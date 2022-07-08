@@ -1,9 +1,10 @@
 package br.com.cleandomain.entities;
 
+import br.com.cleandomain.entities.ientities.ICpf;
 import lombok.Data;
 
 @Data
-public class Cpf {
+public class Cpf implements ICpf {
     private String number;
 
     public Cpf(String cpf) {

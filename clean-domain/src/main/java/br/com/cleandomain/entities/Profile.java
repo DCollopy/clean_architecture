@@ -6,9 +6,22 @@ import lombok.Data;
 public abstract class Profile {
     private String name;
     private String lastName;
-    private String email;
+    private Email email;
     private Cpf cpf;
     private Phone phone;
 
-    public abstract String how();
+    public Profile(String name, String lastName, Email email, Cpf cpf, Phone phone) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.cpf = cpf;
+        this.phone = phone;
+    }
+
+    public Profile() {
+    }
+
+
+    public abstract String who();
 }
+

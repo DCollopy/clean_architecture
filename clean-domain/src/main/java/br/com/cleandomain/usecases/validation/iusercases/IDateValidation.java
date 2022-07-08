@@ -1,4 +1,4 @@
-package br.com.cleandomain.usecases.validation;
+package br.com.cleandomain.usecases.validation.iusercases;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

@@ -1,6 +1,7 @@
 package br.com.cleandomain.entities;
 
 public class Criterion {
+    private Long id;
     private String title;
     private String description;
     private int pmd;

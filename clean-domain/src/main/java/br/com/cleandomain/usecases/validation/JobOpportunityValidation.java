@@ -1,6 +1,7 @@
 package br.com.cleandomain.usecases.validation;
 
 import br.com.cleandomain.entities.JobOpportunity;
+import br.com.cleandomain.usecases.validation.iusercases.IJobOpportunityValidation;
 
 public class JobOpportunityValidation implements IJobOpportunityValidation {
 

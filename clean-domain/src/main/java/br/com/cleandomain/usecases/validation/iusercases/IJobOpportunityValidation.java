@@ -1,4 +1,4 @@
-package br.com.cleandomain.usecases.validation;
+package br.com.cleandomain.usecases.validation.iusercases;
 
 import br.com.cleandomain.entities.JobOpportunity;
 
