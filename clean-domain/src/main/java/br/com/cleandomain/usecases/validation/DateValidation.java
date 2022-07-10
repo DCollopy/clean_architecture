@@ -1,7 +1,7 @@
 package br.com.cleandomain.usecases.validation;
 
 
-import br.com.cleandomain.entities.ientities.IJobOpportunity;
+import br.com.cleandomain.entities.repository.IJobOpportunity;
 import br.com.cleandomain.usecases.validation.iusercases.IDateValidation;
 
 import java.time.LocalDate;

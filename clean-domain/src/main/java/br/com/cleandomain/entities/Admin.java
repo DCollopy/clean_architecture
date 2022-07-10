@@ -3,7 +3,7 @@ package br.com.cleandomain.entities;
 import lombok.Data;
 
 @Data
-public class Admin extends Profile implements br.com.cleandomain.entities.ientities.IAdmin {
+public class Admin extends Profile implements br.com.cleandomain.entities.repository.IAdmin {
     private Functional functional;
 
     public Admin() {}

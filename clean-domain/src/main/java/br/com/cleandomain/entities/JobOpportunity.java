@@ -1,6 +1,6 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.ientities.IJobOpportunity;
+import br.com.cleandomain.entities.repository.IJobOpportunity;
 import lombok.Data;
 
 import java.time.LocalDate;

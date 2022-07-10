@@ -1,6 +1,6 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.ientities.ICnpj;
+import br.com.cleandomain.entities.repository.ICnpj;
 import lombok.Data;
 
 @Data

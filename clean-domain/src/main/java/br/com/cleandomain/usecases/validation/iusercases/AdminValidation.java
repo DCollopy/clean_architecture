@@ -1,6 +1,6 @@
 package br.com.cleandomain.usecases.validation.iusercases;
 
-import br.com.cleandomain.entities.ientities.IAdmin;
+import br.com.cleandomain.entities.repository.IAdmin;
 
 public class AdminValidation implements IAdminValidation {
 

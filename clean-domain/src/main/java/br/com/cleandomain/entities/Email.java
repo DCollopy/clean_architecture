@@ -1,6 +1,6 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.ientities.IEmail;
+import br.com.cleandomain.entities.repository.IEmail;
 import lombok.Data;
 
 @Data

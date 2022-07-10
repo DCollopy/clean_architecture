@@ -1,11 +1,11 @@
-package br.com.cleandomain.entities.ientities;
+package br.com.cleandomain.entities.repository;
 
 import br.com.cleandomain.entities.Cpf;
 import br.com.cleandomain.entities.Email;
 import br.com.cleandomain.entities.Functional;
 import br.com.cleandomain.entities.Phone;
 
-public interface IAdmin {
+public interface IClient {
     String who();
 
     String getName();
@@ -20,15 +20,4 @@ public interface IAdmin {
 
     Functional getFunctional();
 
-    void setName(String name);
-
-    void setLastName(String lastName);
-
-    void setEmail(Email email);
-
-    void setCpf(Cpf cpf);
-
-    void setPhone(Phone phone);
-
-    void setFunctional(Functional functional);
 }

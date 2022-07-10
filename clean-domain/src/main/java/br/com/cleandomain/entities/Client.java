@@ -1,6 +1,6 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.ientities.IClient;
+import br.com.cleandomain.entities.repository.IClient;
 import lombok.Data;
 
 
@@ -14,6 +14,7 @@ public class Client extends Profile implements IClient {
         super(name, lastName, email, cpf, phone);
         this.functional = functional;
     }
+
 
 
     public String who() {

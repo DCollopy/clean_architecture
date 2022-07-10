@@ -1,7 +1,10 @@
 package br.com.cleandomain.entities;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 
 class CpfTest {
 

@@ -1,6 +1,6 @@
 package br.com.cleandomain.usecases.validation;
 
-import br.com.cleandomain.entities.ientities.IClient;
+import br.com.cleandomain.entities.repository.IClient;
 import br.com.cleandomain.usecases.validation.iusercases.IClientValidation;
 
 public class ClientValidation implements IClientValidation {
