@@ -18,6 +18,6 @@ public class JobOpportunity implements IJobOpportunity {
     private Criterion criterion;
     private User user;
     private Company company;
-    private Client client;
+    private Customer customer;
     private boolean status;
 }

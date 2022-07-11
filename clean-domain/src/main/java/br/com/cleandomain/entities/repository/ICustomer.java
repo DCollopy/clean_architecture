@@ -2,7 +2,7 @@ package br.com.cleandomain.entities.repository;
 
 import br.com.cleandomain.entities.*;
 
-public interface IUser {
+public interface ICustomer {
     String who();
 
     String getName();
@@ -15,11 +15,9 @@ public interface IUser {
 
     Phone getPhone();
 
-    SchoolingLevel getSchoolingLevel();
+    Functional getFunctional();
 
-    Skill getSkill();
-
-    ProfessionalExperience getProfessionalExperience();
+    Company getCompany();
 
     void setName(String name);
 
@@ -31,13 +29,9 @@ public interface IUser {
 
     void setPhone(Phone phone);
 
-    void setSchoolingLevel(SchoolingLevel schoolingLevel);
+    void setFunctional(Functional functional);
 
-    void setSkill(Skill skill);
-
-    void setProfessionalExperience(ProfessionalExperience professionalExperience);
-
-
+    void setCompany(Company company);
 
 
 }

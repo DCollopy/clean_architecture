@@ -1,6 +1,7 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.usecases.validation.iusercases.AdminValidation;
+import br.com.cleandomain.entities.repository.IAdmin;
+import br.com.cleandomain.usecases.validation.AdminValidation;
 import br.com.cleandomain.usecases.validation.iusercases.IAdminValidation;
 import org.junit.jupiter.api.Test;
 
@@ -60,14 +61,15 @@ class AdminTest {
     }
 
     @Test
+    void profileIsAdmin(){
+        String cpfAdmin = "111111111";
+        assertEquals(cpfAdmin,adminValidation.adminIsAdmin(cpfAdmin));
+    }
+
+    @Test
     void profileAdmin() {
-        Admin admin = new Admin();
-        admin.setFunctional(new Functional("123456789"));
-        admin.setName("teste");
-        admin.setLastName("teste");
-        admin.setEmail(new Email("teste@email.com"));
-        admin.setCpf(new Cpf("33333333333"));
-        admin.setPhone(new Phone("21","11111111"));
-        assertEquals(admin, admin);
+        IAdmin admin = new Admin("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
+                new Phone("21", "11111111"), null);
+        assertEquals(admin,adminValidation.createAdmin(admin));
     }
 }

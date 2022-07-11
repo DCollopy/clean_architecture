@@ -1,6 +1,10 @@
-package br.com.cleandomain.usecases.validation.iusercases;
+package br.com.cleandomain.usecases.validation;
 
+import br.com.cleandomain.entities.Admin;
 import br.com.cleandomain.entities.repository.IAdmin;
+import br.com.cleandomain.usecases.validation.iusercases.IAdminValidation;
+
+import java.util.logging.Logger;
 
 public class AdminValidation implements IAdminValidation {
 
@@ -25,4 +29,19 @@ public class AdminValidation implements IAdminValidation {
             throw new IllegalArgumentException("Functional is required");
         }
     }
+
+    // a ideia aqui e jogar o cpf vindo da jpa para esse metodo
+    public String adminIsAdmin(String cpfAdmin){
+        if(cpfAdmin == null || cpfAdmin.isEmpty()) {
+            Logger.getLogger(AdminValidation.class.getName()).info("Cpf is not admin");
+        }
+        return cpfAdmin;
+    }
+    // so posso chamar esse metodo depois de validar o cpf
+    public Admin createAdmin(IAdmin admin) {
+        Logger.getLogger(AdminValidation.class.getName()).info("Admin created");
+        return new Admin(admin.getName(), admin.getLastName(), admin.getEmail(),
+                admin.getCpf(), admin.getPhone(), admin.getFunctional());
+    }
+
 }
