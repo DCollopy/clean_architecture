@@ -20,28 +20,32 @@ public class User extends Profile implements IUser {
         this.professionalExperience = professionalExperience;
     }
 
+    public User(String name, String lastName, Email email, Cpf cpf, Phone phone) {
+        super(name, lastName, email, cpf, phone);
+    }
+
     public String who() {
         return getCpf().getNumber();
     }
 
     public String getName() {
-        return getName();
+        return super.getName();
     }
 
     public String getLastName() {
-        return getLastName();
+        return super.getLastName();
     }
 
     public Email getEmail() {
-        return getEmail();
+        return super.getEmail();
     }
 
     public Cpf getCpf() {
-        return getCpf();
+        return super.getCpf();
     }
 
     public Phone getPhone() {
-        return getPhone();
+        return super.getPhone();
     }
 
     public SchoolingLevel getSchoolingLevel() {
