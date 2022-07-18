@@ -1,8 +1,8 @@
-package br.com.cleandomain.usecases.validation;
+package br.com.cleandomain.usecases;
 
 import br.com.cleandomain.entities.Admin;
 import br.com.cleandomain.entities.repository.IAdmin;
-import br.com.cleandomain.usecases.validation.iusercases.IAdminValidation;
+import br.com.cleandomain.usecases.validation.IAdminValidation;
 
 import java.util.logging.Logger;
 
@@ -38,9 +38,9 @@ public class AdminValidation implements IAdminValidation {
         return cpfAdmin;
     }
     // so posso chamar esse metodo depois de validar o cpf
-    public Admin createAdmin(IAdmin admin) {
+    public void createAdmin(IAdmin admin) {
         Logger.getLogger(AdminValidation.class.getName()).info("Admin created");
-        return new Admin(admin.getName(), admin.getLastName(), admin.getEmail(),
+        new Admin(admin.getName(), admin.getLastName(), admin.getEmail(),
                 admin.getCpf(), admin.getPhone(), admin.getFunctional());
     }
 

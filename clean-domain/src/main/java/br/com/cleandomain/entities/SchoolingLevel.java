@@ -8,10 +8,11 @@ import java.time.LocalDate;
 @Data
 public class SchoolingLevel implements ISchoolingLevel {
     private String name;
+    private String educationLevel;
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public SchoolingLevel(String name, LocalDate startDate, LocalDate endDate) {
+    public SchoolingLevel(String name, String educationLevel, LocalDate startDate, LocalDate endDate) {
         if(name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Invalid name");
         }
@@ -25,6 +26,7 @@ public class SchoolingLevel implements ISchoolingLevel {
             throw new IllegalArgumentException("Start date greater than end date");
         }
         this.name = name;
+        this.educationLevel = educationLevel;
         this.startDate = startDate;
         this.endDate = endDate;
     }

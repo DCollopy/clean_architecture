@@ -2,7 +2,7 @@ package br.com.cleandomain.usecases.validation;
 
 import br.com.cleandomain.entities.*;
 import br.com.cleandomain.entities.repository.ICustomer;
-import br.com.cleandomain.usecases.validation.iusercases.ICustomerValidation;
+import br.com.cleandomain.usecases.CustomerValidation;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

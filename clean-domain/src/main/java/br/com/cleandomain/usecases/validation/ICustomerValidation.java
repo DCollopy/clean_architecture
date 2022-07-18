@@ -1,4 +1,4 @@
-package br.com.cleandomain.usecases.validation.iusercases;
+package br.com.cleandomain.usecases.validation;
 
 import br.com.cleandomain.entities.Customer;
 import br.com.cleandomain.entities.repository.ICustomer;

@@ -1,6 +1,6 @@
 package br.com.cleandomain.usecases.validation;
 
-import br.com.cleandomain.usecases.validation.iusercases.IDateValidation;
+import br.com.cleandomain.usecases.DateValidation;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package br.com.cleandomain.usecases.validation.iusercases;
+package br.com.cleandomain.usecases.validation;
 
 import br.com.cleandomain.entities.Admin;
 import br.com.cleandomain.entities.repository.IAdmin;
@@ -8,5 +8,5 @@ public interface IAdminValidation {
 
     String adminIsAdmin(String cpfAdmin);
 
-    Admin createAdmin(IAdmin admin);
+    void createAdmin(IAdmin admin);
 }

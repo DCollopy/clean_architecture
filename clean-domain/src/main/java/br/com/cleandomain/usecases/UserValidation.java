@@ -1,8 +1,8 @@
-package br.com.cleandomain.usecases.validation;
+package br.com.cleandomain.usecases;
 
 import br.com.cleandomain.entities.User;
 import br.com.cleandomain.entities.repository.IUser;
-import br.com.cleandomain.usecases.validation.iusercases.IUserValidation;
+import br.com.cleandomain.usecases.validation.IUserValidation;
 
 import java.util.logging.Logger;
 
@@ -37,15 +37,15 @@ public class UserValidation implements IUserValidation {
         return cpfUser;
     }
 
-    public User createUser(IUser user) {
+    public void createUser(IUser user) {
         Logger.getLogger(UserValidation.class.getName()).info("Creating user");
-        return new User(user.getName(), user.getLastName(), user.getEmail(),
+        new User(user.getName(), user.getLastName(), user.getEmail(),
                 user.getCpf(), user.getPhone());
     }
 
-    public User createUserCurriculum(IUser user) {
+    public void createUserCurriculum(IUser user) {
         Logger.getLogger(UserValidation.class.getName()).info("User created curriculum");
-        return new User(user.getName(), user.getLastName(), user.getEmail(),
+        new User(user.getName(), user.getLastName(), user.getEmail(),
                 user.getCpf(), user.getPhone(),user.getSchoolingLevel(),user.getSkill(),user.getProfessionalExperience());
     }
 

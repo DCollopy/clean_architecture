@@ -1,12 +1,13 @@
 package br.com.cleandomain.usecases.validation;
 
 import br.com.cleandomain.entities.*;
+import br.com.cleandomain.entities.repository.IEducationLevel;
 import br.com.cleandomain.entities.repository.IUser;
-import br.com.cleandomain.usecases.validation.iusercases.IUserValidation;
+import br.com.cleandomain.usecases.UserValidation;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-
+;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserValidationTest {
@@ -20,7 +21,7 @@ class UserValidationTest {
         assertThrows(IllegalArgumentException.class, () -> userValidation.validate(new User("Luis", null, new Email("teste@email.com"),
                 new Cpf("33333333333"), new Phone("21", "11111111"))));
         assertThrows(IllegalArgumentException.class, () -> userValidation.validate(new User("luis", "Oliveira", null,
-                new Cpf("33333333333"),new Phone("21", "11111111"))));
+                new Cpf("33333333333"), new Phone("21", "11111111"))));
         assertThrows(IllegalArgumentException.class, () -> userValidation.validate(new User("Luis", "Oliveira", new Email("teste@email.com"),
                 null, new Phone("21", "11111111"))));
         assertThrows(IllegalArgumentException.class, () -> userValidation.validate(new User("Luis", "Oliveira", new Email("teste@email.com"),
@@ -31,7 +32,7 @@ class UserValidationTest {
     void takeCpf() {
         IUser user = new User("Luis", "Oliveira", new Email("teste@email.com"),
                 new Cpf("33333333333"), new Phone("21", "11111111"));
-        assertEquals(user.getCpf().getNumber(),userValidation.takeCpf(user));
+        assertEquals(user.getCpf().getNumber(), userValidation.takeCpf(user));
     }
 
     @Test
@@ -50,18 +51,18 @@ class UserValidationTest {
     void createUser() {
         IUser user = new User("Luis", "Oliveira", new Email("teste@email.com"),
                 new Cpf("33333333333"), new Phone("21", "11111111"));
-        assertEquals(user, userValidation.createUser(user));
+        userValidation.createUser(user);
     }
 
     @Test
     void createUserCurriculum() {
         IUser user = new User("Luis", "Oliveira", new Email("teste@email.com"),
                 new Cpf("33333333333"), new Phone("21", "11111111"),
-                new SchoolingLevel("Software Engineer", LocalDate.now(),LocalDate.now()),
+                new SchoolingLevel("Software Engineer", IEducationLevel.COMPLETE_GRAD, LocalDate.now(), LocalDate.now()),
                 new Skill("Java"),
-                new ProfessionalExperience("IBM","Data Science","Data analysis about systems support",
-                        LocalDate.of(2000,05,02),LocalDate.now()));
-        assertEquals(user, userValidation.createUserCurriculum(user));
+                new ProfessionalExperience("IBM", "Data Science", "Data analysis about systems support",
+                        LocalDate.of(2000, 05, 02), LocalDate.now()));
+        userValidation.createUserCurriculum(user);
     }
 
 

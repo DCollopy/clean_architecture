@@ -2,14 +2,14 @@ package br.com.cleandomain.usecases.validation;
 
 import br.com.cleandomain.entities.*;
 import br.com.cleandomain.entities.repository.IAdmin;
-import br.com.cleandomain.usecases.validation.iusercases.IAdminValidation;
+import br.com.cleandomain.usecases.AdminValidation;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AdminValidationTest {
 
-    IAdminValidation adminValidation = new AdminValidation();
+    protected IAdminValidation adminValidation = new AdminValidation();
     @Test
     void notProfileAdmin() {
         assertThrows(IllegalArgumentException.class,
@@ -43,6 +43,6 @@ class AdminValidationTest {
     void profileAdmin() {
         IAdmin admin = new Admin("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
                 new Phone("21", "11111111"), null);
-        assertEquals(admin,adminValidation.createAdmin(admin));
+        adminValidation.createAdmin(admin);
     }
 }

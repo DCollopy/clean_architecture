@@ -1,8 +1,8 @@
-package br.com.cleandomain.usecases.validation;
+package br.com.cleandomain.usecases;
 
 import br.com.cleandomain.entities.Customer;
 import br.com.cleandomain.entities.repository.ICustomer;
-import br.com.cleandomain.usecases.validation.iusercases.ICustomerValidation;
+import br.com.cleandomain.usecases.validation.ICustomerValidation;
 
 import java.util.logging.Logger;
 

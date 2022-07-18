@@ -1,7 +1,6 @@
-package br.com.cleandomain.usecases.validation.iusercases;
+package br.com.cleandomain.usecases.validation;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public interface IDateValidation {
     String formatDate(LocalDate date);

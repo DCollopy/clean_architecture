@@ -1,4 +1,4 @@
-package br.com.cleandomain.usecases.validation.iusercases;
+package br.com.cleandomain.usecases.validation;
 
 import br.com.cleandomain.entities.User;
 import br.com.cleandomain.entities.repository.IUser;
@@ -7,6 +7,6 @@ public interface IUserValidation {
     void validate(IUser user);
     String takeCpf(IUser user);
     String userIsUser(String cpfUser);
-    User createUser(IUser user);
-    User createUserCurriculum(IUser user);
+    void createUser(IUser user);
+    void createUserCurriculum(IUser user);
 }
