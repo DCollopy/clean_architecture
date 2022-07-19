@@ -37,7 +37,8 @@ public interface IUser {
 
     void setProfessionalExperience(ProfessionalExperience professionalExperience);
 
+    IUser listAll();
 
-
+    IUser edit(ICpf cpf);
 
 }

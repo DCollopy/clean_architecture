@@ -1,6 +1,7 @@
 package br.com.cleandomain.usecases.validation;
 
 import br.com.cleandomain.entities.*;
+import br.com.cleandomain.entities.repository.ICpf;
 import br.com.cleandomain.entities.repository.IEducationLevel;
 import br.com.cleandomain.entities.repository.IJobOpportunity;
 import br.com.cleandomain.usecases.JobOpportunityValidation;
@@ -108,7 +109,22 @@ class JobOpportunityValidationTest {
                 new Criterion(UUID.randomUUID().getMostSignificantBits(), "Java","teste",4,5),
                 new Company(new Cnpj("33.663.683/0001-16"),
                         "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
-                        new Customer(null,"Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
+                        new Customer("Joao","Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
+                        ,new Phone("21", "11111111"),new Functional("123456789"),
+                        new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")));
+        jobOpportunityValidation.createJobOpportunity(jobOpportunity);
+    }
+
+    @Test
+    void notCreateJobOpportunity() {
+        IJobOpportunity jobOpportunity = new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
+                "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
+                "English intemediario", LocalDate.now(), LocalDate.now().plusDays(30),
+                IEducationLevel.COMPLETE_GRAD, "1200",
+                new Criterion(UUID.randomUUID().getMostSignificantBits(), "Java","teste",4,5),
+                new Company(new Cnpj("33.663.683/0001-16"),
+                        "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
+                new Customer("Joao","Oliveira",new Email("teste@email.com"),null
                         ,new Phone("21", "11111111"),new Functional("123456789"),
                         new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")));
         jobOpportunityValidation.createJobOpportunity(jobOpportunity);
@@ -130,6 +146,52 @@ class JobOpportunityValidationTest {
     @Test
     void opportunityExists() {
         assertTrue(jobOpportunityValidation.opportunityExists(UUID.randomUUID().getMostSignificantBits()));
+    }
+
+    @Test
+    void customerNotExist() {
+        assertFalse(jobOpportunityValidation.exitCustomerJobOpportunity(null));
+    }
+
+    @Test
+    void customerExist() {
+        ICpf cpf = new Cpf("33333333333");
+        assertTrue(jobOpportunityValidation.exitCustomerJobOpportunity(cpf));
+    }
+
+    @Test
+    void listCustomerJobOpportunity() {
+        ICpf cpf = new Cpf("33333333333");
+        assertTrue(jobOpportunityValidation.listCustomerJobOpportunity(cpf).size() > 0);
+    }
+
+    @Test
+    void deleteNotFoundCustomer() {
+        JobOpportunity jobOpportunity = new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
+                "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
+                "English intemediario", LocalDate.now(), LocalDate.now().plusDays(30),
+                IEducationLevel.COMPLETE_GRAD, "1200",
+                new Criterion(UUID.randomUUID().getMostSignificantBits(), "Java","teste",4,5),
+                new Company(new Cnpj("33.663.683/0001-16"), "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
+                new Customer(null,"Oliveira",new Email("teste@email.com"),null
+                        ,new Phone("21", "11111111"),new Functional("123456789"),
+                        new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")));
+        jobOpportunityValidation.deleteJobOpportunity(jobOpportunity);
+    }
+
+    @Test
+    void delete() {
+        JobOpportunity jobOpportunity = new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
+                "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
+                "English intemediario", LocalDate.now(), LocalDate.now().plusDays(30),
+                IEducationLevel.COMPLETE_GRAD, "1200",
+                new Criterion(UUID.randomUUID().getMostSignificantBits(), "Java","teste",4,5),
+                new Company(new Cnpj("33.663.683/0001-16"),
+                        "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
+                new Customer("Jose","Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
+                        ,new Phone("21", "11111111"),new Functional("123456789"),
+                        new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")));
+        jobOpportunityValidation.deleteJobOpportunity(jobOpportunity);
     }
 
 }

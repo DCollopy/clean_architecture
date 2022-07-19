@@ -1,9 +1,11 @@
 package br.com.cleandomain.entities;
 
+import br.com.cleandomain.entities.repository.ICpf;
 import br.com.cleandomain.entities.repository.IJobOpportunity;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class JobOpportunity implements IJobOpportunity {
@@ -23,6 +25,8 @@ public class JobOpportunity implements IJobOpportunity {
     private Customer customer;
     private boolean status;
 
+    public JobOpportunity() {
+    }
     public JobOpportunity(Long id, String title, String description, String language, LocalDate startDate,
                           LocalDate closingDate, String educationLevel, String salary, Criterion criterion,
                           Company company, Customer customer) {
@@ -142,10 +146,20 @@ public class JobOpportunity implements IJobOpportunity {
         this.status = status;
     }
 
-    @Override
     public boolean isStatus() {
         return true;
     }
 
+    public JobOpportunity listAll(){
+        return this;
+    }
+
+    public JobOpportunity delete(long id){
+        return this;
+    }
+
+    public List<IJobOpportunity> listAllCustomer(ICpf cpf){
+        return List.of(this);
+    }
 
 }

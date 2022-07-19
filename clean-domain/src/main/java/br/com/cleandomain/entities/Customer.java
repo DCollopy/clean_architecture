@@ -18,7 +18,6 @@ public class Customer extends Profile implements ICustomer {
     }
 
 
-
     public String who() {
         return functional.getNumber();
     }
@@ -77,6 +76,14 @@ public class Customer extends Profile implements ICustomer {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public Customer listAll(){
+        return this;
+    }
+
+    public Customer delete(long id){
+        return this;
     }
 
 }

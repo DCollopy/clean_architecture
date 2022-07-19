@@ -1,44 +1,53 @@
 package br.com.cleandomain.usecases;
 
 import br.com.cleandomain.entities.*;
-import br.com.cleandomain.entities.repository.ICriterion;
+import br.com.cleandomain.entities.repository.ICpf;
 import br.com.cleandomain.entities.repository.IJobOpportunity;
 import br.com.cleandomain.usecases.validation.IJobOpportunityValidation;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 public class JobOpportunityValidation implements IJobOpportunityValidation {
 
-    public void validate(IJobOpportunity jobOpportunity) {
+    public String validate(IJobOpportunity jobOpportunity) {
+        String message = "";
         if (jobOpportunity.getTitle() == null || jobOpportunity.getTitle().isEmpty()) {
-            throw new IllegalArgumentException("Title is required");
+            return message ="Title is required";
         }
         if (jobOpportunity.getDescription() == null || jobOpportunity.getDescription().isEmpty()) {
-            throw new IllegalArgumentException("Description is required");
+            return "Description is required";
         }
         if (jobOpportunity.getCompany() == null) {
-            throw new IllegalArgumentException("Company is required");
+            return "Company is required";
         }
         if (jobOpportunity.getCriterion() == null) {
-            throw new IllegalArgumentException("Criterion is required");
+            return "Criterion is required";
         }
+        if( jobOpportunity.getCustomer().getCpf() == null || jobOpportunity.getCustomer().getCpf().getNumber().isEmpty()){
+            return "CPF is required";
+        }
+        return message;
     }
 
     public void createJobOpportunity(IJobOpportunity jobOpportunity) {
 
-        if(jobOpportunity.getClosingDate() == null) {
+        if (jobOpportunity.getClosingDate() == null) {
             closingDay(jobOpportunity);
         }
         jobOpportunity.setId(UUID.randomUUID().getMostSignificantBits());
         jobOpportunity.setStatus(true);
 
-        new JobOpportunity(jobOpportunity.getId(),jobOpportunity.getTitle(), jobOpportunity.getDescription(),
-                jobOpportunity.getLanguage(),jobOpportunity.getStartDate(),
-                jobOpportunity.getClosingDate(), jobOpportunity.getEducationLevel(),
-                jobOpportunity.getSalary(), jobOpportunity.getCriterion(),
-                jobOpportunity.getCompany(), jobOpportunity.getCustomer());
+        if (validate(jobOpportunity).isEmpty()){
+            new JobOpportunity(jobOpportunity.getId(), jobOpportunity.getTitle(), jobOpportunity.getDescription(),
+                    jobOpportunity.getLanguage(), jobOpportunity.getStartDate(), jobOpportunity.getClosingDate(),
+                    jobOpportunity.getEducationLevel(), jobOpportunity.getSalary(), jobOpportunity.getCriterion(),
+                    jobOpportunity.getCompany(), jobOpportunity.getCustomer());
+            Logger.getLogger("JobOpportunityValidation").info("Job Opportunity created");
+        }
+        Logger.getLogger("JobOpportunityValidation").info("Job Opportunity not created");
     }
 
     private void closingDay(IJobOpportunity jobOpportunity) {
@@ -46,16 +55,41 @@ public class JobOpportunityValidation implements IJobOpportunityValidation {
     }
 
     public boolean isExpired(LocalDate closingDate) {
-       if(closingDate.isEqual(LocalDate.now())){
-           return true;
-       } else {
-           return false;
-       }
+        if (closingDate.isEqual(LocalDate.now())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean opportunityExists(Long id) {
         return true;
     }
 
+
+    public void deleteJobOpportunity(IJobOpportunity jobOpportunity) {
+        if (jobOpportunity.getId() == 0 || exitCustomerJobOpportunity(jobOpportunity.getCustomer().getCpf())) {
+            jobOpportunity.delete(jobOpportunity.getId());
+            Logger.getLogger("JobOpportunityValidation").info("Job Opportunity deleted");
+        } else {
+            Logger.getLogger("JobOpportunityValidation").info("Job Opportunity not found");
+        }
+    }
+
+    public List<IJobOpportunity> listCustomerJobOpportunity(ICpf cpf) {
+        IJobOpportunity jobOpportunity = new JobOpportunity();
+        if (cpf != null) {
+            return jobOpportunity.listAllCustomer(cpf);
+        }
+        Logger.getLogger("JobOpportunityValidation").info("Customer not found job publication");
+        return null;
+    }
+
+    public boolean exitCustomerJobOpportunity(ICpf cpf) {
+        if (cpf != null) {
+            return true;
+        }
+        return false;
+    }
 
 }

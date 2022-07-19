@@ -33,4 +33,12 @@ public class Company implements ICompany {
     public void setFantasyName(String fantasyName) {
         this.fantasyName = fantasyName;
     }
+
+    public Company listAllCompanies() {
+        return this;
+    }
+
+    public Company deleteCompany(Cnpj cnpj) {
+        return this;
+    }
 }

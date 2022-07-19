@@ -10,4 +10,8 @@ public interface ICompany {
     void setCnpj(Cnpj cnpj);
 
     void setFantasyName(String fantasyName);
+
+    ICompany listAllCompanies();
+
+    ICompany deleteCompany(Cnpj cnpj);
 }

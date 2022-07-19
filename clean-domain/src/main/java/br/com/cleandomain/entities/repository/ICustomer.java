@@ -33,5 +33,7 @@ public interface ICustomer {
 
     void setCompany(Company company);
 
+    Customer listAll();
 
+    Customer delete(long id);
 }

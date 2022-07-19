@@ -1,5 +1,6 @@
 package br.com.cleandomain.entities;
 
+import br.com.cleandomain.entities.repository.ICpf;
 import br.com.cleandomain.entities.repository.IUser;
 import lombok.Data;
 
@@ -92,5 +93,12 @@ public class User extends Profile implements IUser {
         this.professionalExperience = professionalExperience;
     }
 
+    public User listAll(){
+        return this;
+    }
+
+    public User edit(ICpf cpf){
+        return this;
+    }
 
 }

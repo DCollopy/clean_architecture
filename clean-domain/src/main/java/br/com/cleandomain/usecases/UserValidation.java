@@ -1,6 +1,7 @@
 package br.com.cleandomain.usecases;
 
 import br.com.cleandomain.entities.User;
+import br.com.cleandomain.entities.repository.ICpf;
 import br.com.cleandomain.entities.repository.IUser;
 import br.com.cleandomain.usecases.validation.IUserValidation;
 

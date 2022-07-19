@@ -1,11 +1,9 @@
 package br.com.cleandomain.entities.repository;
 
-import br.com.cleandomain.entities.Company;
-import br.com.cleandomain.entities.Criterion;
-import br.com.cleandomain.entities.Customer;
-import br.com.cleandomain.entities.User;
+import br.com.cleandomain.entities.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface IJobOpportunity {
 
@@ -62,4 +60,10 @@ public interface IJobOpportunity {
     void setStatus(boolean status);
 
     boolean isStatus();
+
+    JobOpportunity listAll();
+
+    JobOpportunity delete(long id);
+
+    List<IJobOpportunity> listAllCustomer(ICpf cpf);
 }
