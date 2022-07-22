@@ -7,6 +7,9 @@ on:
   push:
     branches-ignore:
       - 'master'
+defaults:
+  run:
+    working-directory: ./clean-domain
 
 jobs:
   build:
