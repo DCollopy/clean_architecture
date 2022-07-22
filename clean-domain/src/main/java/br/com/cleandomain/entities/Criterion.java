@@ -14,9 +14,8 @@ public class Criterion implements ICriterion {
     private int weight;
     private Set<AnswerOpportunity> answerOpportunity;
 
-    private Long jobOpportunity;
 
-    public Criterion(Long id, String title, String description, int pmd, int weight, JobOpportunity jobOpportunity) {
+    public Criterion(Long id, String title, String description, int pmd, int weight) {
         if (pmd < 1 || pmd >= 6) {
             throw new IllegalArgumentException("Valor Incorreto, entre com um valor de 1 a 5 ");
         }
@@ -26,7 +25,6 @@ public class Criterion implements ICriterion {
         if (title.isEmpty()) {
             throw new IllegalArgumentException("Entre com o titulo!");
         }
-        this.jobOpportunity = jobOpportunity.getId();
         this.id = id;
         this.pmd = pmd;
         this.weight = weight;
@@ -62,9 +60,6 @@ public class Criterion implements ICriterion {
         return weight;
     }
 
-    public JobOpportunity getJobOpportunity() {
-        return jobOpportunity;
-    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -91,10 +86,6 @@ public class Criterion implements ICriterion {
     }
     public void setAnswerOpportunity(Set<AnswerOpportunity> answerOpportunity) {
         this.answerOpportunity = answerOpportunity;
-    }
-
-    public void setJobOpportunity(JobOpportunity jobOpportunity) {
-        this.jobOpportunity = jobOpportunity;
     }
 
 }

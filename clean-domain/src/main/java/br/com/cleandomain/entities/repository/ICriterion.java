@@ -16,7 +16,6 @@ public interface ICriterion {
 
     int getWeight();
 
-    JobOpportunity getJobOpportunity();
     Set<AnswerOpportunity> getAnswerOpportunity();
 
     void setTitle(String title);
@@ -31,5 +30,4 @@ public interface ICriterion {
 
     void setAnswerOpportunity(Set<AnswerOpportunity> answerOpportunity);
 
-    void setJobOpportunity(JobOpportunity jobOpportunity);
 }
