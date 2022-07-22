@@ -8,6 +8,9 @@ on:
     branches-ignore:
       - 'master'
       - 'release*'
+defaults:
+  run:
+    working-directory: ./clean-domain
 
 jobs:
   build:
