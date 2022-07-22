@@ -30,4 +30,5 @@ public class SchoolingLevel implements ISchoolingLevel {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
 }

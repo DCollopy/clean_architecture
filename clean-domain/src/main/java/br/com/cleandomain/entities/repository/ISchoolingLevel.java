@@ -1,11 +1,15 @@
 package br.com.cleandomain.entities.repository;
 
+import java.time.LocalDate;
+
 public interface ISchoolingLevel {
     String getName();
 
-    java.time.LocalDate getStartDate();
+    String getEducationLevel();
 
-    java.time.LocalDate getEndDate();
+    LocalDate getStartDate();
+
+    LocalDate getEndDate();
 
     void setName(String name);
 

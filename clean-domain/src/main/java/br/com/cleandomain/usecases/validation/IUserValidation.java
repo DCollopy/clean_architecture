@@ -4,7 +4,7 @@ import br.com.cleandomain.entities.User;
 import br.com.cleandomain.entities.repository.IUser;
 
 public interface IUserValidation {
-    void validate(IUser user);
+    String validate(IUser user);
     String takeCpf(IUser user);
     String userIsUser(String cpfUser);
     void createUser(IUser user);

@@ -3,6 +3,8 @@ package br.com.cleandomain.entities;
 import br.com.cleandomain.entities.repository.ICriterion;
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 public class Criterion implements ICriterion {
     private Long id;
@@ -10,14 +12,15 @@ public class Criterion implements ICriterion {
     private String description;
     private int pmd;
     private int weight;
+    private Set<AnswerOpportunity> answerOpportunity;
 
-    private AnswerOpportunity answerOpportunity;
+    private JobOpportunity jobOpportunity;
 
     public Criterion(Long id, String title, String description, int pmd, int weight) {
-        if (pmd <= 1 || pmd >= 6) {
+        if (pmd < 1 || pmd >= 6) {
             throw new IllegalArgumentException("Valor Incorreto, entre com um valor de 1 a 5 ");
         }
-        if (weight <= 1 || weight >= 6) {
+        if (weight < 1 || weight >= 6) {
             throw new IllegalArgumentException("Valor Incorreto, entre com um valor de 1 a 5 ");
         }
         if (title.isEmpty()) {
@@ -30,8 +33,12 @@ public class Criterion implements ICriterion {
         this.description = description;
     }
 
-    public Criterion(AnswerOpportunity answerOpportunity) {
+    public Criterion(Set<AnswerOpportunity> answerOpportunity) {
         this.answerOpportunity = answerOpportunity;
+    }
+
+    public Criterion() {
+
     }
 
     public long getId() {
@@ -54,6 +61,10 @@ public class Criterion implements ICriterion {
         return weight;
     }
 
+    public JobOpportunity getJobOpportunity() {
+        return jobOpportunity;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -74,13 +85,15 @@ public class Criterion implements ICriterion {
         this.id = id;
     }
 
-    public AnswerOpportunity getAnswerOpportunity() {
+    public Set<AnswerOpportunity> getAnswerOpportunity() {
         return answerOpportunity;
     }
-
-    public void setAnswerOpportunity(AnswerOpportunity answerOpportunity) {
+    public void setAnswerOpportunity(Set<AnswerOpportunity> answerOpportunity) {
         this.answerOpportunity = answerOpportunity;
     }
 
+    public void setJobOpportunity(JobOpportunity jobOpportunity) {
+        this.jobOpportunity = jobOpportunity;
+    }
 
 }

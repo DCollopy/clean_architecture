@@ -42,5 +42,6 @@
     </dependencies>
     <modules>
         <module>clean-domain</module>
+        <module>clean-web</module>
     </modules>
 </project>

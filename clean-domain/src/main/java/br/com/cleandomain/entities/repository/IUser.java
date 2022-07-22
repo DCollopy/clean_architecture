@@ -2,6 +2,8 @@ package br.com.cleandomain.entities.repository;
 
 import br.com.cleandomain.entities.*;
 
+import java.util.Set;
+
 public interface IUser {
     String who();
 
@@ -21,6 +23,8 @@ public interface IUser {
 
     ProfessionalExperience getProfessionalExperience();
 
+    Set<AnswerOpportunity> getAnswerOpportunity();
+
     void setName(String name);
 
     void setLastName(String lastName);
@@ -36,6 +40,8 @@ public interface IUser {
     void setSkill(Skill skill);
 
     void setProfessionalExperience(ProfessionalExperience professionalExperience);
+
+    void setAnswerOpportunity(Set<AnswerOpportunity> answerOpportunity);
 
     IUser listAll();
 

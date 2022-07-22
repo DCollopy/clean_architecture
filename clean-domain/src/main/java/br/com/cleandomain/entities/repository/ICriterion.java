@@ -1,6 +1,9 @@
 package br.com.cleandomain.entities.repository;
 
 import br.com.cleandomain.entities.AnswerOpportunity;
+import br.com.cleandomain.entities.JobOpportunity;
+
+import java.util.Set;
 
 public interface ICriterion {
 
@@ -13,7 +16,8 @@ public interface ICriterion {
 
     int getWeight();
 
-    AnswerOpportunity getAnswerOpportunity();
+    JobOpportunity getJobOpportunity();
+    Set<AnswerOpportunity> getAnswerOpportunity();
 
     void setTitle(String title);
 
@@ -25,6 +29,7 @@ public interface ICriterion {
 
     void setId(long id);
 
-    void setAnswerOpportunity(AnswerOpportunity answerOpportunity);
+    void setAnswerOpportunity(Set<AnswerOpportunity> answerOpportunity);
 
+    void setJobOpportunity(JobOpportunity jobOpportunity);
 }

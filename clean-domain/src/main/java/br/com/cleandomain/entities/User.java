@@ -4,11 +4,15 @@ import br.com.cleandomain.entities.repository.ICpf;
 import br.com.cleandomain.entities.repository.IUser;
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 public class User extends Profile implements IUser {
     private SchoolingLevel schoolingLevel;
     private Skill skill;
     private ProfessionalExperience professionalExperience;
+
+    private Set<AnswerOpportunity> answerOpportunity;
 
     public User() {
     }
@@ -23,6 +27,10 @@ public class User extends Profile implements IUser {
 
     public User(String name, String lastName, Email email, Cpf cpf, Phone phone) {
         super(name, lastName, email, cpf, phone);
+    }
+
+    public User(Set<AnswerOpportunity> answerOpportunity) {
+        this.answerOpportunity = answerOpportunity;
     }
 
     public String who() {
@@ -61,6 +69,10 @@ public class User extends Profile implements IUser {
         return professionalExperience;
     }
 
+    public Set<AnswerOpportunity> getAnswerOpportunity() {
+        return answerOpportunity;
+    }
+
     public void setName(String name) {
         super.setName(name);
     }
@@ -92,6 +104,9 @@ public class User extends Profile implements IUser {
     public void setProfessionalExperience(ProfessionalExperience professionalExperience) {
         this.professionalExperience = professionalExperience;
     }
+    public void setAnswerOpportunity(Set<AnswerOpportunity> answerOpportunity) {
+        this.answerOpportunity = answerOpportunity;
+    }
 
     public User listAll(){
         return this;
@@ -100,5 +115,6 @@ public class User extends Profile implements IUser {
     public User edit(ICpf cpf){
         return this;
     }
+
 
 }

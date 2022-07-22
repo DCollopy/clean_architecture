@@ -4,6 +4,7 @@ import br.com.cleandomain.entities.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 public interface IJobOpportunity {
 
@@ -14,7 +15,7 @@ public interface IJobOpportunity {
 
     String getLanguage();
 
-    String getMinimumProfile();
+    double getMinimumProfile();
 
     LocalDate getStartDate();
 
@@ -24,7 +25,7 @@ public interface IJobOpportunity {
 
     String getSalary();
 
-    Criterion getCriterion();
+    Set<Criterion> getCriterion();
 
     User getUser();
 
@@ -41,7 +42,7 @@ public interface IJobOpportunity {
 
     void setLanguage(String language);
 
-    void setMinimumProfile(String minimumProfile);
+    double setMinimumProfile(double minimumProfile);
 
     void setClosingDate(LocalDate closingDate);
 
@@ -49,7 +50,7 @@ public interface IJobOpportunity {
 
     void setSalary(String salary);
 
-    void setCriterion(Criterion criterion);
+    void setCriterion(Set<Criterion> criterion);
 
     void setUser(User user);
 

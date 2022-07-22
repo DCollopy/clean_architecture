@@ -7,6 +7,7 @@ import br.com.cleandomain.usecases.validation.IJobOpportunityValidation;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -15,7 +16,7 @@ public class JobOpportunityValidation implements IJobOpportunityValidation {
     public String validate(IJobOpportunity jobOpportunity) {
         String message = "";
         if (jobOpportunity.getTitle() == null || jobOpportunity.getTitle().isEmpty()) {
-            return message ="Title is required";
+            return "Title is required";
         }
         if (jobOpportunity.getDescription() == null || jobOpportunity.getDescription().isEmpty()) {
             return "Description is required";
@@ -33,21 +34,36 @@ public class JobOpportunityValidation implements IJobOpportunityValidation {
     }
 
     public void createJobOpportunity(IJobOpportunity jobOpportunity) {
-
         if (jobOpportunity.getClosingDate() == null) {
             closingDay(jobOpportunity);
         }
         jobOpportunity.setId(UUID.randomUUID().getMostSignificantBits());
         jobOpportunity.setStatus(true);
 
-        if (validate(jobOpportunity).isEmpty()){
+        if (validate(jobOpportunity).isEmpty()) {
             new JobOpportunity(jobOpportunity.getId(), jobOpportunity.getTitle(), jobOpportunity.getDescription(),
                     jobOpportunity.getLanguage(), jobOpportunity.getStartDate(), jobOpportunity.getClosingDate(),
-                    jobOpportunity.getEducationLevel(), jobOpportunity.getSalary(), jobOpportunity.getCriterion(),
-                    jobOpportunity.getCompany(), jobOpportunity.getCustomer());
+                    jobOpportunity.getEducationLevel(), jobOpportunity.getSalary(),
+                    jobOpportunity.getCriterion(),
+                    jobOpportunity.getCompany(), jobOpportunity.getCustomer(),getAverage(jobOpportunity));
             Logger.getLogger("JobOpportunityValidation").info("Job Opportunity created");
+        } else {
+            Logger.getLogger("JobOpportunityValidation").info("Job Opportunity not created");
         }
-        Logger.getLogger("JobOpportunityValidation").info("Job Opportunity not created");
+
+    }
+
+    public double getAverage(IJobOpportunity jobOpportunity) {
+        double multiple = 0;
+        int soma = 0;
+        Set<Criterion> criterion = jobOpportunity.getCriterion();
+        for (int i = 0; i < criterion.size(); i++) {
+            for (Criterion calculate : criterion) {
+                multiple += (calculate.getPmd() * calculate.getWeight());
+                soma += calculate.getWeight();
+            }
+        }
+        return jobOpportunity.setMinimumProfile(multiple / soma);
     }
 
     private void closingDay(IJobOpportunity jobOpportunity) {
@@ -91,5 +107,4 @@ public class JobOpportunityValidation implements IJobOpportunityValidation {
         }
         return false;
     }
-
 }

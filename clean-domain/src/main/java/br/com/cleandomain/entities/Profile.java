@@ -1,9 +1,10 @@
 package br.com.cleandomain.entities;
 
+import br.com.cleandomain.entities.repository.IProfile;
 import lombok.Data;
 
 @Data
-public abstract class Profile {
+public abstract class Profile implements IProfile {
     private String name;
     private String lastName;
     private Email email;
@@ -22,6 +23,5 @@ public abstract class Profile {
     }
 
 
-    public abstract String who();
 }
 

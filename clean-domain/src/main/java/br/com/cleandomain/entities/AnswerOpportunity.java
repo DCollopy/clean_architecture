@@ -6,26 +6,23 @@ public class AnswerOpportunity implements IAnswerOpportunity {
 
     private long id;
     private int pmdUser;
-    private int weightUser;
-
     private Criterion criterion;
+    private User user;
 
-    public AnswerOpportunity(long id,int pmdUser, int weightUser) {
-        if(pmdUser <=1 || pmdUser >= 6){
+    public AnswerOpportunity(long id,int pmdUser, Criterion criterion, User user) {
+        if(pmdUser < 1 || pmdUser >= 6){
             throw new IllegalArgumentException("Valor Incorreto, entre com um valor de 1 a 5 ");
         }
-        if(weightUser <=1 || weightUser >= 6){
-            throw new IllegalArgumentException("Valor Incorreto, entre com um valor de 1 a 5 ");
+        if(criterion == null){
+            throw new IllegalArgumentException("Criterio não pode ser nulo");
         }
-        this.pmdUser = pmdUser;
-        this.weightUser = weightUser;
-    }
-
-    public AnswerOpportunity(long id, int pmdUser, int weightUser, Criterion criterion) {
+        if(user == null){
+            throw new IllegalArgumentException("Usuario não pode ser nulo");
+        }
         this.id = id;
-        this.pmdUser = pmdUser;
-        this.weightUser = weightUser;
         this.criterion = criterion;
+        this.user = user;
+        this.pmdUser = pmdUser;
     }
 
     @Override
@@ -38,14 +35,14 @@ public class AnswerOpportunity implements IAnswerOpportunity {
         return pmdUser;
     }
 
-    @Override
-    public int getWeightUser() {
-        return weightUser;
-    }
 
     @Override
     public Criterion getCriterion() {
         return criterion;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     @Override
@@ -59,12 +56,11 @@ public class AnswerOpportunity implements IAnswerOpportunity {
     }
 
     @Override
-    public void setWeightUser(int weightUser) {
-        this.weightUser = weightUser;
-    }
-
-    @Override
     public void setCriterion(Criterion criterion) {
         this.criterion = criterion;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

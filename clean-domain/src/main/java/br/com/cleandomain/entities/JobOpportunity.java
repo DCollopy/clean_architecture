@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class JobOpportunity implements IJobOpportunity {
@@ -14,12 +15,12 @@ public class JobOpportunity implements IJobOpportunity {
     private String title;
     private String description;
     private String language;
-    private String minimumProfile;
+    private Double minimumProfile = 0.0;
     private final LocalDate startDate = LocalDate.now();
     private LocalDate closingDate;
     private String educationLevel;
     private String salary;
-    private Criterion criterion;
+    private Set<Criterion> criterion;
     private User user;
     private Company company;
     private Customer customer;
@@ -28,7 +29,7 @@ public class JobOpportunity implements IJobOpportunity {
     public JobOpportunity() {
     }
     public JobOpportunity(Long id, String title, String description, String language, LocalDate startDate,
-                          LocalDate closingDate, String educationLevel, String salary, Criterion criterion,
+                          LocalDate closingDate, String educationLevel, String salary, Set<Criterion> criterion,
                           Company company, Customer customer) {
         this.id = id;
         this.title = title;
@@ -40,6 +41,22 @@ public class JobOpportunity implements IJobOpportunity {
         this.criterion = criterion;
         this.company = company;
         this.customer = customer;
+    }
+
+    public JobOpportunity(Long id, String title, String description, String language, LocalDate startDate,
+                          LocalDate closingDate, String educationLevel, String salary, Set<Criterion> criterion,
+                          Company company, Customer customer,double minimumProfile) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.language = language;
+        this.closingDate = closingDate;
+        this.educationLevel = educationLevel;
+        this.salary = salary;
+        this.criterion = criterion;
+        this.company = company;
+        this.customer = customer;
+        this.minimumProfile = minimumProfile;
     }
 
     public long getId() {
@@ -58,7 +75,7 @@ public class JobOpportunity implements IJobOpportunity {
         return language;
     }
 
-    public String getMinimumProfile() {
+    public double getMinimumProfile() {
         return minimumProfile;
     }
 
@@ -78,7 +95,7 @@ public class JobOpportunity implements IJobOpportunity {
         return salary;
     }
 
-    public Criterion getCriterion() {
+    public Set<Criterion> getCriterion() {
         return criterion;
     }
 
@@ -110,8 +127,9 @@ public class JobOpportunity implements IJobOpportunity {
         this.language = language;
     }
 
-    public void setMinimumProfile(String minimumProfile) {
+    public double setMinimumProfile(double minimumProfile) {
         this.minimumProfile = minimumProfile;
+        return minimumProfile;
     }
 
     public void setClosingDate(LocalDate closingDate) {
@@ -126,10 +144,9 @@ public class JobOpportunity implements IJobOpportunity {
         this.salary = salary;
     }
 
-    public void setCriterion(Criterion criterion) {
+    public void setCriterion(Set<Criterion> criterion) {
         this.criterion = criterion;
     }
-
     public void setUser(User user) {
         this.user = user;
     }

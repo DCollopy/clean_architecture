@@ -1,9 +1,10 @@
 package br.com.cleandomain.entities;
 
+import br.com.cleandomain.entities.repository.ISkill;
 import lombok.Data;
 
 @Data
-public class Skill {
+public class Skill implements ISkill {
     private String language;
 
     public Skill(String language) {
