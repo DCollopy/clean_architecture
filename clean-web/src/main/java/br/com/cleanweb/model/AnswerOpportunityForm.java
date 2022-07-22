@@ -14,7 +14,6 @@ public class AnswerOpportunityForm {
     public AnswerOpportunityForm(IAnswerOpportunity answerOpportunity) {
         this.id = answerOpportunity.getId();
         this.pmdUser = answerOpportunity.getPmdUser();
-        this.weightUser = answerOpportunity.getWeightUser();
         this.criterion = new CriterionForm(answerOpportunity.getCriterion());
     }
 
