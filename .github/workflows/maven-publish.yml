@@ -8,14 +8,15 @@ on:
     branches-ignore:
       - 'master'
       - 'release*'
-
+      
+defaults:
+  run:
+    working-directory: ./clean-domain
+    
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./clean-domain
     permissions:
       contents: read
       packages: write
