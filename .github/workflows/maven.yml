@@ -28,8 +28,9 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Build
+    - name: Build Test
       run: mvn --batch-mode -DskipTests package
+      working-directory: ./clean-domain/src/test/java/*
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
