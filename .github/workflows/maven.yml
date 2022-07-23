@@ -28,14 +28,17 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Maven Package
-      run: mvn -B clean package -DskipTests
+    - name: Build
+      run: mvn --batch-mode -DskipTests package
 
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v2
+    - name: Test
+      run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
+
+    - name: Report
+      uses: dorny/test-reporter@v1
       if: always()
       with:
-        junit_files: "test-results/junit/**/*.xml"
-        nunit_files: "test-results/nunit/**/*.xml"
-        xunit_files: "test-results/xunit/**/*.xml"
-        trx_files: "test-results/**/*.trx"
+        name: Maven Tests
+        path: target/surefire-reports/*.xml
+        reporter: java-junit
+        fail-on-error: true
