@@ -30,7 +30,7 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Build Test
       run: mvn --batch-mode -DskipTests package
-      working-directory: ./clean-domain
+      working-directory: ./clean-domain/src/test/java/com/example/clean/domain/
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
