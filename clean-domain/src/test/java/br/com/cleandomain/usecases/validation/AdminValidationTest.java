@@ -12,23 +12,17 @@ class AdminValidationTest {
     protected IAdminValidation adminValidation = new AdminValidation();
     @Test
     void notProfileAdmin() {
-        assertThrows(IllegalArgumentException.class,
-                () -> adminValidation.validate(new Admin(null, "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
+        assertNotNull(adminValidation.validate(new Admin(null, "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
                         new Phone("21", "11111111"), new Functional("123456789"))));
-        assertThrows(IllegalArgumentException.class,
-                () -> adminValidation.validate(new Admin("Luis", null, new Email("teste@email.com"), new Cpf("33333333333"),
+        assertNotNull(adminValidation.validate(new Admin("Luis", null, new Email("teste@email.com"), new Cpf("33333333333"),
                         new Phone("21", "11111111"), new Functional("123456789"))));
-        assertThrows(IllegalArgumentException.class,
-                () -> adminValidation.validate(new Admin("luis", "Oliveira", null, new Cpf("33333333333"),
+        assertNotNull(adminValidation.validate(new Admin("luis", "Oliveira", null, new Cpf("33333333333"),
                         new Phone("21", "11111111"), new Functional("123456789"))));
-        assertThrows(IllegalArgumentException.class,
-                () -> adminValidation.validate(new Admin("Luis", "Oliveira", new Email("teste@email.com"), null,
+        assertNotNull(adminValidation.validate(new Admin("Luis", "Oliveira", new Email("teste@email.com"), null,
                         new Phone("21", "11111111"), new Functional("123456789"))));
-        assertThrows(IllegalArgumentException.class,
-                () -> adminValidation.validate(new Admin("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
+        assertNotNull(adminValidation.validate(new Admin("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
                         null, new Functional("123456789"))));
-        assertThrows(IllegalArgumentException.class,
-                () -> adminValidation.validate(new Admin("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
+        assertNotNull(adminValidation.validate(new Admin("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
                         new Phone("21", "11111111"), null)));
 
     }
@@ -40,9 +34,17 @@ class AdminValidationTest {
     }
 
     @Test
-    void profileAdmin() {
-        IAdmin admin = new Admin("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
-                new Phone("21", "11111111"), null);
-        adminValidation.createAdmin(admin);
+    void profileNotCreateAdmin() {
+        assertThrows(IllegalArgumentException.class, () -> adminValidation.createAdmin(
+                new Admin(null, "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
+                        new Phone("21", "11111111"), new Functional("123456789"))));
     }
+
+    @Test
+    void profileCreateAdmin() {
+        assertNotNull(adminValidation.createAdmin(
+                new Admin("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
+                        new Phone("21", "11111111"), new Functional("123456789"))));
+    }
+
 }

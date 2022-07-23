@@ -33,7 +33,7 @@ public class JobOpportunityValidation implements IJobOpportunityValidation {
         return message;
     }
 
-    public void createJobOpportunity(IJobOpportunity jobOpportunity) {
+    public IJobOpportunity createJobOpportunity(IJobOpportunity jobOpportunity) {
         if (jobOpportunity.getClosingDate() == null) {
             closingDay(jobOpportunity);
         }
@@ -41,16 +41,17 @@ public class JobOpportunityValidation implements IJobOpportunityValidation {
         jobOpportunity.setStatus(true);
 
         if (validate(jobOpportunity).isEmpty()) {
-            new JobOpportunity(jobOpportunity.getId(), jobOpportunity.getTitle(), jobOpportunity.getDescription(),
+            Logger.getLogger(JobOpportunityValidation.class.getName()).info("JobOpportunity created");
+           return new JobOpportunity(jobOpportunity.getId(), jobOpportunity.getTitle(), jobOpportunity.getDescription(),
                     jobOpportunity.getLanguage(), jobOpportunity.getStartDate(), jobOpportunity.getClosingDate(),
                     jobOpportunity.getEducationLevel(), jobOpportunity.getSalary(),
                     jobOpportunity.getCriterion(),
                     jobOpportunity.getCompany(), jobOpportunity.getCustomer(),getAverage(jobOpportunity));
-            Logger.getLogger("JobOpportunityValidation").info("Job Opportunity created");
+
         } else {
             Logger.getLogger("JobOpportunityValidation").info("Job Opportunity not created");
+            throw new IllegalArgumentException("Job Opportunity not created");
         }
-
     }
 
     public double getAverage(IJobOpportunity jobOpportunity) {
@@ -83,12 +84,13 @@ public class JobOpportunityValidation implements IJobOpportunityValidation {
     }
 
 
-    public void deleteJobOpportunity(IJobOpportunity jobOpportunity) {
+    public IJobOpportunity deleteJobOpportunity(IJobOpportunity jobOpportunity) {
         if (jobOpportunity.getId() == 0 || exitCustomerJobOpportunity(jobOpportunity.getCustomer().getCpf())) {
-            jobOpportunity.delete(jobOpportunity.getId());
             Logger.getLogger("JobOpportunityValidation").info("Job Opportunity deleted");
+            return jobOpportunity.delete(jobOpportunity.getId());
         } else {
             Logger.getLogger("JobOpportunityValidation").info("Job Opportunity not found");
+            throw new IllegalArgumentException("Job Opportunity not found");
         }
     }
 

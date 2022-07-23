@@ -15,16 +15,15 @@ class UserValidationTest {
 
     @Test
     void validate() {
-        assertThrows(IllegalArgumentException.class,
-                () -> userValidation.validate(new User(null, "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
+        assertNotNull( userValidation.validate(new User(null, "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
                         new Phone("21", "11111111"))));
-        assertThrows(IllegalArgumentException.class, () -> userValidation.validate(new User("Luis", null, new Email("teste@email.com"),
+        assertNotNull(userValidation.validate(new User("Luis", null, new Email("teste@email.com"),
                 new Cpf("33333333333"), new Phone("21", "11111111"))));
-        assertThrows(IllegalArgumentException.class, () -> userValidation.validate(new User("luis", "Oliveira", null,
+        assertNotNull(userValidation.validate(new User("luis", "Oliveira", null,
                 new Cpf("33333333333"), new Phone("21", "11111111"))));
-        assertThrows(IllegalArgumentException.class, () -> userValidation.validate(new User("Luis", "Oliveira", new Email("teste@email.com"),
+        assertNotNull(userValidation.validate(new User("Luis", "Oliveira", new Email("teste@email.com"),
                 null, new Phone("21", "11111111"))));
-        assertThrows(IllegalArgumentException.class, () -> userValidation.validate(new User("Luis", "Oliveira", new Email("teste@email.com"),
+        assertNotNull(userValidation.validate(new User("Luis", "Oliveira", new Email("teste@email.com"),
                 new Cpf("33333333333"), null)));
     }
 
@@ -51,7 +50,7 @@ class UserValidationTest {
     void createUser() {
         IUser user = new User("Luis", "Oliveira", new Email("teste@email.com"),
                 new Cpf("33333333333"), new Phone("21", "11111111"));
-        userValidation.createUser(user);
+        assertEquals(user,userValidation.createUser(user));
     }
 
     @Test
@@ -62,8 +61,6 @@ class UserValidationTest {
                 new Skill("Java"),
                 new ProfessionalExperience("IBM", "Data Science", "Data analysis about systems support",
                         LocalDate.of(2000, 05, 02), LocalDate.now()));
-        userValidation.createUserCurriculum(user);
+        assertEquals(user,userValidation.createUserCurriculum(user));
     }
-
-
 }

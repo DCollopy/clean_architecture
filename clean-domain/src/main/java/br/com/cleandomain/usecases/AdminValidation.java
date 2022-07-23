@@ -9,25 +9,27 @@ import java.util.logging.Logger;
 public class AdminValidation implements IAdminValidation {
 
     @Override
-    public void validate(IAdmin admin) {
+    public String validate(IAdmin admin) {
+        String message = "";
         if(admin.getName() == null || admin.getName().isEmpty()) {
-            throw new IllegalArgumentException("Name is required");
+            return "Name is required";
         }
         if(admin.getLastName() == null || admin.getLastName().isEmpty()) {
-            throw new IllegalArgumentException("LastName is required");
+            return "Last name is required";
         }
         if(admin.getEmail() == null || admin.getEmail().getAddress().isEmpty()) {
-            throw new IllegalArgumentException("Email is required");
+            return "Email is required";
         }
         if(admin.getCpf() == null || admin.getCpf().getNumber().isEmpty()) {
-            throw new IllegalArgumentException("Cpf is required");
+            return "CPF is required";
         }
         if(admin.getPhone() == null || admin.getPhone().getNumber().isEmpty()) {
-            throw new IllegalArgumentException("Phone is required");
+            return "Phone is required";
         }
         if(admin.getFunctional() == null || admin.getFunctional().getNumber().isEmpty()) {
-            throw new IllegalArgumentException("Functional is required");
+            return "Functional is required";
         }
+        return message;
     }
 
     // a ideia aqui e jogar o cpf vindo da jpa para esse metodo
@@ -37,11 +39,15 @@ public class AdminValidation implements IAdminValidation {
         }
         return cpfAdmin;
     }
-    // so posso chamar esse metodo depois de validar o cpf
-    public void createAdmin(IAdmin admin) {
-        Logger.getLogger(AdminValidation.class.getName()).info("Admin created");
-        new Admin(admin.getName(), admin.getLastName(), admin.getEmail(),
-                admin.getCpf(), admin.getPhone(), admin.getFunctional());
+
+    public IAdmin createAdmin(IAdmin admin) {
+        if(validate(admin).isEmpty()) {
+            Logger.getLogger(AdminValidation.class.getName()).info("Admin created");
+            return new Admin(admin.getName(), admin.getLastName(), admin.getEmail(),
+                    admin.getCpf(), admin.getPhone(), admin.getFunctional());
+        }
+        throw new IllegalArgumentException("Admin does not create");
+
     }
 
 }

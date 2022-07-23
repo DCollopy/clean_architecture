@@ -7,6 +7,6 @@ public interface IUserValidation {
     String validate(IUser user);
     String takeCpf(IUser user);
     String userIsUser(String cpfUser);
-    void createUser(IUser user);
-    void createUserCurriculum(IUser user);
+    IUser createUser(IUser user);
+    IUser createUserCurriculum(IUser user);
 }

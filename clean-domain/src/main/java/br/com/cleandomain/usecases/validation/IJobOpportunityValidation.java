@@ -10,13 +10,13 @@ public interface IJobOpportunityValidation {
 
     String validate(IJobOpportunity jobOpportunity);
 
-    void createJobOpportunity(IJobOpportunity jobOpportunity);
+    IJobOpportunity createJobOpportunity(IJobOpportunity jobOpportunity);
 
     boolean opportunityExists(Long id);
 
     boolean isExpired(LocalDate closingDate);
 
-    void deleteJobOpportunity(IJobOpportunity jobOpportunity);
+    IJobOpportunity deleteJobOpportunity(IJobOpportunity jobOpportunity);
 
     List<IJobOpportunity> listCustomerJobOpportunity(ICpf cpf);
 

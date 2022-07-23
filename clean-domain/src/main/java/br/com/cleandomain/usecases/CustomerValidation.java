@@ -9,31 +9,33 @@ import java.util.logging.Logger;
 public class CustomerValidation implements ICustomerValidation {
 
     @Override
-    public void createClient(ICustomer client) {
+    public String validate(ICustomer client) {
+        String message = "";
         if(client.getName() == null || client.getName().isEmpty()) {
-            throw new IllegalArgumentException("Name is required");
+            return "Name is required";
         }
         if(client.getLastName() == null || client.getLastName().isEmpty()) {
-            throw new IllegalArgumentException("LastName is required");
+            return "Last name is required";
         }
         if(client.getEmail() == null || client.getEmail().getAddress().isEmpty()) {
-            throw new IllegalArgumentException("Email is required");
+            return "Email is required";
         }
         if(client.getCpf() == null || client.getCpf().getNumber().isEmpty()) {
-            throw new IllegalArgumentException("Cpf is required");
+            return "CPF is required";
         }
         if(client.getPhone() == null || client.getPhone().getNumber().isEmpty()) {
-            throw new IllegalArgumentException("Phone is required");
+            return "Phone is required";
         }
         if(client.getFunctional() == null || client.getFunctional().getNumber().isEmpty()) {
-            throw new IllegalArgumentException("Functional is required");
+            return "Functional is required";
         }
         if(client.getCompany() == null || client.getCompany().getCnpj().isEmpty()) {
-            throw new IllegalArgumentException("Cnpj is required");
+            return "Company is required";
         }
         if(client.getCompany().getFantasyName() == null || client.getCompany().getFantasyName().isEmpty()) {
-            throw new IllegalArgumentException("FantasyName is required");
+            return "Fantasy name is required";
         }
+        return message;
     }
 
     public boolean customerTeamCompany(ICustomer customer) {
@@ -43,14 +45,14 @@ public class CustomerValidation implements ICustomerValidation {
         return true;
     }
 
-    public Customer createCustomer(ICustomer customer) {
-        if(customerTeamCompany(customer)){
+    public ICustomer createCustomer(ICustomer customer) {
+        if(validate(customer).isEmpty()) {
             Logger.getLogger(CustomerValidation.class.getName()).info("Customer created");
             return new Customer(customer.getName(), customer.getLastName(), customer.getEmail(),
                     customer.getCpf(), customer.getPhone(), customer.getFunctional(), customer.getCompany());
         }
-        Logger.getLogger(CustomerValidation.class.getName()).info("Customer does not have company");
-       return null;
+        Logger.getLogger(CustomerValidation.class.getName()).info("Customer does not create");
+        throw new IllegalArgumentException("Customer does not create");
     }
 
 

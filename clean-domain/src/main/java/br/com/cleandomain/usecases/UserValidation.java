@@ -39,20 +39,26 @@ public class UserValidation implements IUserValidation {
         return cpfUser;
     }
 
-    public void createUser(IUser user) {
+    public IUser createUser(IUser user) {
         if(validate(user).isEmpty()){
-            new User(user.getName(), user.getLastName(), user.getEmail(),
-                    user.getCpf(), user.getPhone());
             Logger.getLogger(UserValidation.class.getName()).info("User created");
+            return new User(user.getName(), user.getLastName(), user.getEmail(),
+                    user.getCpf(), user.getPhone());
         } else{
             Logger.getLogger(UserValidation.class.getName()).info("User not created");
         }
+        throw new IllegalArgumentException("User not created");
     }
 
-    public void createUserCurriculum(IUser user) {
-        Logger.getLogger(UserValidation.class.getName()).info("User created curriculum");
-        new User(user.getName(), user.getLastName(), user.getEmail(),
-                user.getCpf(), user.getPhone(),user.getSchoolingLevel(),user.getSkill(),user.getProfessionalExperience());
+    public IUser createUserCurriculum(IUser user) {
+        if(validate(user).isEmpty()) {
+            Logger.getLogger(UserValidation.class.getName()).info("User created curriculum");
+            return new User(user.getName(), user.getLastName(), user.getEmail(),
+                    user.getCpf(), user.getPhone(), user.getSchoolingLevel(), user.getSkill(), user.getProfessionalExperience());
+        } else{
+            Logger.getLogger(UserValidation.class.getName()).info("User not created curriculum");
+            throw new IllegalArgumentException("User not created curriculum");
+        }
     }
 
     public void userAnswerOpportunity(IUser user) {
