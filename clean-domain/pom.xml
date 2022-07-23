@@ -4,24 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>br.com.cleandomain</groupId>
     <artifactId>clean-domain</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>clean-domain</name>
     <description>clean-domain</description>
     <parent>
         <groupId>br.com.cleanarchitecture</groupId>
         <artifactId>clean-architecture</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
-                    <testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
