@@ -1,5 +1,6 @@
 package br.com.cleandomain.usecases;
 
+import br.com.cleandomain.entities.ProfessionalExperience;
 import br.com.cleandomain.entities.User;
 import br.com.cleandomain.entities.repository.IUser;
 import br.com.cleandomain.usecases.validation.IUserValidation;
@@ -54,7 +55,7 @@ public class UserValidation implements IUserValidation {
         if(validate(user).isEmpty()) {
             Logger.getLogger(UserValidation.class.getName()).info("User created curriculum");
             return new User(user.getName(), user.getLastName(), user.getEmail(),
-                    user.getCpf(), user.getPhone(), user.getSchoolingLevel(), user.getSkill(), user.getProfessionalExperience());
+                    user.getCpf(), user.getPhone(), user.getSchoolingLevel(), user.getSkill(),user.getProfessionalExperience());
         } else{
             Logger.getLogger(UserValidation.class.getName()).info("User not created curriculum");
             throw new IllegalArgumentException("User not created curriculum");

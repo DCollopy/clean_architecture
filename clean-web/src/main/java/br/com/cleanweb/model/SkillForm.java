@@ -4,7 +4,7 @@ import br.com.cleandomain.entities.repository.ISkill;
 import lombok.Data;
 
 @Data
-public class SkillForm {
+public class SkillForm implements ISkill {
 
     private String language;
 

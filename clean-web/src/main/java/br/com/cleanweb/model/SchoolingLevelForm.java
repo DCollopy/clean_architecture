@@ -5,7 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 @Data
-public class SchoolingLevelForm {
+public class SchoolingLevelForm implements ISchoolingLevel {
 
     private String name;
     private String educationLevel;

@@ -26,7 +26,7 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Build Test
       run: mvn --batch-mode -DskipTests package
-    - name: Report
+    - name: Test
       run: mvn surefire-report:report
     - name: Publish Test Report
       if: ${{ always() }}

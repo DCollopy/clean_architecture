@@ -19,8 +19,7 @@ public abstract class Profile implements IProfile {
         this.phone = phone;
     }
 
-    public Profile() {
-    }
+    public Profile() {}
 
 
 }

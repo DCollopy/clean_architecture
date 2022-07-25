@@ -1,10 +1,13 @@
 package br.com.cleanweb.configs;
 
-import br.com.cleandomain.entities.repository.IUser;
 import br.com.cleandomain.usecases.validation.IUserValidation;
 import br.com.cleanweb.model.UserForm;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-public class UserConfig {
+@Configuration
+
+public abstract class UserConfig  {
 
     private final IUserValidation userValidation;
 
@@ -12,7 +15,14 @@ public class UserConfig {
         this.userValidation = userValidation;
     }
 
+    @Bean
     public void createUser(UserForm userForm){
-        userValidation.createUser((IUser) userForm);
+        userValidation.createUser(userForm.toUser());
     }
+
+    @Bean
+    public void createUserCurriculum(UserForm userForm){
+        userValidation.createUserCurriculum(userForm.toUserCurriculum());
+    }
+
 }
