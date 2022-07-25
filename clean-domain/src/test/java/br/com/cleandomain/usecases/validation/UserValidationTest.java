@@ -31,7 +31,7 @@ class UserValidationTest {
     void takeCpf() {
         IUser user = new User("Luis", "Oliveira", new Email("teste@email.com"),
                 new Cpf("33333333333"), new Phone("21", "11111111"));
-        assertEquals(user.getCpf(), userValidation.takeCpf(user));
+        assertEquals(user.getCpf().getNumber(), userValidation.takeCpf(user));
     }
 
     @Test

@@ -2,6 +2,7 @@ package br.com.cleanweb.controllers;
 
 import br.com.cleanweb.configs.UserConfig;
 import br.com.cleanweb.model.UserForm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
