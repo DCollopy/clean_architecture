@@ -1,9 +1,10 @@
 package br.com.cleanweb.model;
 
+import br.com.cleandomain.entities.Email;
 import lombok.Data;
 
 @Data
-public class EmailForm implements Email {
+public class EmailForm {
 
     private String address;
 
@@ -14,12 +15,12 @@ public class EmailForm implements Email {
     public EmailForm() {
     }
 
-    @Override
+
     public String getAddress() {
         return this.address;
     }
 
-    @Override
+
     public void setAddress(String address) {}
 
     public br.com.cleandomain.entities.Email convertEmailFormToEmail(){

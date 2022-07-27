@@ -1,5 +1,6 @@
 package br.com.cleanweb.model;
 
+import br.com.cleandomain.entities.Phone;
 import lombok.Data;
 
 @Data
