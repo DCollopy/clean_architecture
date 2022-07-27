@@ -9,7 +9,7 @@
     </parent>
     <groupId>br.com.cleanpersistence</groupId>
     <artifactId>clean-persistence</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>clean-persistence</name>
     <description>clean-persistence</description>
     <properties>
