@@ -1,16 +1,16 @@
 package br.com.cleandomain.usecases;
 
 
-import br.com.cleandomain.entities.repository.IJobOpportunity;
+import br.com.cleandomain.entities.JobOpportunity;
 import br.com.cleandomain.usecases.validation.IDateValidation;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class DateValidation implements IDateValidation {
-    IJobOpportunity jobOpportunity;
+    JobOpportunity jobOpportunity;
 
-    public DateValidation(IJobOpportunity jobOpportunity) {
+    public DateValidation(JobOpportunity jobOpportunity) {
         this.jobOpportunity = jobOpportunity;
     }
 

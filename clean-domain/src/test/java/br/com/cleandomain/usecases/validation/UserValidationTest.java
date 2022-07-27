@@ -2,7 +2,6 @@ package br.com.cleandomain.usecases.validation;
 
 import br.com.cleandomain.entities.*;
 import br.com.cleandomain.entities.repository.IEducationLevel;
-import br.com.cleandomain.entities.repository.IUser;
 import br.com.cleandomain.usecases.UserValidation;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +29,7 @@ class UserValidationTest {
 
     @Test
     void takeCpf() {
-        IUser user = new User("Luis", "Oliveira", new Email("teste@email.com"),
+        User user = new User("Luis", "Oliveira", new Email("teste@email.com"),
                 new Cpf("33333333333"), new Phone("21", "11111111"));
         assertEquals(user.getCpf().getNumber(), userValidation.takeCpf(user));
     }
@@ -49,14 +48,14 @@ class UserValidationTest {
 
     @Test
     void createUser() {
-        IUser user = new User("Luis", "Oliveira", new Email("teste@email.com"),
+        User user = new User("Luis", "Oliveira", new Email("teste@email.com"),
                 new Cpf("33333333333"), new Phone("21", "11111111"));
         assertEquals(user,userValidation.createUser(user));
     }
 
     @Test
     void createUserCurriculum() {
-        IUser user = new User("Luis", "Oliveira", new Email("teste@email.com"),
+        User user = new User("Luis", "Oliveira", new Email("teste@email.com"),
                 new Cpf("33333333333"), new Phone("21", "11111111"),
                 new SchoolingLevel(UUID.randomUUID().getMostSignificantBits(),"Software Engineer", IEducationLevel.COMPLETE_GRAD, LocalDate.now(), LocalDate.now()),
                 new Skill(UUID.randomUUID().getMostSignificantBits(), "Java"),

@@ -1,12 +1,11 @@
 package br.com.cleandomain.usecases.validation;
 
 import br.com.cleandomain.entities.Customer;
-import br.com.cleandomain.entities.repository.ICustomer;
 
 public interface ICustomerValidation {
-    String validate(ICustomer customer);
+    String validate(Customer customer);
 
-    boolean customerTeamCompany(ICustomer customer);
+    boolean customerTeamCompany(Customer customer);
 
-    ICustomer createCustomer(ICustomer customer);
+    Customer createCustomer(Customer customer);
 }

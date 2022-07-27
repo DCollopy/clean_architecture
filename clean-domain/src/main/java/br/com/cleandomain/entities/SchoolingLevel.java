@@ -1,12 +1,11 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.repository.ISchoolingLevel;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
-public class SchoolingLevel implements ISchoolingLevel {
+public class SchoolingLevel {
 
     private long id;
     private String name;

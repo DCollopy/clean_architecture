@@ -1,7 +1,6 @@
 package br.com.cleandomain.usecases;
 
 import br.com.cleandomain.entities.Admin;
-import br.com.cleandomain.entities.repository.IAdmin;
 import br.com.cleandomain.usecases.validation.IAdminValidation;
 
 import java.util.logging.Logger;
@@ -9,7 +8,7 @@ import java.util.logging.Logger;
 public class AdminValidation implements IAdminValidation {
 
     @Override
-    public String validate(IAdmin admin) {
+    public String validate(Admin admin) {
         String message = "";
         if(admin.getName() == null || admin.getName().isEmpty()) {
             return "Name is required";
@@ -40,10 +39,10 @@ public class AdminValidation implements IAdminValidation {
         return cpfAdmin;
     }
 
-    public IAdmin createAdmin(IAdmin admin) {
+    public Admin createAdmin(Admin admin) {
         if(validate(admin).isEmpty()) {
             Logger.getLogger(AdminValidation.class.getName()).info("Admin created");
-            return new Admin(admin.getName(), admin.getLastName(), admin.getEmail(),
+            return new br.com.cleandomain.entities.Admin(admin.getName(), admin.getLastName(), admin.getEmail(),
                     admin.getCpf(), admin.getPhone(), admin.getFunctional());
         }
         throw new IllegalArgumentException("Admin does not create");

@@ -1,8 +1,6 @@
 package br.com.cleandomain.usecases;
 
 import br.com.cleandomain.entities.*;
-import br.com.cleandomain.entities.repository.ICpf;
-import br.com.cleandomain.entities.repository.IJobOpportunity;
 import br.com.cleandomain.usecases.validation.IJobOpportunityValidation;
 
 import java.time.LocalDate;
@@ -13,7 +11,7 @@ import java.util.logging.Logger;
 
 public class JobOpportunityValidation implements IJobOpportunityValidation {
 
-    public String validate(IJobOpportunity jobOpportunity) {
+    public String validate(JobOpportunity jobOpportunity) {
         String message = "";
         if (jobOpportunity.getTitle() == null || jobOpportunity.getTitle().isEmpty()) {
             return "Title is required";
@@ -33,7 +31,7 @@ public class JobOpportunityValidation implements IJobOpportunityValidation {
         return message;
     }
 
-    public IJobOpportunity createJobOpportunity(IJobOpportunity jobOpportunity) {
+    public JobOpportunity createJobOpportunity(JobOpportunity jobOpportunity) {
         if (jobOpportunity.getClosingDate() == null) {
             closingDay(jobOpportunity);
         }
@@ -54,7 +52,7 @@ public class JobOpportunityValidation implements IJobOpportunityValidation {
         }
     }
 
-    public double getAverage(IJobOpportunity jobOpportunity) {
+    public double getAverage(JobOpportunity jobOpportunity) {
         double multiple = 0;
         int soma = 0;
         Set<Criterion> criterion = jobOpportunity.getCriterion();
@@ -67,7 +65,7 @@ public class JobOpportunityValidation implements IJobOpportunityValidation {
         return jobOpportunity.setMinimumProfile(multiple / soma);
     }
 
-    private void closingDay(IJobOpportunity jobOpportunity) {
+    private void closingDay(JobOpportunity jobOpportunity) {
         jobOpportunity.setClosingDate(LocalDate.now().plusDays(30));
     }
 
@@ -84,7 +82,7 @@ public class JobOpportunityValidation implements IJobOpportunityValidation {
     }
 
 
-    public IJobOpportunity deleteJobOpportunity(IJobOpportunity jobOpportunity) {
+    public JobOpportunity deleteJobOpportunity(JobOpportunity jobOpportunity) {
         if (jobOpportunity.getId() == 0 || exitCustomerJobOpportunity(jobOpportunity.getCustomer().getCpf())) {
             Logger.getLogger("JobOpportunityValidation").info("Job Opportunity deleted");
             return jobOpportunity.delete(jobOpportunity.getId());
@@ -94,8 +92,8 @@ public class JobOpportunityValidation implements IJobOpportunityValidation {
         }
     }
 
-    public List<IJobOpportunity> listCustomerJobOpportunity(ICpf cpf) {
-        IJobOpportunity jobOpportunity = new JobOpportunity();
+    public List<JobOpportunity> listCustomerJobOpportunity(Cpf cpf) {
+        JobOpportunity jobOpportunity = new JobOpportunity();
         if (cpf != null) {
             return jobOpportunity.listAllCustomer(cpf);
         }
@@ -103,7 +101,7 @@ public class JobOpportunityValidation implements IJobOpportunityValidation {
         return null;
     }
 
-    public boolean exitCustomerJobOpportunity(ICpf cpf) {
+    public boolean exitCustomerJobOpportunity(Cpf cpf) {
         if (cpf != null) {
             return true;
         }

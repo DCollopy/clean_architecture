@@ -1,7 +1,6 @@
 package br.com.cleanweb.model;
 
 import br.com.cleandomain.entities.SchoolingLevel;
-import br.com.cleandomain.entities.repository.ISchoolingLevel;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -13,7 +12,7 @@ public class SchoolingLevelForm {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public SchoolingLevelForm(ISchoolingLevel schoolingLevel) {
+    public SchoolingLevelForm(SchoolingLevel schoolingLevel) {
         this.name = schoolingLevel.getName();
         this.educationLevel = schoolingLevel.getEducationLevel();
         this.startDate = schoolingLevel.getStartDate();
@@ -23,7 +22,7 @@ public class SchoolingLevelForm {
     public SchoolingLevelForm() {
     }
 
-    public SchoolingLevel convertSchoolingLevelFormToSchoolingLevel(){
-        return new SchoolingLevel(this.name, this.educationLevel, this.startDate, this.endDate);
+    public br.com.cleandomain.entities.SchoolingLevel convertSchoolingLevelFormToSchoolingLevel(){
+        return new br.com.cleandomain.entities.SchoolingLevel(this.name, this.educationLevel, this.startDate, this.endDate);
     }
 }

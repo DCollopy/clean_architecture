@@ -1,7 +1,6 @@
 package br.com.cleandomain.usecases;
 
 import br.com.cleandomain.entities.Customer;
-import br.com.cleandomain.entities.repository.ICustomer;
 import br.com.cleandomain.usecases.validation.ICustomerValidation;
 
 import java.util.logging.Logger;
@@ -9,7 +8,7 @@ import java.util.logging.Logger;
 public class CustomerValidation implements ICustomerValidation {
 
     @Override
-    public String validate(ICustomer client) {
+    public String validate(Customer client) {
         String message = "";
         if(client.getName() == null || client.getName().isEmpty()) {
             return "Name is required";
@@ -38,17 +37,17 @@ public class CustomerValidation implements ICustomerValidation {
         return message;
     }
 
-    public boolean customerTeamCompany(ICustomer customer) {
+    public boolean customerTeamCompany(Customer customer) {
         if(customer.getCompany() == null) {
             return false;
         }
         return true;
     }
 
-    public ICustomer createCustomer(ICustomer customer) {
+    public Customer createCustomer(Customer customer) {
         if(validate(customer).isEmpty()) {
             Logger.getLogger(CustomerValidation.class.getName()).info("Customer created");
-            return new Customer(customer.getName(), customer.getLastName(), customer.getEmail(),
+            return new br.com.cleandomain.entities.Customer(customer.getName(), customer.getLastName(), customer.getEmail(),
                     customer.getCpf(), customer.getPhone(), customer.getFunctional(), customer.getCompany());
         }
         Logger.getLogger(CustomerValidation.class.getName()).info("Customer does not create");

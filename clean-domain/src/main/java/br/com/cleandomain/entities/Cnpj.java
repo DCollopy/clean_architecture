@@ -1,10 +1,9 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.repository.ICnpj;
 import lombok.Data;
 
 @Data
-public class Cnpj implements ICnpj {
+public class Cnpj {
     private String number;
 
     public Cnpj(String number) {

@@ -1,15 +1,13 @@
 package br.com.cleandomain.usecases;
 
-import br.com.cleandomain.entities.ProfessionalExperience;
 import br.com.cleandomain.entities.User;
-import br.com.cleandomain.entities.repository.IUser;
 import br.com.cleandomain.usecases.validation.IUserValidation;
 
 import java.util.logging.Logger;
 
 public class UserValidation implements IUserValidation {
 
-    public String validate(IUser user) {
+    public String validate(User user) {
         String message = "";
         if (user.getName() == null || user.getName().isEmpty()) {
             return "Name is required";
@@ -29,7 +27,7 @@ public class UserValidation implements IUserValidation {
         return message;
     }
 
-    public String takeCpf(IUser user) {
+    public String takeCpf(User user) {
         return user.getCpf().getNumber();
     }
 
@@ -40,10 +38,10 @@ public class UserValidation implements IUserValidation {
         return cpfUser;
     }
 
-    public IUser createUser(IUser user) {
+    public User createUser(User user) {
         if(validate(user).isEmpty()){
             Logger.getLogger(UserValidation.class.getName()).info("User created");
-            return new User(user.getName(), user.getLastName(), user.getEmail(),
+            return new br.com.cleandomain.entities.User(user.getName(), user.getLastName(), user.getEmail(),
                     user.getCpf(), user.getPhone());
         } else{
             Logger.getLogger(UserValidation.class.getName()).info("User not created");
@@ -51,10 +49,10 @@ public class UserValidation implements IUserValidation {
         throw new IllegalArgumentException("User not created");
     }
 
-    public IUser createUserCurriculum(IUser user) {
+    public User createUserCurriculum(User user) {
         if(validate(user).isEmpty()) {
             Logger.getLogger(UserValidation.class.getName()).info("User created curriculum");
-            return new User(user.getName(), user.getLastName(), user.getEmail(),
+            return new br.com.cleandomain.entities.User(user.getName(), user.getLastName(), user.getEmail(),
                     user.getCpf(), user.getPhone(), user.getSchoolingLevel(), user.getSkill(),user.getProfessionalExperience());
         } else{
             Logger.getLogger(UserValidation.class.getName()).info("User not created curriculum");
@@ -62,9 +60,9 @@ public class UserValidation implements IUserValidation {
         }
     }
 
-    public void userAnswerOpportunity(IUser user) {
+    public void userAnswerOpportunity(User user) {
         Logger.getLogger(UserValidation.class.getName()).info("User answer opportunity");
-        new User(user.getAnswerOpportunity());
+        new br.com.cleandomain.entities.User(user.getAnswerOpportunity());
     }
 
 

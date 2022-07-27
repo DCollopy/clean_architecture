@@ -1,6 +1,6 @@
 package br.com.cleanweb.model;
 
-import br.com.cleandomain.entities.repository.IProfile;
+import br.com.cleandomain.entities.Profile;
 import lombok.Data;
 
 @Data
@@ -13,7 +13,7 @@ public class ProfileForm {
 
     public ProfileForm() {
     }
-    public ProfileForm(IProfile profile) {
+    public ProfileForm(Profile profile) {
         this.name = profile.getName();
         this.lastName = profile.getLastName();
         this.email = new EmailForm(profile.getEmail());

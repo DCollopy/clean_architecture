@@ -1,14 +1,9 @@
 package br.com.cleandomain.usecases.validation;
 
 import br.com.cleandomain.entities.*;
-import br.com.cleandomain.entities.repository.ICpf;
 import br.com.cleandomain.entities.repository.IEducationLevel;
-import br.com.cleandomain.entities.repository.IJobOpportunity;
 import br.com.cleandomain.usecases.JobOpportunityValidation;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -21,8 +16,8 @@ class JobOpportunityValidationTest {
 
     protected IJobOpportunityValidation jobOpportunityValidation = new JobOpportunityValidation();
 
-    private IJobOpportunity getJobOpportunity(Set<Criterion> criterion, Cpf cpf) {
-        IJobOpportunity jobOpportunity = new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
+    private JobOpportunity getJobOpportunity(Set<Criterion> criterion, br.com.cleandomain.entities.Cpf cpf) {
+        JobOpportunity jobOpportunity = new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
                 "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
                 "English intemediario", LocalDate.now(), LocalDate.now().plusDays(30),
                 IEducationLevel.COMPLETE_GRAD, "1200", criterion,
@@ -54,7 +49,7 @@ class JobOpportunityValidationTest {
                         IEducationLevel.COMPLETE_GRAD, "1200", criterion,
                         new Company(new Cnpj("33.663.683/0001-16"),
                                 "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
-                        new Customer(null, "Oliveira", new Email("teste@email.com"), new Cpf("33333333333")
+                        new Customer(null, "Oliveira", new Email("teste@email.com"), new br.com.cleandomain.entities.Cpf("33333333333")
                                 , new Phone("21", "11111111"), new Functional("123456789"),
                                 new Company(new Cnpj("33.663.683/0001-16"), "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")))));
         assertNotNull(jobOpportunityValidation.validate(new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),null,
@@ -63,7 +58,7 @@ class JobOpportunityValidationTest {
                         IEducationLevel.COMPLETE_GRAD, "1200",criterion,
                         new Company(new Cnpj("33.663.683/0001-16"),
                                 "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
-                        new Customer(null,"Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
+                        new Customer(null,"Oliveira",new Email("teste@email.com"),new br.com.cleandomain.entities.Cpf("33333333333")
                                 ,new Phone("21", "11111111"),new Functional("123456789"),
                                 new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")))));
         assertNotNull(jobOpportunityValidation.validate(new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
@@ -72,7 +67,7 @@ class JobOpportunityValidationTest {
                         IEducationLevel.COMPLETE_GRAD, "1200", criterion,
                         new Company(new Cnpj("33.663.683/0001-16"),
                                 "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
-                        new Customer(null,"Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
+                        new Customer(null,"Oliveira",new Email("teste@email.com"),new br.com.cleandomain.entities.Cpf("33333333333")
                                 ,new Phone("21", "11111111"),new Functional("123456789"),
                                 new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")))));
         assertNotNull(jobOpportunityValidation.validate(new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
@@ -81,7 +76,7 @@ class JobOpportunityValidationTest {
                         IEducationLevel.COMPLETE_GRAD, "1200", criterion,
                         new Company(new Cnpj("33.663.683/0001-16"),
                                 "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
-                        new Customer(null,"Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
+                        new Customer(null,"Oliveira",new Email("teste@email.com"),new br.com.cleandomain.entities.Cpf("33333333333")
                                 ,new Phone("21", "11111111"),new Functional("123456789"),
                                 new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")))));
         assertNotNull(jobOpportunityValidation.validate(new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
@@ -89,7 +84,7 @@ class JobOpportunityValidationTest {
                         "English intemediario", LocalDate.now(), LocalDate.now().plusDays(30),
                         IEducationLevel.COMPLETE_GRAD, "1200", criterion,
                         null,
-                        new Customer(null,"Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
+                        new Customer(null,"Oliveira",new Email("teste@email.com"),new br.com.cleandomain.entities.Cpf("33333333333")
                                 ,new Phone("21", "11111111"),new Functional("123456789"),
                                 new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")))));
 
@@ -100,7 +95,7 @@ class JobOpportunityValidationTest {
                         IEducationLevel.COMPLETE_GRAD, "1200", criterion,
                         new Company(new Cnpj(null),
                                 null),
-                        new Customer(null,"Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
+                        new Customer(null,"Oliveira",new Email("teste@email.com"),new br.com.cleandomain.entities.Cpf("33333333333")
                                 ,new Phone("21", "11111111"),new Functional("123456789"),
                                 new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")))));
         assertNotNull(jobOpportunityValidation.validate(new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
@@ -110,7 +105,7 @@ class JobOpportunityValidationTest {
                         null,
                         new Company(new Cnpj("33.663.683/0001-16"),
                                 "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
-                        new Customer(null,"Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
+                        new Customer(null,"Oliveira",new Email("teste@email.com"),new br.com.cleandomain.entities.Cpf("33333333333")
                                 ,new Phone("21", "11111111"),new Functional("123456789"),
                                 new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")))));
     }
@@ -120,7 +115,7 @@ class JobOpportunityValidationTest {
     @Test
     void createJobOpportunity() {
         Set<Criterion> criterion = getCriteria();
-        IJobOpportunity jobOpportunity = getJobOpportunity(criterion, new Cpf("33333333333"));
+        JobOpportunity jobOpportunity = getJobOpportunity(criterion, new br.com.cleandomain.entities.Cpf("33333333333"));
         assertEquals(jobOpportunity,jobOpportunityValidation.createJobOpportunity(jobOpportunity));
     }
 
@@ -129,7 +124,7 @@ class JobOpportunityValidationTest {
     @Test
     void notCreateJobOpportunity() {
         Set<Criterion> criterion = getCriteria();
-        IJobOpportunity jobOpportunity = getJobOpportunity(criterion, null);
+        JobOpportunity jobOpportunity = getJobOpportunity(criterion, null);
         assertThrows(IllegalArgumentException.class,
                 () -> jobOpportunityValidation.createJobOpportunity(jobOpportunity));
     }
@@ -159,20 +154,20 @@ class JobOpportunityValidationTest {
 
     @Test
     void customerExist() {
-        ICpf cpf = new Cpf("33333333333");
+        Cpf cpf = new br.com.cleandomain.entities.Cpf("33333333333");
         assertTrue(jobOpportunityValidation.exitCustomerJobOpportunity(cpf));
     }
 
     @Test
     void listCustomerJobOpportunity() {
-        ICpf cpf = new Cpf("33333333333");
+        Cpf cpf = new br.com.cleandomain.entities.Cpf("33333333333");
         assertTrue(jobOpportunityValidation.listCustomerJobOpportunity(cpf).size() > 0);
     }
 
     @Test
     void deleteNotFoundCustomer() {
         Set<Criterion> criterion = getCriteria();
-        JobOpportunity jobOpportunity = new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
+        br.com.cleandomain.entities.JobOpportunity jobOpportunity = new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
                 "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
                 "English intemediario", LocalDate.now(), LocalDate.now().plusDays(30),
                 IEducationLevel.COMPLETE_GRAD, "1200", criterion,
@@ -187,13 +182,13 @@ class JobOpportunityValidationTest {
     @Test
     void delete() {
         Set<Criterion> criterion = getCriteria();
-        JobOpportunity jobOpportunity = new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
+        br.com.cleandomain.entities.JobOpportunity jobOpportunity = new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
                 "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
                 "English intemediario", LocalDate.now(), LocalDate.now().plusDays(30),
                 IEducationLevel.COMPLETE_GRAD, "1200",criterion,
                 new Company(new Cnpj("33.663.683/0001-16"),
                         "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
-                new Customer("Jose","Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
+                new Customer("Jose","Oliveira",new Email("teste@email.com"),new br.com.cleandomain.entities.Cpf("33333333333")
                         ,new Phone("21", "11111111"),new Functional("123456789"),
                         new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")));
         assertNotNull(jobOpportunityValidation.deleteJobOpportunity(jobOpportunity));

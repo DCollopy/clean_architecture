@@ -1,11 +1,10 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.repository.IProfessionalExperience;
 import lombok.Data;
 
 import java.time.LocalDate;
 @Data
-public class ProfessionalExperience implements IProfessionalExperience {
+public class ProfessionalExperience  {
 
     private long id;
     private String companyName;

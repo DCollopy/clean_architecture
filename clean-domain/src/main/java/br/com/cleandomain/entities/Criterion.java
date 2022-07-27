@@ -1,12 +1,11 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.repository.ICriterion;
 import lombok.Data;
 
 import java.util.Set;
 
 @Data
-public class Criterion implements ICriterion {
+public class Criterion  {
     private Long id;
     private String title;
     private String description;

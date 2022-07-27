@@ -1,11 +1,11 @@
 package br.com.cleandomain.usecases.validation;
 
-import br.com.cleandomain.entities.repository.ICriterion;
+import br.com.cleandomain.entities.Criterion;
 
 public interface ICriterionValidation {
-    String validate(ICriterion criterion);
+    String validate(Criterion criterion);
 
-    void createCriterion(ICriterion criterion);
+    void createCriterion(Criterion criterion);
 
     // (pmd * weight) + (pmd * weight) + (pmd * weight)/ weight + weight + weight = moderateAverage
 

@@ -1,10 +1,7 @@
 package br.com.cleanweb.model;
 
+import br.com.cleandomain.entities.Profile;
 import br.com.cleandomain.entities.User;
-import br.com.cleandomain.entities.repository.IProfile;
-import br.com.cleandomain.entities.repository.IUser;
-
-import java.util.Set;
 
 public class UserForm extends ProfileForm{
     private SchoolingLevelForm schoolingLevel;
@@ -16,11 +13,11 @@ public class UserForm extends ProfileForm{
     public UserForm() {
     }
 
-    public UserForm(IProfile profile) {
+    public UserForm(Profile profile) {
         super(profile);
     }
 
-    public UserForm(IUser user, IProfile profile) {
+    public UserForm(User user, Profile profile) {
         super(profile);
         this.schoolingLevel = new SchoolingLevelForm(user.getSchoolingLevel());
         this.skill = new SkillForm(user.getSkill());
@@ -55,8 +52,8 @@ public class UserForm extends ProfileForm{
         this.professionalExperience = professionalExperience;
     }
 
-    public IUser convertUserformToUserCurriculum(){
-        IUser user = new User(this.getName(), this.getLastName(),
+    public User convertUserformToUserCurriculum(){
+        User user = new User(this.getName(), this.getLastName(),
                 new EmailForm().convertEmailFormToEmail(),
                 new CpfForm().convertCpfFormToCpf(),
                 new PhoneForm().convertPhoneFormToPhone(),
@@ -66,8 +63,8 @@ public class UserForm extends ProfileForm{
         return user;
     }
 
-    public IUser convertUserformToUser(){
-        IUser user = new User(this.getName(), this.getLastName(),
+    public User convertUserformToUser(){
+        User user = new User(this.getName(), this.getLastName(),
                 new EmailForm().convertEmailFormToEmail(),
                 new CpfForm().convertCpfFormToCpf(),
                 new PhoneForm().convertPhoneFormToPhone());

@@ -1,6 +1,5 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.repository.IProfessionalExperience;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -9,7 +8,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProfessionalExperienceTest {
-    IProfessionalExperience professionalExperience = new ProfessionalExperience();
+    ProfessionalExperience professionalExperience = new br.com.cleandomain.entities.ProfessionalExperience();
 
     @Test
     void getCompanyName() {
@@ -93,39 +92,39 @@ class ProfessionalExperienceTest {
 
     @Test
     void getCompanyNameNull(){
-        assertThrows(IllegalArgumentException.class, () -> new ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(), null, "Product Owner",
+        assertThrows(IllegalArgumentException.class, () -> new br.com.cleandomain.entities.ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(), null, "Product Owner",
                 "Directs the course of development, discusses possibilities and limits with the client, evaluates the fulfillment...",
                 LocalDate.of(2000,10,05), LocalDate.of(2001,10,05)));
 
-        assertThrows(IllegalArgumentException.class, () -> new ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"", "Product Owner",
+        assertThrows(IllegalArgumentException.class, () -> new br.com.cleandomain.entities.ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"", "Product Owner",
                 "Directs the course of development, discusses possibilities and limits with the client, evaluates the fulfillment...",
                 LocalDate.of(2000,10,05), LocalDate.of(2001,10,05)));
 
-        assertThrows(IllegalArgumentException.class, () -> new ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"IBM", null,
+        assertThrows(IllegalArgumentException.class, () -> new br.com.cleandomain.entities.ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"IBM", null,
                 "Directs the course of development, discusses possibilities and limits with the client, evaluates the fulfillment...",
                 LocalDate.of(2000,10,05), LocalDate.of(2001,10,05)));
 
-        assertThrows(IllegalArgumentException.class, () -> new ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"IBM", "",
+        assertThrows(IllegalArgumentException.class, () -> new br.com.cleandomain.entities.ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"IBM", "",
                 "Directs the course of development, discusses possibilities and limits with the client, evaluates the fulfillment...",
                 LocalDate.of(2000,10,05), LocalDate.of(2001,10,05)));
 
-        assertThrows(IllegalArgumentException.class, () -> new ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"IBM", "Product Owner",
+        assertThrows(IllegalArgumentException.class, () -> new br.com.cleandomain.entities.ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"IBM", "Product Owner",
                 null,
                 LocalDate.of(2000,10,05), LocalDate.of(2001,10,05)));
 
-        assertThrows(IllegalArgumentException.class, () -> new ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"IBM", "Product Owner",
+        assertThrows(IllegalArgumentException.class, () -> new br.com.cleandomain.entities.ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"IBM", "Product Owner",
                 "",
                 LocalDate.of(2000,10,05), LocalDate.of(2001,10,05)));
 
-        assertThrows(IllegalArgumentException.class, () -> new ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"IBM", "Product Owner",
+        assertThrows(IllegalArgumentException.class, () -> new br.com.cleandomain.entities.ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"IBM", "Product Owner",
                 "Directs the course of development, discusses possibilities and limits with the client, evaluates the fulfillment...",
                 null, LocalDate.of(2001,10,05)));
 
-        assertThrows(IllegalArgumentException.class, () -> new ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"IBM", "Product Owner",
+        assertThrows(IllegalArgumentException.class, () -> new br.com.cleandomain.entities.ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"IBM", "Product Owner",
                 "Directs the course of development, discusses possibilities and limits with the client, evaluates the fulfillment...",
                 LocalDate.of(2000,10,05), null));
 
-        assertThrows(IllegalArgumentException.class, () -> new ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"IBM", "Product Owner",
+        assertThrows(IllegalArgumentException.class, () -> new br.com.cleandomain.entities.ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(),"IBM", "Product Owner",
                 "Directs the course of development, discusses possibilities and limits with the client, evaluates the fulfillment...",
                 LocalDate.of(2000,10,05), LocalDate.of(1988,10,05)));
     }

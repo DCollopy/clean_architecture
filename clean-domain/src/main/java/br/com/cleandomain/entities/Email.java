@@ -1,10 +1,9 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.repository.IEmail;
 import lombok.Data;
 
 @Data
-public class Email implements IEmail {
+public class Email  {
     private String address;
 
     public Email(String address) {

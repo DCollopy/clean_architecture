@@ -1,11 +1,10 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.repository.ICustomer;
 import lombok.Data;
 
 
 @Data
-public class Customer extends Profile implements ICustomer {
+public class Customer extends Profile{
     private Functional functional;
     private Company company;
 

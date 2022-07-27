@@ -2,7 +2,6 @@ package br.com.cleanpersistence.converter;
 
 import br.com.cleandomain.entities.Cpf;
 import br.com.cleanpersistence.entities.CpfEntity;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 @Service

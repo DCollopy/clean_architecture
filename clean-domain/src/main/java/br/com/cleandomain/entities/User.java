@@ -1,13 +1,11 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.repository.ICpf;
-import br.com.cleandomain.entities.repository.IUser;
 import lombok.Data;
 
 import java.util.Set;
 
 @Data
-public class User extends Profile implements IUser {
+public class User extends Profile{
     private SchoolingLevel schoolingLevel;
     private Skill skill;
     private ProfessionalExperience professionalExperience;
@@ -107,14 +105,5 @@ public class User extends Profile implements IUser {
     public void setAnswerOpportunity(Set<AnswerOpportunity> answerOpportunity) {
         this.answerOpportunity = answerOpportunity;
     }
-
-    public User listAll(){
-        return this;
-    }
-
-    public User edit(ICpf cpf){
-        return this;
-    }
-
 
 }

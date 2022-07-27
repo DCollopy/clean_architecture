@@ -1,6 +1,6 @@
 package br.com.cleanweb.model;
 
-import br.com.cleandomain.entities.repository.ICriterion;
+import br.com.cleandomain.entities.Criterion;
 import lombok.Data;
 
 @Data
@@ -12,7 +12,7 @@ public class CriterionForm {
     private int pmd;
     private int weight;
 
-    public CriterionForm(ICriterion criterion) {
+    public CriterionForm(Criterion criterion) {
         this.id = criterion.getId();
         this.title = criterion.getTitle();
         this.description = criterion.getDescription();

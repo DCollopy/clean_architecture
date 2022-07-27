@@ -1,13 +1,13 @@
 package br.com.cleanweb.model;
 
-import br.com.cleandomain.entities.repository.IFunctional;
+import br.com.cleandomain.entities.Functional;
 import lombok.Data;
 
 @Data
 public class FunctionalForm {
     private String number;
 
-    public FunctionalForm(IFunctional functional) {
+    public FunctionalForm(Functional functional) {
         this.number = functional.getNumber();
     }
 

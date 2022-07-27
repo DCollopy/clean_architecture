@@ -1,10 +1,9 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.repository.IFunctional;
 import lombok.Data;
 
 @Data
-public class Functional implements IFunctional {
+public class Functional {
     private String number;
 
     public Functional(String number) {

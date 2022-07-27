@@ -1,7 +1,6 @@
 package br.com.cleandomain.usecases.validation;
 
 import br.com.cleandomain.entities.*;
-import br.com.cleandomain.entities.repository.IAdmin;
 import br.com.cleandomain.usecases.AdminValidation;
 import org.junit.jupiter.api.Test;
 

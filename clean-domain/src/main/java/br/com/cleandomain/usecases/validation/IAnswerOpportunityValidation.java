@@ -1,9 +1,9 @@
 package br.com.cleandomain.usecases.validation;
 
-import br.com.cleandomain.entities.repository.IAnswerOpportunity;
+import br.com.cleandomain.entities.AnswerOpportunity;
 
 public interface IAnswerOpportunityValidation {
-    String validate(IAnswerOpportunity answerOpportunity);
+    String validate(AnswerOpportunity answerOpportunity);
 
-    void createAnswerOpportunity(IAnswerOpportunity answerOpportunity);
+    void createAnswerOpportunity(AnswerOpportunity answerOpportunity);
 }

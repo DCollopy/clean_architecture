@@ -1,7 +1,5 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.repository.ICpf;
-import br.com.cleandomain.entities.repository.IJobOpportunity;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -9,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-public class JobOpportunity implements IJobOpportunity {
+public class JobOpportunity {
 
     private long id;
     private String title;
@@ -175,7 +173,7 @@ public class JobOpportunity implements IJobOpportunity {
         return this;
     }
 
-    public List<IJobOpportunity> listAllCustomer(ICpf cpf){
+    public List<JobOpportunity> listAllCustomer(Cpf cpf){
         return List.of(this);
     }
 

@@ -1,13 +1,12 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.repository.IAdmin;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AdminTest {
 
-    IAdmin admin = new Admin();
+    Admin admin = new br.com.cleandomain.entities.Admin();
     @Test
     void how() {
         admin.setFunctional(new Functional("111111111"));

@@ -1,10 +1,9 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.repository.IPhone;
 import lombok.Data;
 
 @Data
-public class Phone implements IPhone {
+public class Phone  {
     private String ddd;
     private String number;
 

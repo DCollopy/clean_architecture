@@ -1,15 +1,13 @@
 package br.com.cleanweb.model;
 
-import br.com.cleandomain.entities.Email;
-import br.com.cleandomain.entities.repository.IEmail;
 import lombok.Data;
 
 @Data
-public class EmailForm implements IEmail {
+public class EmailForm implements Email {
 
     private String address;
 
-    public EmailForm(IEmail email) {
+    public EmailForm(Email email) {
         this.address = email.getAddress();
     }
 
@@ -24,8 +22,8 @@ public class EmailForm implements IEmail {
     @Override
     public void setAddress(String address) {}
 
-    public Email convertEmailFormToEmail(){
-        return new Email(this.getAddress());
+    public br.com.cleandomain.entities.Email convertEmailFormToEmail(){
+        return new br.com.cleandomain.entities.Email(this.getAddress());
     }
 
 }

@@ -1,13 +1,12 @@
 package br.com.cleandomain.entities;
 
-import br.com.cleandomain.entities.repository.ICustomer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerTest {
 
-    ICustomer customer = new Customer();
+    Customer customer = new br.com.cleandomain.entities.Customer();
 
     @Test
     void who() {

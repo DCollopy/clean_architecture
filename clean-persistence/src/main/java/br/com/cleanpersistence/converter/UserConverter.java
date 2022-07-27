@@ -1,7 +1,6 @@
 package br.com.cleanpersistence.converter;
 
 import br.com.cleandomain.entities.User;
-import br.com.cleandomain.entities.repository.IUser;
 import br.com.cleanpersistence.entities.UserEntity;
 import org.springframework.stereotype.Service;
 
@@ -24,20 +23,20 @@ public class UserConverter {
         this.professionalExperienceConverter = professionalExperienceConverter;
     }
 
-    public IUser convertToUserCurriculum(UserEntity userEntity) {
-        IUser user = new User(userEntity.getName(), userEntity.getLastName(),emailConverter.convertToEmail(), cpfConverter.convertToCpf()
+    public br.com.cleandomain.entities.User convertToUserCurriculum(UserEntity userEntity) {
+        br.com.cleandomain.entities.User user = new br.com.cleandomain.entities.User(userEntity.getName(), userEntity.getLastName(),emailConverter.convertToEmail(), cpfConverter.convertToCpf()
                 ,phoneConverter.convertToPhone(), schoolingLevelConverter.convertToSchoolingLevel(), skillConverter.convertToSkill(),
                 professionalExperienceConverter.convertToProfessionalExperience());
         return user;
     }
 
-    public IUser convertToUser(UserEntity userEntity) {
-        IUser user = new User(userEntity.getName(), userEntity.getLastName(),emailConverter.convertToEmail(), cpfConverter.convertToCpf()
+    public br.com.cleandomain.entities.User convertToUser(UserEntity userEntity) {
+        br.com.cleandomain.entities.User user = new br.com.cleandomain.entities.User(userEntity.getName(), userEntity.getLastName(),emailConverter.convertToEmail(), cpfConverter.convertToCpf()
                 ,phoneConverter.convertToPhone());
         return user;
     }
 
-    public UserEntity convertToUserEntity(IUser user) {
+    public UserEntity convertToUserEntity(User user) {
         UserEntity userEntity = new UserEntity(user.getName(), user.getLastName(),emailConverter.convertToEmail(), cpfConverter.convertToCpf()
                 ,phoneConverter.convertToPhone());
         return userEntity;

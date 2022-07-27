@@ -1,7 +1,6 @@
 package br.com.cleanweb.model;
 
 import br.com.cleandomain.entities.ProfessionalExperience;
-import br.com.cleandomain.entities.repository.IProfessionalExperience;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -14,7 +13,7 @@ public class ProfessionalExperienceForm {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public ProfessionalExperienceForm(IProfessionalExperience professionalExperience) {
+    public ProfessionalExperienceForm(ProfessionalExperience professionalExperience) {
         this.companyName = professionalExperience.getCompanyName();
         this.function = professionalExperience.getFunction();
         this.description = professionalExperience.getDescription();
@@ -25,7 +24,7 @@ public class ProfessionalExperienceForm {
     public ProfessionalExperienceForm() {
     }
 
-    public ProfessionalExperience convertProfessionalExperienceFormToProfessionalExperience() {
-        return new ProfessionalExperience(this.companyName, this.function, this.description, this.startDate, this.endDate);
+    public br.com.cleandomain.entities.ProfessionalExperience convertProfessionalExperienceFormToProfessionalExperience() {
+        return new br.com.cleandomain.entities.ProfessionalExperience(this.companyName, this.function, this.description, this.startDate, this.endDate);
     }
 }

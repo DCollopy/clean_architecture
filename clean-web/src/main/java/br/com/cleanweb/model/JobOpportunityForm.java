@@ -1,7 +1,7 @@
 package br.com.cleanweb.model;
 
-import br.com.cleandomain.entities.repository.ICriterion;
-import br.com.cleandomain.entities.repository.IJobOpportunity;
+import br.com.cleandomain.entities.Criterion;
+import br.com.cleandomain.entities.JobOpportunity;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -23,7 +23,7 @@ public class JobOpportunityForm {
     private CustomerForm customer;
     private boolean status;
 
-    public JobOpportunityForm(IJobOpportunity jobOpportunity) {
+    public JobOpportunityForm(JobOpportunity jobOpportunity) {
         this.id = jobOpportunity.getId();
         this.title = jobOpportunity.getTitle();
         this.description = jobOpportunity.getDescription();
@@ -33,7 +33,7 @@ public class JobOpportunityForm {
         this.closingDate = jobOpportunity.getClosingDate();
         this.educationLevel = jobOpportunity.getEducationLevel();
         this.salary = jobOpportunity.getSalary();
-        this.criterion = new CriterionForm((ICriterion) jobOpportunity.getCriterion());
+        this.criterion = new CriterionForm((Criterion) jobOpportunity.getCriterion());
         this.user = new UserForm(jobOpportunity.getUser());
         this.company = new CompanyForm(jobOpportunity.getCompany());
         this.customer = new CustomerForm(jobOpportunity.getCustomer());
