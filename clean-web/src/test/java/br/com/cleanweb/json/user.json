@@ -1,0 +1,14 @@
+{
+  "name": "Luis",
+  "lastName": "Soares",
+  "email": {
+    "address": "Rua alamameda, nº 10"
+  },
+  "cpf": {
+    "number": "123.456.789-00"
+  },
+  "phone": {
+    "ddd": "11",
+    "number": "98888-8888"
+  }
+}

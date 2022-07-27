@@ -27,27 +27,6 @@ public class UserForm extends ProfileForm{
         this.professionalExperience = new ProfessionalExperienceForm(user.getProfessionalExperience());
     }
 
-    public IUser toUser() {
-       return new User(
-                this.getName(),
-                this.getLastName(),
-                this.toUser().getEmail(),
-                this.toUser().getCpf(),
-                this.toUser().getPhone());
-    }
-
-    public IUser toUserCurriculum() {
-        return new User(
-                this.getName(),
-                this.getLastName(),
-                this.toUser().getEmail(),
-                this.toUser().getCpf(),
-                this.toUser().getPhone(),
-                this.toUser().getSchoolingLevel(),
-                this.toUser().getSkill(),
-                this.toUser().getProfessionalExperience());
-    }
-
     public String who(){
         return this.who();
     }
@@ -74,5 +53,24 @@ public class UserForm extends ProfileForm{
 
     public void setProfessionalExperience(ProfessionalExperienceForm professionalExperience) {
         this.professionalExperience = professionalExperience;
+    }
+
+    public IUser convertUserformToUserCurriculum(){
+        IUser user = new User(this.getName(), this.getLastName(),
+                new EmailForm().convertEmailFormToEmail(),
+                new CpfForm().convertCpfFormToCpf(),
+                new PhoneForm().convertPhoneFormToPhone(),
+                new SchoolingLevelForm().convertSchoolingLevelFormToSchoolingLevel(),
+                new SkillForm().convertSkillFormToSkill(),
+                new ProfessionalExperienceForm().convertProfessionalExperienceFormToProfessionalExperience());
+        return user;
+    }
+
+    public IUser convertUserformToUser(){
+        IUser user = new User(this.getName(), this.getLastName(),
+                new EmailForm().convertEmailFormToEmail(),
+                new CpfForm().convertCpfFormToCpf(),
+                new PhoneForm().convertPhoneFormToPhone());
+        return user;
     }
 }

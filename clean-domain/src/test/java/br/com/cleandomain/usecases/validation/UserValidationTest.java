@@ -7,6 +7,7 @@ import br.com.cleandomain.usecases.UserValidation;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.UUID;
 ;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -57,9 +58,9 @@ class UserValidationTest {
     void createUserCurriculum() {
         IUser user = new User("Luis", "Oliveira", new Email("teste@email.com"),
                 new Cpf("33333333333"), new Phone("21", "11111111"),
-                new SchoolingLevel("Software Engineer", IEducationLevel.COMPLETE_GRAD, LocalDate.now(), LocalDate.now()),
-                new Skill("Java"),
-                new ProfessionalExperience("IBM", "Data Science", "Data analysis about systems support",
+                new SchoolingLevel(UUID.randomUUID().getMostSignificantBits(),"Software Engineer", IEducationLevel.COMPLETE_GRAD, LocalDate.now(), LocalDate.now()),
+                new Skill(UUID.randomUUID().getMostSignificantBits(), "Java"),
+                new ProfessionalExperience(UUID.randomUUID().getMostSignificantBits(), "IBM", "Data Science", "Data analysis about systems support",
                         LocalDate.of(2000, 05, 02), LocalDate.now()));
         assertEquals(user,userValidation.createUserCurriculum(user));
     }
