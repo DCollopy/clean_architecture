@@ -14,10 +14,10 @@ import static io.restassured.module.jsv.JsonSchemaValidatorSettings.settings;
 
 class UserControllerTest {
 
-    @Test
-    void validateSchemaStatic() {
-        when().get("/create/user").then().assertThat().body(matchesJsonSchemaInClasspath("json/user.json"));
-    }
+//    @Test
+//    void validateSchemaStatic() {
+//        when().get("/create/user").then().assertThat().body(matchesJsonSchemaInClasspath("json/user.json"));
+//    }
 
     @Test
     void index() {
