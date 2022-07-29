@@ -25,6 +25,8 @@ class UserValidationTest {
                 null, new Phone("21", "11111111"))));
         assertNotNull(userValidation.validate(new User("Luis", "Oliveira", new Email("teste@email.com"),
                 new Cpf("33333333333"), null)));
+        assertNotNull(userValidation.validate(new User("Luis", "Oliveira", null,
+                new Cpf("33333333333"), new Phone("21", "11111111"))));
     }
 
     @Test

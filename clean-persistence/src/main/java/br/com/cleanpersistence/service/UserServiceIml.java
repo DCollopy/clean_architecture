@@ -6,23 +6,19 @@ import br.com.cleandomain.usecases.validation.IUserValidation;
 import br.com.cleanpersistence.converter.UserConverter;
 import br.com.cleanpersistence.entities.UserEntity;
 import br.com.cleanpersistence.repository.UserRepository;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
-@EnableAutoConfiguration
-public class UserRepositoryIml implements UserService {
+public class UserServiceIml implements UserService {
 
     private final UserRepository userRepository;
-    private final IUserValidation userValidation;
+    private  IUserValidation userValidation;
     private final UserConverter userConverter;
 
-    public UserRepositoryIml(UserRepository userRepository, IUserValidation userValidation, UserConverter userConverter) {
+    public UserServiceIml(UserRepository userRepository, UserConverter userConverter) {
         this.userRepository = userRepository;
-        this.userValidation = userValidation;
         this.userConverter = userConverter;
     }
 
