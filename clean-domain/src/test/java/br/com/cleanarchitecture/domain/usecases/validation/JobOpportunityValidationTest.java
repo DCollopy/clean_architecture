@@ -2,7 +2,6 @@ package br.com.cleanarchitecture.domain.usecases.validation;
 
 import br.com.cleanarchitecture.domain.entities.*;
 import br.com.cleanarchitecture.domain.entities.repository.IEducationLevel;
-import br.com.cleanarchitecture.domain.usecases.JobOpportunityValidation;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

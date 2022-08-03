@@ -1,7 +1,6 @@
 package br.com.cleanarchitecture.domain.usecases.validation;
 
 import br.com.cleanarchitecture.domain.entities.*;
-import br.com.cleanarchitecture.domain.usecases.AdminValidation;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
