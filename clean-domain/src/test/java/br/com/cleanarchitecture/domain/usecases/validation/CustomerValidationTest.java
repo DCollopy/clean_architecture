@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerValidationTest {
-    ICustomerValidation clientValidation = new CustomerValidation();
+    CustomerValidTest clientValidation = new CustomerValidTest();
 
     @Test
     void customerTeamCompany() {

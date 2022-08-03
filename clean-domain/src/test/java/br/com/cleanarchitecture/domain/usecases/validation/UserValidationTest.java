@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserValidationTest {
 
-    UserValidatonTest userValidation = new UserValidatonTest();
+    UserValidTest userValidation = new UserValidTest();
 
     @Test
     void validate() {

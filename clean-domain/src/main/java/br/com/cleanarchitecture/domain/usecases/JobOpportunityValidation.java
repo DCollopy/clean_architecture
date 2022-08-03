@@ -3,7 +3,6 @@ package br.com.cleanarchitecture.domain.usecases;
 import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.Criterion;
 import br.com.cleanarchitecture.domain.entities.JobOpportunity;
-import br.com.cleanarchitecture.domain.usecases.validation.IJobOpportunityValidation;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-public class JobOpportunityValidation implements IJobOpportunityValidation {
+public abstract class JobOpportunityValidation {
 
     public String validate(JobOpportunity jobOpportunity) {
         String message = "";

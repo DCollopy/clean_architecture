@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AdminValidationTest {
 
-    protected IAdminValidation adminValidation = new AdminValidation();
+    protected AdminValidTest adminValidation = new AdminValidTest();
     @Test
     void notProfileAdmin() {
         assertNotNull(adminValidation.validate(new Admin(null, "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),

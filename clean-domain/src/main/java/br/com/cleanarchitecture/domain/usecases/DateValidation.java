@@ -2,12 +2,11 @@ package br.com.cleanarchitecture.domain.usecases;
 
 
 import br.com.cleanarchitecture.domain.entities.JobOpportunity;
-import br.com.cleanarchitecture.domain.usecases.validation.IDateValidation;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class DateValidation implements IDateValidation {
+public abstract class DateValidation  {
     JobOpportunity jobOpportunity;
 
     public DateValidation(JobOpportunity jobOpportunity) {

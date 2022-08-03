@@ -1,13 +1,12 @@
 package br.com.cleanarchitecture.domain.usecases;
 
 import br.com.cleanarchitecture.domain.entities.Customer;
-import br.com.cleanarchitecture.domain.usecases.validation.ICustomerValidation;
 
 import java.util.logging.Logger;
 
-public class CustomerValidation implements ICustomerValidation {
+public abstract class CustomerValidation {
 
-    @Override
+
     public String validate(Customer client) {
         String message = "";
         if(client.getName() == null || client.getName().isEmpty()) {

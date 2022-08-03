@@ -1,13 +1,12 @@
 package br.com.cleanarchitecture.domain.usecases;
 
 import br.com.cleanarchitecture.domain.entities.Criterion;
-import br.com.cleanarchitecture.domain.usecases.validation.ICriterionValidation;
 
 import java.util.logging.Logger;
 
-public class CriterionValidation implements ICriterionValidation {
+public abstract class CriterionValidation {
 
-    @Override
+
     public String validate(Criterion criterion) {
         String message = "";
         if (criterion.getTitle() == null) {
@@ -25,7 +24,7 @@ public class CriterionValidation implements ICriterionValidation {
         return message;
     }
 
-    @Override
+
     public void createCriterion(Criterion criterion) {
         if(!validate(criterion).isEmpty()) {
             new Criterion(criterion.getId(), criterion.getTitle(),

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class JobOpportunityValidationTest {
 
-    protected IJobOpportunityValidation jobOpportunityValidation = new JobOpportunityValidation();
+    protected JobOpportunityValidTest jobOpportunityValidation = new JobOpportunityValidTest();
 
     private JobOpportunity getJobOpportunity(Set<Criterion> criterion, Cpf cpf) {
         JobOpportunity jobOpportunity = new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",

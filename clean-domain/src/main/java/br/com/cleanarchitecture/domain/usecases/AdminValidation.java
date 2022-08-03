@@ -1,13 +1,12 @@
 package br.com.cleanarchitecture.domain.usecases;
 
 import br.com.cleanarchitecture.domain.entities.Admin;
-import br.com.cleanarchitecture.domain.usecases.validation.IAdminValidation;
 
 import java.util.logging.Logger;
 
-public class AdminValidation implements IAdminValidation {
+public abstract class AdminValidation {
 
-    @Override
+
     public String validate(Admin admin) {
         String message = "";
         if(admin.getName() == null || admin.getName().isEmpty()) {

@@ -2,7 +2,6 @@ package br.com.cleanarchitecture.persistence.converter;
 
 import br.com.cleanarchitecture.domain.entities.User;
 import br.com.cleanarchitecture.persistence.entities.UserEntity;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class UserConverter {
 
     }
 
-    public UserEntity convertToUserEntity(@NotNull User user) {
+    public UserEntity convertToUserEntity(User user) {
         return new UserEntity(user.getName(), user.getLastName(),
                 new EmailConverter().convertToEmailEntity(user.getEmail().getAddress()),
                 new CpfConverter().convertToCpfEntity(user.getCpf().getNumber()),
