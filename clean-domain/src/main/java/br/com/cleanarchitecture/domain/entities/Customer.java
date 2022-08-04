@@ -6,19 +6,21 @@ import lombok.Data;
 @Data
 public class Customer extends Profile{
     private Functional functional;
+
+    private final String type = "CUSTOMER";
     private Company company;
 
     public Customer() {}
 
-    public Customer(String name, String lastName, Email email, Cpf cpf, Phone phone, Functional functional, Company company) {
+    public Customer(String name, String lastName, Email email, Cpf cpf,
+                    Phone phone, Functional functional, Company company) {
         super(name, lastName, email, cpf, phone);
         this.functional = functional;
         this.company = company;
     }
 
-
     public String who() {
-        return functional.getNumber();
+        return "CUSTOMER";
     }
 
     public String getName() {
@@ -47,6 +49,10 @@ public class Customer extends Profile{
 
     public Company getCompany() {
         return this.company;
+    }
+
+    public String getCompanyCnpj() {
+        return this.company.getCnpj();
     }
 
     public void setName(String name) {

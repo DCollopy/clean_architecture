@@ -20,6 +20,7 @@ public abstract class Profile{
 
     public Profile() {}
 
+    public abstract String who();
 
 }
 

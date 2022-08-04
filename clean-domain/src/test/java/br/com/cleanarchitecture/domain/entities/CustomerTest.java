@@ -10,9 +10,9 @@ class CustomerTest {
 
     @Test
     void who() {
-        customer.setFunctional(new Functional("111111111"));
-        String expected = "111111111";
-        String actual = customer.who();
+        customer.getType();
+        String expected = customer.who();
+        String actual = customer.getType();
         assertEquals(expected, actual);
     }
 

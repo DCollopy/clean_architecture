@@ -31,11 +31,8 @@ public abstract class AdminValidation {
     }
 
     // a ideia aqui e jogar o cpf vindo da jpa para esse metodo
-    public String adminIsAdmin(String cpfAdmin){
-        if(cpfAdmin == null || cpfAdmin.isEmpty()) {
-            Logger.getLogger(AdminValidation.class.getName()).info("Cpf is not admin");
-        }
-        return cpfAdmin;
+    public boolean adminIsAdmin(Admin admin) {
+        return admin.getType().equals("ADMIN");
     }
 
     public Admin createAdmin(Admin admin) {

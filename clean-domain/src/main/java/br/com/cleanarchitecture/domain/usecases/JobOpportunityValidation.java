@@ -2,6 +2,7 @@ package br.com.cleanarchitecture.domain.usecases;
 
 import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.Criterion;
+import br.com.cleanarchitecture.domain.entities.Customer;
 import br.com.cleanarchitecture.domain.entities.JobOpportunity;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.util.logging.Logger;
 
 public abstract class JobOpportunityValidation {
 
+    private CustomerValidation customerValidation;
     public String validate(JobOpportunity jobOpportunity) {
         String message = "";
         if (jobOpportunity.getTitle() == null || jobOpportunity.getTitle().isEmpty()) {
@@ -32,17 +34,15 @@ public abstract class JobOpportunityValidation {
         return message;
     }
 
-    public JobOpportunity createJobOpportunity(JobOpportunity jobOpportunity) {
-        if (jobOpportunity.getClosingDate() == null) {
-            closingDay(jobOpportunity);
-        }
-        jobOpportunity.setId(UUID.randomUUID().getMostSignificantBits());
+    public JobOpportunity createJobOpportunity(JobOpportunity jobOpportunity, String whoYou) {
+        closingDay(jobOpportunity);
+
         jobOpportunity.setStatus(true);
 
-        if (validate(jobOpportunity).isEmpty()) {
+        if (validate(jobOpportunity).isEmpty() && whoYou.equals("CUSTOMER")) {
             Logger.getLogger(JobOpportunityValidation.class.getName()).info("JobOpportunity created");
-           return new JobOpportunity(jobOpportunity.getId(), jobOpportunity.getTitle(), jobOpportunity.getDescription(),
-                    jobOpportunity.getLanguage(), jobOpportunity.getStartDate(), jobOpportunity.getClosingDate(),
+           return new JobOpportunity(jobOpportunity.getTitle(), jobOpportunity.getDescription(),
+                    jobOpportunity.getLanguage(), jobOpportunity.getClosingDate(),
                     jobOpportunity.getEducationLevel(), jobOpportunity.getSalary(),
                     jobOpportunity.getCriterion(),
                     jobOpportunity.getCompany(), jobOpportunity.getCustomer(),getAverage(jobOpportunity));
@@ -50,6 +50,12 @@ public abstract class JobOpportunityValidation {
         } else {
             Logger.getLogger("JobOpportunityValidation").info("Job Opportunity not created");
             throw new IllegalArgumentException("Job Opportunity not created");
+        }
+    }
+
+    private void renewDay(JobOpportunity jobOpportunity) {
+        if (jobOpportunity.getClosingDate() == null) {
+            closingDay(jobOpportunity);
         }
     }
 
@@ -83,8 +89,8 @@ public abstract class JobOpportunityValidation {
     }
 
 
-    public JobOpportunity deleteJobOpportunity(JobOpportunity jobOpportunity) {
-        if (jobOpportunity.getId() == 0 || exitCustomerJobOpportunity(jobOpportunity.getCustomer().getCpf())) {
+    public JobOpportunity deleteJobOpportunity(JobOpportunity jobOpportunity, Cpf cpf) {
+        if (jobOpportunity.getId() == 0 || exitCustomerJobOpportunity(jobOpportunity,cpf)) {
             Logger.getLogger("JobOpportunityValidation").info("Job Opportunity deleted");
             return jobOpportunity.delete(jobOpportunity.getId());
         } else {
@@ -102,10 +108,8 @@ public abstract class JobOpportunityValidation {
         return null;
     }
 
-    public boolean exitCustomerJobOpportunity(Cpf cpf) {
-        if (cpf != null) {
-            return true;
-        }
-        return false;
+    public boolean exitCustomerJobOpportunity(JobOpportunity jobOpportunity,Cpf cpf) {
+        return jobOpportunity.getCustomer().getCpf().getNumber().equals(cpf.getNumber());
     }
+
 }

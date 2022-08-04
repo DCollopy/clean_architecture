@@ -65,4 +65,12 @@ class CustomerValidationTest {
                         ,new Phone("21", "11111111"),new Functional("123456789"),new Company(new Cnpj("33.663.683/0001-16"),
                         "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"))));
     }
+
+    @Test
+    void custumerIsCustumer(){
+        Customer customer = new Customer("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
+                new Phone("21","11111111"), new Functional("123456789"), new Company(new Cnpj("33.663.683/0001-16"),
+                "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"));
+        assertTrue(clientValidation.custumerIsCustumer(customer));
+    }
 }

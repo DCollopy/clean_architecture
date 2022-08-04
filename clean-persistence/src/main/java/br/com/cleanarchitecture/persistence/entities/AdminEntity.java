@@ -12,6 +12,8 @@ import java.io.Serializable;
 @Table(name = "admin")
 public class AdminEntity extends ProfileEntity implements Serializable {
 
+    private final String type = "ADMIN";
+
     @Embedded
     private FunctionalEntity functional;
 

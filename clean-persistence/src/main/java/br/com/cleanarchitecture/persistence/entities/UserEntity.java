@@ -11,6 +11,7 @@ import java.util.Set;
 @Table(name = "user")
 public class UserEntity extends ProfileEntity implements Serializable {
 
+    private final String type = "USER";
     public UserEntity() {
     }
 

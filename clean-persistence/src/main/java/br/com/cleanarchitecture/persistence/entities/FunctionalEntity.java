@@ -14,4 +14,10 @@ public class FunctionalEntity implements Serializable {
     @Column(name = "number", length = 11)
     private String functional;
 
+    protected FunctionalEntity() {}
+
+    public FunctionalEntity(String functional) {
+        this.functional = functional;
+    }
+
 }

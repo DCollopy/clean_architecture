@@ -9,8 +9,7 @@ class AdminTest {
     Admin admin = new Admin();
     @Test
     void how() {
-        admin.setFunctional(new Functional("111111111"));
-        String expected = "111111111";
+        String expected = admin.getType();;
         String actual = admin.who();
         assertEquals(expected, actual);
     }

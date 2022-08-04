@@ -6,6 +6,8 @@ import java.util.Set;
 
 @Data
 public class User extends Profile{
+
+    private final String type = "USER";
     private SchoolingLevel schoolingLevel;
     private Skill skill;
     private ProfessionalExperience professionalExperience;
@@ -32,7 +34,7 @@ public class User extends Profile{
     }
 
     public String who() {
-        return getCpf().getNumber();
+        return "USER";
     }
 
     public String getName() {
@@ -86,17 +88,6 @@ public class User extends Profile{
 
     public void setPhone(Phone phone) {
         super.setPhone(phone);
-    }
-
-    public void setSchoolingLevel(SchoolingLevel schoolingLevel) {
-        this.schoolingLevel = schoolingLevel;
-    }
-
-    public void setProfessionalExperience(ProfessionalExperience professionalExperience) {
-        this.professionalExperience = professionalExperience;
-    }
-    public void setAnswerOpportunity(Set<AnswerOpportunity> answerOpportunity) {
-        this.answerOpportunity = answerOpportunity;
     }
 
 

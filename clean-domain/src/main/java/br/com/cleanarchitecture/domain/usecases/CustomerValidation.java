@@ -53,5 +53,13 @@ public abstract class CustomerValidation {
         throw new IllegalArgumentException("Customer does not create");
     }
 
+    public boolean custumerIsCustumer(Customer customer) {
+        return customer.getType().equals("CUSTOMER");
+    }
+
+    public String whoYou(){
+        return "Customer";
+    }
+
 
 }

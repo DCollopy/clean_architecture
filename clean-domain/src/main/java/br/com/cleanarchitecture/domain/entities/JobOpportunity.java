@@ -26,7 +26,36 @@ public class JobOpportunity {
 
     public JobOpportunity() {
     }
-    public JobOpportunity(Long id, String title, String description, String language, LocalDate startDate,
+    public JobOpportunity(String title, String description, String language,
+                          LocalDate closingDate, String educationLevel, String salary, Set<Criterion> criterion,
+                          Company company, Customer customer) {
+        this.title = title;
+        this.description = description;
+        this.language = language;
+        this.closingDate = closingDate;
+        this.educationLevel = educationLevel;
+        this.salary = salary;
+        this.criterion = criterion;
+        this.company = company;
+        this.customer = customer;
+    }
+
+    public JobOpportunity(String title, String description, String language,
+                          LocalDate closingDate, String educationLevel, String salary, Set<Criterion> criterion,
+                          Company company, Customer customer,double minimumProfile) {
+        this.title = title;
+        this.description = description;
+        this.language = language;
+        this.closingDate = closingDate;
+        this.educationLevel = educationLevel;
+        this.salary = salary;
+        this.criterion = criterion;
+        this.company = company;
+        this.customer = customer;
+        this.minimumProfile = minimumProfile;
+    }
+
+    public JobOpportunity(Long id,String title, String description, String language,
                           LocalDate closingDate, String educationLevel, String salary, Set<Criterion> criterion,
                           Company company, Customer customer) {
         this.id = id;
@@ -39,22 +68,6 @@ public class JobOpportunity {
         this.criterion = criterion;
         this.company = company;
         this.customer = customer;
-    }
-
-    public JobOpportunity(Long id, String title, String description, String language, LocalDate startDate,
-                          LocalDate closingDate, String educationLevel, String salary, Set<Criterion> criterion,
-                          Company company, Customer customer,double minimumProfile) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.language = language;
-        this.closingDate = closingDate;
-        this.educationLevel = educationLevel;
-        this.salary = salary;
-        this.criterion = criterion;
-        this.company = company;
-        this.customer = customer;
-        this.minimumProfile = minimumProfile;
     }
 
     public long getId() {

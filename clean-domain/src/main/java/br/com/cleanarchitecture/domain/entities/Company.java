@@ -2,10 +2,18 @@ package br.com.cleanarchitecture.domain.entities;
 
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 public class Company {
     private Cnpj cnpj;
     private String fantasyName;
+    private Set<Customer> customers;
+    public Company(Cnpj cnpj, String fantasyName, Set<Customer> customers) {
+        this.cnpj = cnpj;
+        this.fantasyName = fantasyName;
+        this.customers = customers;
+    }
 
     public Company() {
     }

@@ -6,6 +6,7 @@ import lombok.Data;
 public class Admin extends Profile {
     private Functional functional;
 
+    private final String type = "ADMIN";
     public Admin() {
     }
 
@@ -16,7 +17,7 @@ public class Admin extends Profile {
 
 
     public String who() {
-        return functional.getNumber();
+        return "ADMIN";
     }
 
 

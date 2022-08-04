@@ -27,8 +27,9 @@ class AdminValidationTest {
 
     @Test
     void profileIsAdmin(){
-        String cpfAdmin = "111111111";
-        assertEquals(cpfAdmin,adminValidation.adminIsAdmin(cpfAdmin));
+        Admin admin = new Admin("Pedro", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
+                new Phone("21", "11111111"), new Functional("123456789"));
+        assertTrue(adminValidation.adminIsAdmin(admin));
     }
 
     @Test

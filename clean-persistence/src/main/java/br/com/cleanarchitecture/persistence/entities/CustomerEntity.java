@@ -11,12 +11,24 @@ import java.util.Set;
 @Table(name = "customer")
 public class CustomerEntity extends ProfileEntity implements Serializable {
 
+    private final String type = "CUSTOMER";
+    protected CustomerEntity() {}
+
+    public CustomerEntity(String name, String lastName, EmailEntity email, CpfEntity cpf,
+                          PhoneEntity phone, FunctionalEntity functional, CompanyEntity company) {
+        super(name, lastName, email, cpf, phone);
+        this.functional = functional;
+    }
+
     @Embedded
     private FunctionalEntity functional;
+
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private JobOpportunityEntity jobOpportunity;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private Set<CompanyEntity> company;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private CompanyEntity company;
+
+
 }

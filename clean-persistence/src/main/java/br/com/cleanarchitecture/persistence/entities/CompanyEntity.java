@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Data
@@ -15,10 +16,17 @@ public class CompanyEntity implements Serializable {
     @Column(length = 100)
     private String fantasyName;
 
+    public CompanyEntity() {}
+
+    public CompanyEntity(CnpjEntity cnpj, String fantasyName) {
+        this.cnpj = cnpj;
+        this.fantasyName = fantasyName;
+    }
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     private JobOpportunityEntity jobOpportunity;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private CustomerEntity customer;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private Set<CustomerEntity> customer;
 
 }

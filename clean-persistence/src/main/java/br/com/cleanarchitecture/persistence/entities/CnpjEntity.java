@@ -14,4 +14,14 @@ public class CnpjEntity implements Serializable {
 
     @Column(length = 14, nullable = false)
     private String cnpj;
+
+    protected CnpjEntity() {}
+
+    public CnpjEntity(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
 }
