@@ -3,13 +3,16 @@ package br.com.cleanarchitecture.persistence.service.user;
 import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.User;
 import br.com.cleanarchitecture.domain.entities.repository.UserService;
+import br.com.cleanarchitecture.persistence.converter.CpfConverter;
 import br.com.cleanarchitecture.persistence.converter.UserConverter;
+import br.com.cleanarchitecture.persistence.entities.CpfEntity;
 import br.com.cleanarchitecture.persistence.entities.UserEntity;
 import br.com.cleanarchitecture.persistence.repository.UserRepository;
+import net.bytebuddy.dynamic.DynamicType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public  class UserServiceIml implements UserService {
@@ -22,21 +25,19 @@ public  class UserServiceIml implements UserService {
     @Autowired
     private UserConverter userConverter;
 
+    private CpfConverter cpfConverter = new CpfConverter();
+
     public UserServiceIml() {
     }
 
-
     public User findOne(Cpf cpf) {
-        return userConverter.convertToUser(userRepository.findByCpf(cpf));
+        Optional<UserEntity> userEntity = userRepository.findById(cpfConverter.convertToCpfEntity(cpf.getNumber()));
+        return userConverter.convertToUser(userEntity.get());
     }
 
     public Boolean exist(Cpf cpf) {
-        UserEntity number = userRepository.findByCpf(cpf);
-        if (number == null) {
-            return false;
-        } else {
-            return true;
-        }
+        CpfEntity cpfEntity = cpfConverter.convertToCpfEntity(cpf.getNumber());
+        return userRepository.existsById(cpfEntity);
     }
 
     public void save(User user) {
@@ -53,6 +54,15 @@ public  class UserServiceIml implements UserService {
             UserEntity userEntity = userConverter.convertToUserEntity(user);
             userRepository.save(userEntity);
         }
+    }
+
+    public User edit(User user, Cpf cpf) {
+        User validation = userValidation.editUser(user,cpf);
+        if(validation != null){
+            UserEntity userEntity = userConverter.convertToUserEntity(user);
+            userRepository.save(userEntity);
+        }
+        return user;
     }
 
 

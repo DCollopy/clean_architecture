@@ -1,5 +1,6 @@
 package br.com.cleanarchitecture.domain.usecases;
 
+import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.User;
 
 import java.util.logging.Logger;
@@ -62,6 +63,17 @@ public abstract class UserValidation {
     public void userAnswerOpportunity(User user) {
         Logger.getLogger(UserValidation.class.getName()).info("User answer opportunity");
         new User(user.getAnswerOpportunity());
+    }
+
+    public User editUser(User user, Cpf cpf) {
+      if(cpf.getNumber().equals(user.getCpf().getNumber())){
+          Logger.getLogger(UserValidation.class.getName()).info("User edited");
+          return new User(user.getName(), user.getLastName(), user.getEmail(),
+                  user.getCpf(), user.getPhone());
+      } else{
+          Logger.getLogger(UserValidation.class.getName()).info("User not edited");
+          throw new IllegalArgumentException("User not edited");
+      }
     }
 
 
