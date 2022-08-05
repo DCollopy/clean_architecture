@@ -18,7 +18,11 @@ public class CompanyForm {
 
     public CompanyForm(){}
 
-    public Company convertCompanyFormToCompany() {
+    public Company convertCompany() {
         return new Company(new Cnpj(this.getCnpj()), this.getFantasyName());
+    }
+
+    public Company convertCompanyToCompany(String cnpj, String fantasyName) {
+        return new Company(new Cnpj(cnpj), fantasyName);
     }
 }

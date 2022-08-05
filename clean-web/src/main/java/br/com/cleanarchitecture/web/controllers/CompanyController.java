@@ -31,7 +31,7 @@ public class CompanyController {
     public String createCompany(@Valid
                                     @RequestBody CompanyForm companyForm,
                                     @PathVariable(name= "who") String  who) {
-        Company company = companyForm.convertCompanyFormToCompany();
+        Company company = companyForm.convertCompany();
         companyService.save(company,who);
         return "redirect:/company";
     }
@@ -45,7 +45,7 @@ public class CompanyController {
     public ResponseEntity<Company> editCompany(@Valid
                                                    @RequestBody CompanyForm companyForm,
                                                          String cnpj, String who) {
-        Company company = companyForm.convertCompanyFormToCompany();
+        Company company = companyForm.convertCompany();
         return new ResponseEntity<>(companyService.edit(company, new Cnpj(cnpj),who), HttpStatus.OK);
     }
 

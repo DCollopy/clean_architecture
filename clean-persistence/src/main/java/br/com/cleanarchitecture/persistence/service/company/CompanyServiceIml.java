@@ -37,6 +37,14 @@ public class CompanyServiceIml implements CompanyService {
         }
     }
 
+    public Company edit(Company company, Cnpj cnpj, String whoYou) {
+        Company validation = companyValidation.editCompany(company, cnpj, whoYou);
+        if(validation != null){
+            CompanyEntity companyEntity = companyConverter.convertToCompanyEntity(validation);
+            companyRepository.save(companyEntity);
+        }
+        return validation;
+    }
 
     public Company findOne(Cnpj cnpj) {
         Optional<CompanyEntity> companyEntity = companyRepository.findById(cnpjConverter.convertToCnpjEntity(cnpj.getNumber()));
@@ -54,12 +62,5 @@ public class CompanyServiceIml implements CompanyService {
         return companyConverter.convertToCompanyList(companyEntities);
     }
 
-    public Company edit(Company company, Cnpj cnpj, String whoYou) {
-        Company validation = companyValidation.editCompany(company, cnpj, whoYou);
-        if(validation != null){
-            CompanyEntity companyEntity = companyConverter.convertToCompanyEntity(validation);
-            companyRepository.save(companyEntity);
-        }
-        return validation;
-    }
+
 }

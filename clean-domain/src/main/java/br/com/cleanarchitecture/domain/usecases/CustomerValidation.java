@@ -1,5 +1,6 @@
 package br.com.cleanarchitecture.domain.usecases;
 
+import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.Customer;
 
 import java.util.logging.Logger;
@@ -51,6 +52,16 @@ public abstract class CustomerValidation {
         }
         Logger.getLogger(CustomerValidation.class.getName()).info("Customer does not create");
         throw new IllegalArgumentException("Customer does not create");
+    }
+
+    public Customer editCustomer(Customer customer, Cpf cpf) {
+        if (validate(customer).isEmpty() && cpf.getNumber().equals(customer.getCpf().getNumber())) {
+            Logger.getLogger(CustomerValidation.class.getName()).info("Customer edited");
+            return new Customer(customer.getName(), customer.getLastName(), customer.getEmail(),
+                    customer.getCpf(), customer.getPhone(), customer.getFunctional(), customer.getCompany());
+        } else {
+            throw new IllegalArgumentException("Customer does not edit");
+        }
     }
 
     public boolean custumerIsCustumer(Customer customer) {

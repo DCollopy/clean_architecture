@@ -28,16 +28,6 @@ public  class UserServiceIml implements UserService {
 
     public UserServiceIml() {}
 
-    public User findOne(Cpf cpf) {
-        Optional<UserEntity> userEntity = userRepository.findById(cpfConverter.convertToCpfEntity(cpf.getNumber()));
-        return userConverter.convertToUser(userEntity.get());
-    }
-
-    public Boolean exist(Cpf cpf) {
-        CpfEntity cpfEntity = cpfConverter.convertToCpfEntity(cpf.getNumber());
-        return userRepository.existsById(cpfEntity);
-    }
-
     public void save(User user) {
         User validation = userValidation.createUser(user);
         if(validation != null){
@@ -63,5 +53,14 @@ public  class UserServiceIml implements UserService {
         return user;
     }
 
+    public User findOne(Cpf cpf) {
+        Optional<UserEntity> userEntity = userRepository.findById(cpfConverter.convertToCpfEntity(cpf.getNumber()));
+        return userConverter.convertToUser(userEntity.get());
+    }
+
+    public Boolean exist(Cpf cpf) {
+        CpfEntity cpfEntity = cpfConverter.convertToCpfEntity(cpf.getNumber());
+        return userRepository.existsById(cpfEntity);
+    }
 
 }
