@@ -21,7 +21,8 @@ public class CompanyConverter {
     }
 
     public List<Company> convertToCompanyList(List<CompanyEntity> companyEntity) {
-        List<Company> companies = new ArrayList<>(companyEntity.size());
+        List<Company> companies = new ArrayList<>(companyEntity.stream().
+                map(this::convertToCompany).collect(ArrayList::new, ArrayList::add, ArrayList::addAll));
         return companies;
     }
 }

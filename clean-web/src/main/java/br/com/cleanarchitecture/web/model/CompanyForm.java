@@ -16,7 +16,9 @@ public class CompanyForm {
         this.fantasyName = company.getFantasyName();
     }
 
+    public CompanyForm(){}
+
     public Company convertCompanyFormToCompany() {
-        return new Company(new Cnpj(cnpj), fantasyName);
+        return new Company(new Cnpj(this.getCnpj()), this.getFantasyName());
     }
 }

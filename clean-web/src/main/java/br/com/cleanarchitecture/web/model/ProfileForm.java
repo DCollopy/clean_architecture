@@ -4,7 +4,7 @@ import br.com.cleanarchitecture.domain.entities.Profile;
 import lombok.Data;
 
 @Data
-public class ProfileForm {
+public abstract class ProfileForm {
     private String name;
     private String lastName;
     private EmailForm email;
@@ -20,5 +20,7 @@ public class ProfileForm {
         this.cpf = new CpfForm(profile.getCpf());
         this.phone = new PhoneForm(profile.getPhone());
     }
+
+    public abstract String who();
 
 }

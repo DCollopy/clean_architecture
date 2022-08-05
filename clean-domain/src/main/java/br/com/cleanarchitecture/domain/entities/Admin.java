@@ -17,7 +17,7 @@ public class Admin extends Profile {
 
 
     public String who() {
-        return "ADMIN";
+        return this.getType();
     }
 
 

@@ -2,7 +2,9 @@ package br.com.cleanarchitecture.web.model;
 
 import br.com.cleanarchitecture.domain.entities.Profile;
 import br.com.cleanarchitecture.domain.entities.User;
+import lombok.Data;
 
+@Data
 public class UserForm extends ProfileForm{
     private SchoolingLevelForm schoolingLevel;
 
@@ -10,8 +12,9 @@ public class UserForm extends ProfileForm{
 
     private ProfessionalExperienceForm professionalExperience;
 
-    public UserForm() {
-    }
+    private final String type = "USER";
+
+    public UserForm() {}
 
     public UserForm(Profile profile) {
         super(profile);
@@ -24,8 +27,8 @@ public class UserForm extends ProfileForm{
         this.professionalExperience = new ProfessionalExperienceForm(user.getProfessionalExperience());
     }
 
-    public String who(){
-        return this.getCpf().getNumber();
+    public String who() {
+        return this.getType();
     }
 
     public SchoolingLevelForm getSchoolingLevel() {

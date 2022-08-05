@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/venturarh/company")
@@ -22,12 +23,11 @@ public class CompanyController {
     }
 
     @GetMapping
-    public String index() {
-        companyService.listAll();
-        return "redirect:/company";
+    public List<Company> index() {
+        return companyService.listAll();
     }
 
-    @PostMapping("/create{who}")
+    @PostMapping("/create/{who}")
     public String createCompany(@Valid
                                     @RequestBody CompanyForm companyForm,
                                     @PathVariable(name= "who") String  who) {

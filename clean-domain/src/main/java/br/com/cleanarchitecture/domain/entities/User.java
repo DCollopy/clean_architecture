@@ -34,7 +34,7 @@ public class User extends Profile{
     }
 
     public String who() {
-        return "USER";
+        return this.type;
     }
 
     public String getName() {

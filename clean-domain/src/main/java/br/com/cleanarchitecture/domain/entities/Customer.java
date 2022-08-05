@@ -20,7 +20,7 @@ public class Customer extends Profile{
     }
 
     public String who() {
-        return "CUSTOMER";
+        return this.getType();
     }
 
     public String getName() {

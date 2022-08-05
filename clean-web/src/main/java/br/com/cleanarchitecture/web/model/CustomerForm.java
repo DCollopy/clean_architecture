@@ -9,6 +9,8 @@ public class CustomerForm extends ProfileForm {
     private FunctionalForm functional;
     private CompanyForm company;
 
+    private final String type = "CUSTOMER";
+
     public CustomerForm(Customer customer, Profile profile) {
         super(profile);
         this.functional = new FunctionalForm(customer.getFunctional());
@@ -21,6 +23,6 @@ public class CustomerForm extends ProfileForm {
     }
 
     public String who(){
-        return this.who();
+        return this.getType();
     }
 }

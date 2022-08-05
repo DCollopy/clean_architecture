@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class AdminForm  extends ProfileForm{
     private FunctionalForm functional;
+    private final String type = "ADMIN";
 
     public AdminForm(Admin admin, Profile profile) {
         super(profile);
@@ -16,4 +17,9 @@ public class AdminForm  extends ProfileForm{
     public AdminForm(Admin admin) {
         this.functional = new FunctionalForm(admin.getFunctional());
     }
+
+    public String who() {
+        return this.getType();
+    }
+
 }
