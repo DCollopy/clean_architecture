@@ -7,8 +7,7 @@ import br.com.cleanarchitecture.persistence.converter.CpfConverter;
 import br.com.cleanarchitecture.persistence.converter.UserConverter;
 import br.com.cleanarchitecture.persistence.entities.CpfEntity;
 import br.com.cleanarchitecture.persistence.entities.UserEntity;
-import br.com.cleanarchitecture.persistence.repository.UserRepository;
-import net.bytebuddy.dynamic.DynamicType;
+import br.com.cleanarchitecture.persistence.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +24,9 @@ public  class UserServiceIml implements UserService {
     @Autowired
     private UserConverter userConverter;
 
-    private CpfConverter cpfConverter = new CpfConverter();
+    private final CpfConverter cpfConverter = new CpfConverter();
 
-    public UserServiceIml() {
-    }
+    public UserServiceIml() {}
 
     public User findOne(Cpf cpf) {
         Optional<UserEntity> userEntity = userRepository.findById(cpfConverter.convertToCpfEntity(cpf.getNumber()));

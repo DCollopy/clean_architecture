@@ -1,4 +1,4 @@
-package br.com.cleanarchitecture.persistence.repository;
+package br.com.cleanarchitecture.persistence.repository.user;
 
 
 import br.com.cleanarchitecture.persistence.entities.CpfEntity;

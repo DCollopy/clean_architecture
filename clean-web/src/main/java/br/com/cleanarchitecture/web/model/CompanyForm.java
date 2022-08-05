@@ -1,6 +1,7 @@
 package br.com.cleanarchitecture.web.model;
 
 
+import br.com.cleanarchitecture.domain.entities.Cnpj;
 import br.com.cleanarchitecture.domain.entities.Company;
 import lombok.Data;
 
@@ -13,5 +14,9 @@ public class CompanyForm {
     public CompanyForm(Company company) {
         this.cnpj = company.getCnpj();
         this.fantasyName = company.getFantasyName();
+    }
+
+    public Company convertCompanyFormToCompany() {
+        return new Company(new Cnpj(cnpj), fantasyName);
     }
 }

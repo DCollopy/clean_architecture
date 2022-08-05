@@ -13,7 +13,7 @@ public class CustomerConverter {
                 new CpfConverter().convertToCpf(customerEntity.getCpf().getCpf()),
                 new PhoneConverter().convertToPhone(customerEntity.getPhone().getDdd(), customerEntity.getPhone().getPhone()),
                 new FunctionalConverter().convertToFunctional(customerEntity.getFunctional().getFunctional()),
-                new CompanyConverter().convertToCompany(customerEntity.getCompany().getCnpj().getCnpj(), customerEntity.getCompany().getFantasyName()));
+                new CompanyConverter().convertToCompany(customerEntity.getCompany()));
 
     }
 
@@ -23,7 +23,7 @@ public class CustomerConverter {
                 new CpfConverter().convertToCpfEntity(customer.getCpf().getNumber()),
                 new PhoneConverter().convertToPhoneEntity(customer.getPhone().getDdd(), customer.getPhone().getNumber()),
                 new FunctionalConverter().convertToFunctionalEntity(customer.getFunctional().getNumber()),
-                new CompanyConverter().convertToCompanyEntity(customer.getCompany().getCnpj(), customer.getCompany().getFantasyName()));
+                new CompanyConverter().convertToCompanyEntity(customer.getCompany()));
 
 
     }

@@ -30,9 +30,9 @@ public abstract class AdminValidation {
         return message;
     }
 
-    // a ideia aqui e jogar o cpf vindo da jpa para esse metodo
-    public boolean adminIsAdmin(Admin admin) {
-        return admin.getType().equals("ADMIN");
+
+    public boolean adminIsAdmin(String admin) {
+        return new Admin().getType().equals(admin);
     }
 
     public Admin createAdmin(Admin admin) {

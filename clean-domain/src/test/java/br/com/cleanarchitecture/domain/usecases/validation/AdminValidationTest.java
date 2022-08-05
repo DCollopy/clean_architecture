@@ -29,7 +29,7 @@ class AdminValidationTest {
     void profileIsAdmin(){
         Admin admin = new Admin("Pedro", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
                 new Phone("21", "11111111"), new Functional("123456789"));
-        assertTrue(adminValidation.adminIsAdmin(admin));
+        assertTrue(adminValidation.adminIsAdmin(admin.getType()));
     }
 
     @Test
