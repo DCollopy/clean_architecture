@@ -1,5 +1,6 @@
 package br.com.cleanarchitecture.domain.entities.repository;
 
+import br.com.cleanarchitecture.domain.entities.Cnpj;
 import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.Customer;
 

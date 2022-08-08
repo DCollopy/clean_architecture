@@ -4,6 +4,8 @@ import br.com.cleanarchitecture.domain.entities.User;
 import br.com.cleanarchitecture.persistence.entities.UserEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +27,14 @@ public class UserConverter {
                 new CpfConverter().convertToCpfEntity(user.getCpf().getNumber()),
                 new PhoneConverter().convertToPhoneEntity(user.getPhone().getDdd(), user.getPhone().getNumber()));
 
+    }
+
+    public List<User> convertToUserList(List<UserEntity> userEntity) {
+        List<User> users = new ArrayList<>();
+        for (UserEntity user : userEntity) {
+            users.add(convertToUser(user));
+        }
+        return users;
     }
 
 }

@@ -1,6 +1,7 @@
 package br.com.cleanarchitecture.domain.usecases;
 
 import br.com.cleanarchitecture.domain.entities.Admin;
+import br.com.cleanarchitecture.domain.entities.Cpf;
 
 import java.util.logging.Logger;
 
@@ -35,14 +36,23 @@ public abstract class AdminValidation {
         return new Admin().getType().equals(admin);
     }
 
-    public Admin createAdmin(Admin admin) {
-        if(validate(admin).isEmpty()) {
+    public Admin createAdmin(Admin admin, String whoYou) {
+        if(validate(admin).isEmpty() && adminIsAdmin(whoYou)) {
             Logger.getLogger(AdminValidation.class.getName()).info("Admin created");
             return new Admin(admin.getName(), admin.getLastName(), admin.getEmail(),
                     admin.getCpf(), admin.getPhone(), admin.getFunctional());
         }
         throw new IllegalArgumentException("Admin does not create");
 
+    }
+
+    public Admin updateAdmin(Admin admin, Cpf cpf, String whoYou) {
+        if (cpf.equals(admin.getCpf()) && validate(admin).isEmpty() && adminIsAdmin(whoYou)) {
+            Logger.getLogger(AdminValidation.class.getName()).info("Admin updated");
+            return new Admin(admin.getName(), admin.getLastName(), admin.getEmail(),
+                    admin.getCpf(), admin.getPhone(), admin.getFunctional());
+        }
+        throw new IllegalArgumentException("Admin does not update");
     }
 
 }

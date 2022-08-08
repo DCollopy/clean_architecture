@@ -5,21 +5,17 @@ import lombok.Data;
 @Data
 public class Admin extends Profile {
     private Functional functional;
-
     private final String type = "ADMIN";
-    public Admin() {
-    }
+    public Admin() {}
 
     public Admin(String name, String lastName, Email email, Cpf cpf, Phone phone, Functional functional) {
         super(name, lastName, email, cpf, phone);
         this.functional = functional;
     }
 
-
     public String who() {
         return this.getType();
     }
-
 
     public String getName() {
         return super.getName();

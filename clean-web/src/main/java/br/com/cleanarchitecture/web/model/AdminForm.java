@@ -22,4 +22,13 @@ public class AdminForm  extends ProfileForm{
         return this.getType();
     }
 
+    public Admin convertAdminformToAdmin() {
+        Admin admin = new Admin(
+                this.getName(), this.getLastName(),
+                new EmailForm().convertEmailFormToEmail(this.getEmail().getAddress()),
+                new CpfForm().convertCpfFormToCpf(this.getCpf().getNumber()),
+                new PhoneForm().convertPhoneFormToPhone(this.getPhone().getDdd(), this.getPhone().getNumber()),
+                new FunctionalForm().convertFunctionalToFunctional(this.getFunctional().getNumber()));
+        return admin;
+    }
 }

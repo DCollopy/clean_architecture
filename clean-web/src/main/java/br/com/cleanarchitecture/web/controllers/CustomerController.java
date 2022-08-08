@@ -3,8 +3,8 @@ package br.com.cleanarchitecture.web.controllers;
 
 import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.Customer;
+import br.com.cleanarchitecture.domain.entities.repository.CompanyService;
 import br.com.cleanarchitecture.domain.entities.repository.CustomerService;
-import br.com.cleanarchitecture.web.model.CompanyForm;
 import br.com.cleanarchitecture.web.model.CustomerForm;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +18,11 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-    public CustomerController(CustomerService customerService) {
+    private final CompanyService companyService;
+
+    public CustomerController(CustomerService customerService, CompanyService companyService) {
         this.customerService = customerService;
+        this.companyService = companyService;
     }
 
     @GetMapping({ "/{cpf}" })
@@ -32,8 +35,12 @@ public class CustomerController {
     public String createCustomer(@Valid
                                      @RequestBody CustomerForm customerForm) {
         Customer customer = customerForm.convertCustomer();
-        customerService.save(customer);
-        return "Create customer";
+        if(companyService.exist(customer.getCompanyCnpjObj())){
+            customerService.save(customer);
+            companyService.saveCustomer(customerService.findOne(customer.getCpf()),customer.getCompanyCnpjObj());
+            return "Customer created successfully";
+        }
+        return "Ops! Something went wrong";
     }
 
     @GetMapping("/edit{cpf}")

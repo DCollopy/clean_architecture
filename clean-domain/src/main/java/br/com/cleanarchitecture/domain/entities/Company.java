@@ -23,9 +23,17 @@ public class Company {
         this.fantasyName = fantasyName;
     }
 
+    public Company(Set<Customer> customers) {
+        this.customers = customers;
+    }
+
 
     public String getCnpj() {
         return cnpj.getNumber();
+    }
+
+    public Cnpj getCnpjObject() {
+        return cnpj;
     }
 
 
@@ -49,5 +57,8 @@ public class Company {
 
     public Company deleteCompany(Cnpj cnpj) {
         return this;
+    }
+
+    public void setCustomer(Set<Customer> customer) {
     }
 }

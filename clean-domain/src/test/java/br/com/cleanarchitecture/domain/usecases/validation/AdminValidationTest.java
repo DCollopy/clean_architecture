@@ -36,14 +36,15 @@ class AdminValidationTest {
     void profileNotCreateAdmin() {
         assertThrows(IllegalArgumentException.class, () -> adminValidation.createAdmin(
                 new Admin(null, "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
-                        new Phone("21", "11111111"), new Functional("123456789"))));
+                        new Phone("21", "11111111"), new Functional("123456789")),"ADMIN"));
     }
 
     @Test
     void profileCreateAdmin() {
+        String whoYou = "ADMIN";
         assertNotNull(adminValidation.createAdmin(
                 new Admin("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
-                        new Phone("21", "11111111"), new Functional("123456789"))));
+                        new Phone("21", "11111111"), new Functional("123456789")), whoYou));
     }
 
 }

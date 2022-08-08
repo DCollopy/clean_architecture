@@ -2,7 +2,9 @@ package br.com.cleanarchitecture.domain.usecases;
 
 import br.com.cleanarchitecture.domain.entities.Cnpj;
 import br.com.cleanarchitecture.domain.entities.Company;
+import br.com.cleanarchitecture.domain.entities.Customer;
 
+import java.util.Set;
 import java.util.logging.Logger;
 
 public abstract class CompanyValidation {
@@ -28,10 +30,14 @@ public abstract class CompanyValidation {
     public Company editCompany(Company company, Cnpj cnpj, String whoYou) {
         if (cnpj.getNumber().equals(company.getCnpj()) && validate(company).isEmpty() && whoYou.equals("ADMIN")) {
             Logger.getLogger(CompanyValidation.class.getName()).info("Company edited");
-            return new Company(cnpj, company.getFantasyName());
+            return new Company(cnpj, company.getFantasyName(), company.getCustomers());
         } else {
             throw new IllegalArgumentException("Company does not edit");
         }
+    }
+
+    public Company saveCustomer(Set<Customer> customer) {
+        return new Company(customer);
     }
 
 }

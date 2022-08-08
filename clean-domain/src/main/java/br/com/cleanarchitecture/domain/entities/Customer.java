@@ -2,6 +2,8 @@ package br.com.cleanarchitecture.domain.entities;
 
 import lombok.Data;
 
+import java.util.Set;
+
 
 @Data
 public class Customer extends Profile{
@@ -16,6 +18,16 @@ public class Customer extends Profile{
                     Phone phone, Functional functional, Company company) {
         super(name, lastName, email, cpf, phone);
         this.functional = functional;
+        this.company = company;
+    }
+
+    public Customer(String name, String lastName, Email email, Cpf cpf,
+                    Phone phone, Functional functional) {
+        super(name, lastName, email, cpf, phone);
+        this.functional = functional;
+    }
+
+    public Customer(Company company) {
         this.company = company;
     }
 
@@ -53,6 +65,10 @@ public class Customer extends Profile{
 
     public String getCompanyCnpj() {
         return this.company.getCnpj();
+    }
+
+    public Cnpj getCompanyCnpjObj() {
+        return this.company.getCnpjObject();
     }
 
     public void setName(String name) {

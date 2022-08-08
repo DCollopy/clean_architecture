@@ -8,25 +8,24 @@ import br.com.cleanarchitecture.persistence.converter.UserConverter;
 import br.com.cleanarchitecture.persistence.entities.CpfEntity;
 import br.com.cleanarchitecture.persistence.entities.UserEntity;
 import br.com.cleanarchitecture.persistence.repository.user.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public  class UserServiceIml implements UserService {
-    @Autowired
-    private UserRepository userRepository;
 
-    @Autowired
-    private  UserValidationAbs userValidation;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private UserConverter userConverter;
+    private final  UserValidationAbs userValidation = new UserValidationAbs();
 
+    private final UserConverter userConverter = new UserConverter();
     private final CpfConverter cpfConverter = new CpfConverter();
 
-    public UserServiceIml() {}
+    public UserServiceIml(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public void save(User user) {
         User validation = userValidation.createUser(user);
@@ -52,7 +51,6 @@ public  class UserServiceIml implements UserService {
         }
         return user;
     }
-
     public User findOne(Cpf cpf) {
         Optional<UserEntity> userEntity = userRepository.findById(cpfConverter.convertToCpfEntity(cpf.getNumber()));
         return userConverter.convertToUser(userEntity.get());
@@ -61,6 +59,10 @@ public  class UserServiceIml implements UserService {
     public Boolean exist(Cpf cpf) {
         CpfEntity cpfEntity = cpfConverter.convertToCpfEntity(cpf.getNumber());
         return userRepository.existsById(cpfEntity);
+    }
+
+    public List<User> listAll() {
+        return userConverter.convertToUserList(userRepository.findAll());
     }
 
 }

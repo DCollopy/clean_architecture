@@ -17,7 +17,16 @@ public class AdminEntity extends ProfileEntity implements Serializable {
     @Embedded
     private FunctionalEntity functional;
 
+    public AdminEntity(String name, String lastName, EmailEntity email, CpfEntity cpf, PhoneEntity phone, FunctionalEntity functional) {
+        super(name, lastName, email, cpf, phone);
+        this.functional = functional;
+    }
 
+    public AdminEntity(FunctionalEntity functional) {
+        this.functional = functional;
+    }
+
+    protected AdminEntity() {}
     public FunctionalEntity getFunctional() {
         return functional;
     }
