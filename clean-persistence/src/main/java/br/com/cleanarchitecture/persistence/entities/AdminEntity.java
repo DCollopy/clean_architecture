@@ -31,7 +31,4 @@ public class AdminEntity extends ProfileEntity implements Serializable {
         return functional;
     }
 
-    public void setFunctional(FunctionalEntity functional) {
-        this.functional = functional;
-    }
 }

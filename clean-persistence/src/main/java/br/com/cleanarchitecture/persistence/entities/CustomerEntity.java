@@ -34,9 +34,8 @@ public class CustomerEntity extends ProfileEntity implements Serializable {
     @Embedded
     private FunctionalEntity functional;
 
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private JobOpportunityEntity jobOpportunity;
+    @OneToMany(mappedBy = "customer")
+    private Set<JobOpportunityEntity> jobOpportunity = new HashSet<>();
 
     @ManyToMany(mappedBy = "customer", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private Set<CompanyEntity> company = new HashSet<>();

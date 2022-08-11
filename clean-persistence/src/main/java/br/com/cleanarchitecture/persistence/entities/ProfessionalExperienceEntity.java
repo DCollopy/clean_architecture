@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,7 +27,6 @@ public class ProfessionalExperienceEntity implements Serializable {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    Set<UserEntity> user_id;
+    @OneToMany(mappedBy = "professionalExperience")
+    Set<UserEntity> user = new HashSet<>();
 }

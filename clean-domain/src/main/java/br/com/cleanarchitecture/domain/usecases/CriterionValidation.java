@@ -25,15 +25,25 @@ public abstract class CriterionValidation {
     }
 
 
-    public void createCriterion(Criterion criterion) {
+    public Criterion createCriterion(Criterion criterion) {
         if(!validate(criterion).isEmpty()) {
-            new Criterion(criterion.getId(), criterion.getTitle(),
-                    criterion.getDescription(), criterion.getPmd(), criterion.getWeight());
+            Logger.getLogger(CriterionValidation.class.getName()).info("Criterion not created");
+           return new Criterion(criterion.getTitle(),criterion.getDescription(), criterion.getPmd(), criterion.getWeight());
         }else {
             Logger.getLogger(CriterionValidation.class.getName()).severe("Erro ao criar critério");
+            throw new IllegalArgumentException("Criterion not created");
         }
     }
 
+    public Criterion editCriterion(Criterion criterion, long id) {
+        if(!validate(criterion).isEmpty() && id == criterion.getId()) {
+            Logger.getLogger(CriterionValidation.class.getName()).info("Criterion not edited");
+            return new Criterion(criterion.getTitle(),criterion.getDescription(), criterion.getPmd(), criterion.getWeight());
+        }else {
+            Logger.getLogger(CriterionValidation.class.getName()).severe("Erro ao editar critério");
+            throw new IllegalArgumentException("Criterion not edited");
+        }
+    }
 }
 
 

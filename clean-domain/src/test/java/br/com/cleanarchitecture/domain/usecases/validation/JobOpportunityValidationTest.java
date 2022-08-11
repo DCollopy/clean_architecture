@@ -20,8 +20,6 @@ class JobOpportunityValidationTest {
                 "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
                 "English intemediario", LocalDate.now().plusDays(30),
                 IEducationLevel.COMPLETE_GRAD, "1200", criterion,
-                new Company(new Cnpj("33.663.683/0001-16"),
-                        "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
                 new Customer("Joao","Oliveira",new Email("teste@email.com"), cpf
                         ,new Phone("21", "11111111"),new Functional("123456789"),
                         new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")));
@@ -29,14 +27,10 @@ class JobOpportunityValidationTest {
     }
     private Set<Criterion> getCriteria() {
         Set<Criterion> criterion = new HashSet<>();
-        criterion.add(new Criterion(UUID.randomUUID().getMostSignificantBits(),
-                "UML","O candidato deverá conhecer os principais diagramasda UML: casos de uso, classes e seqüência",4,5));
-        criterion.add(new Criterion(UUID.randomUUID().getMostSignificantBits(),
-                "Ingles","Conversação e leitura de documentos técnicos",4,3));
-        criterion.add(new Criterion(UUID.randomUUID().getMostSignificantBits(),
-                "Análise de Pontos de Função","Desejável conhecimentos de dimensionamento de sistemas",1,1));
-        criterion.add(new Criterion(UUID.randomUUID().getMostSignificantBits(),
-                "Experiência Profissional","2 anos de experiência em levantamento de requisitos análise.",4,2));
+        criterion.add(new Criterion(UUID.randomUUID().getMostSignificantBits(),"UML","O candidato deverá conhecer os principais diagramasda UML: casos de uso, classes e seqüência",4,5));
+        criterion.add(new Criterion(UUID.randomUUID().getMostSignificantBits(),"Ingles","Conversação e leitura de documentos técnicos",4,3));
+        criterion.add(new Criterion(UUID.randomUUID().getMostSignificantBits(),"Análise de Pontos de Função","Desejável conhecimentos de dimensionamento de sistemas",1,1));
+        criterion.add(new Criterion(UUID.randomUUID().getMostSignificantBits(),"Experiência Profissional","2 anos de experiência em levantamento de requisitos análise.",4,2));
         return criterion;
     }
 
@@ -47,8 +41,6 @@ class JobOpportunityValidationTest {
                         "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
                         "English intemediario", LocalDate.now().plusDays(30),
                         IEducationLevel.COMPLETE_GRAD, "1200", criterion,
-                        new Company(new Cnpj("33.663.683/0001-16"),
-                                "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
                         new Customer(null, "Oliveira", new Email("teste@email.com"), new Cpf("33333333333")
                                 , new Phone("21", "11111111"), new Functional("123456789"),
                                 new Company(new Cnpj("33.663.683/0001-16"), "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")))));
@@ -57,8 +49,6 @@ class JobOpportunityValidationTest {
                         "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
                         "English intemediario", LocalDate.now().plusDays(30),
                         IEducationLevel.COMPLETE_GRAD, "1200",criterion,
-                        new Company(new Cnpj("33.663.683/0001-16"),
-                                "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
                         new Customer(null,"Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
                                 ,new Phone("21", "11111111"),new Functional("123456789"),
                                 new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")))));
@@ -66,8 +56,6 @@ class JobOpportunityValidationTest {
                         "",
                         "English intemediario", LocalDate.now().plusDays(30),
                         IEducationLevel.COMPLETE_GRAD, "1200", criterion,
-                        new Company(new Cnpj("33.663.683/0001-16"),
-                                "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
                         new Customer(null,"Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
                                 ,new Phone("21", "11111111"),new Functional("123456789"),
                                 new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")))));
@@ -75,8 +63,6 @@ class JobOpportunityValidationTest {
                         null,
                         "English intemediario", LocalDate.now().plusDays(30),
                         IEducationLevel.COMPLETE_GRAD, "1200", criterion,
-                        new Company(new Cnpj("33.663.683/0001-16"),
-                                "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
                         new Customer(null,"Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
                                 ,new Phone("21", "11111111"),new Functional("123456789"),
                                 new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")))));
@@ -84,18 +70,6 @@ class JobOpportunityValidationTest {
                         "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
                         "English intemediario", LocalDate.now().plusDays(30),
                         IEducationLevel.COMPLETE_GRAD, "1200", criterion,
-                        null,
-                        new Customer(null,"Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
-                                ,new Phone("21", "11111111"),new Functional("123456789"),
-                                new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")))));
-
-        assertThrows(IllegalArgumentException.class,
-                () ->jobOpportunityValidation.validate(new JobOpportunity("Engenheiro de Software Java Pleno",
-                        "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
-                        "English intemediario", LocalDate.now().plusDays(30),
-                        IEducationLevel.COMPLETE_GRAD, "1200", criterion,
-                        new Company(new Cnpj(null),
-                                null),
                         new Customer(null,"Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
                                 ,new Phone("21", "11111111"),new Functional("123456789"),
                                 new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")))));
@@ -104,8 +78,6 @@ class JobOpportunityValidationTest {
                         "English intemediario", LocalDate.now().plusDays(30),
                         IEducationLevel.COMPLETE_GRAD, "1200",
                         null,
-                        new Company(new Cnpj("33.663.683/0001-16"),
-                                "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
                         new Customer(null,"Oliveira",new Email("teste@email.com"),new Cpf("33333333333")
                                 ,new Phone("21", "11111111"),new Functional("123456789"),
                                 new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")))));
@@ -179,11 +151,10 @@ class JobOpportunityValidationTest {
     @Test
     void deleteNotFoundCustomer() {
         Set<Criterion> criterion = getCriteria();
-        JobOpportunity jobOpportunity = new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
+        JobOpportunity jobOpportunity = new JobOpportunity("Engenheiro de Software Java Pleno",
                 "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
                 "English intemediario", LocalDate.now().plusDays(30),
                 IEducationLevel.COMPLETE_GRAD, "1200", criterion,
-                new Company(new Cnpj("33.663.683/0001-16"), "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
                 new Customer(null,"Oliveira",new Email("teste@email.com"),new Cpf("33333333333"),
                         new Phone("21", "11111111"),new Functional("123456789"),
                         new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")));
@@ -194,12 +165,10 @@ class JobOpportunityValidationTest {
     @Test
     void delete() {
         Set<Criterion> criterion = getCriteria();
-        JobOpportunity jobOpportunity = new JobOpportunity("Engenheiro de Software Java Pleno",
+        JobOpportunity jobOpportunity = new JobOpportunity(UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Java Pleno",
                 "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
                 "English intemediario", LocalDate.now().plusDays(30),
                 IEducationLevel.COMPLETE_GRAD, "1200",criterion,
-                new Company(new Cnpj("33.663.683/0001-16"),
-                        "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"),
                 new Customer("Jose","Oliveira",new Email("teste@email.com"),
                         new Cpf("33333333333")
                         ,new Phone("21", "11111111"),new Functional("123456789"),

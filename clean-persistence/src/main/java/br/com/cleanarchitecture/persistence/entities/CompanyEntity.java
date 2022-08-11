@@ -29,10 +29,6 @@ public class CompanyEntity implements Serializable {
         this.customer = customer;
     }
 
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private JobOpportunityEntity jobOpportunity;
-
     @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinTable(name="Company_Custommer",joinColumns=
             {@JoinColumn(name="company_id",referencedColumnName="cnpj")},

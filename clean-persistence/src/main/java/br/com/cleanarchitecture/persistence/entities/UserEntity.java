@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,20 +23,19 @@ public class UserEntity extends ProfileEntity implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private SchoolingLevelEntity schoolingLevel;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "skill_user")
     private Set<SkillEntity> skill;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "professionalExperience_id")
-    private ProfessionalExperienceEntity professional_experience_user;
+    @JoinColumn(name = "professionalExperience")
+    private ProfessionalExperienceEntity professionalExperience;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "answer_opportunity_user")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "answerOopportunity_user")
     private AnswerOpportunityEntity answerOpportunity;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "job_opportunity_user")
-    private Set<JobOpportunityEntity> jobOpportunity;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy="user")
+    private Set<JobOpportunityEntity> jobOpportunity = new HashSet<>();
 
 }

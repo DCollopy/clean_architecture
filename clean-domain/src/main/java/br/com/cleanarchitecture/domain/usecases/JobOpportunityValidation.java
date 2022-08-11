@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 
 public abstract class JobOpportunityValidation {
 
-    private CustomerValidation customerValidation;
     public String validate(JobOpportunity jobOpportunity) {
         String message = "";
         if (jobOpportunity.getTitle() == null || jobOpportunity.getTitle().isEmpty()) {
@@ -21,9 +20,6 @@ public abstract class JobOpportunityValidation {
         }
         if (jobOpportunity.getDescription() == null || jobOpportunity.getDescription().isEmpty()) {
             return "Description is required";
-        }
-        if (jobOpportunity.getCompany() == null) {
-            return "Company is required";
         }
         if (jobOpportunity.getCriterion() == null) {
             return "Criterion is required";
@@ -37,19 +33,32 @@ public abstract class JobOpportunityValidation {
     public JobOpportunity createJobOpportunity(JobOpportunity jobOpportunity, String whoYou) {
         closingDay(jobOpportunity);
 
-        jobOpportunity.setStatus(true);
-
         if (validate(jobOpportunity).isEmpty() && whoYou.equals("CUSTOMER")) {
             Logger.getLogger(JobOpportunityValidation.class.getName()).info("JobOpportunity created");
            return new JobOpportunity(jobOpportunity.getTitle(), jobOpportunity.getDescription(),
                     jobOpportunity.getLanguage(), jobOpportunity.getClosingDate(),
                     jobOpportunity.getEducationLevel(), jobOpportunity.getSalary(),
                     jobOpportunity.getCriterion(),
-                    jobOpportunity.getCompany(), jobOpportunity.getCustomer(),getAverage(jobOpportunity));
+                    jobOpportunity.getCustomer(),getAverage(jobOpportunity));
 
         } else {
             Logger.getLogger("JobOpportunityValidation").info("Job Opportunity not created");
             throw new IllegalArgumentException("Job Opportunity not created");
+        }
+    }
+
+    public JobOpportunity editJobOpportunity(JobOpportunity jobOpportunity, long id) {
+        closingDay(jobOpportunity);
+        if (validate(jobOpportunity).isEmpty() && jobOpportunity.getId() == id) {
+            Logger.getLogger(JobOpportunityValidation.class.getName()).info("JobOpportunity edited");
+            return new JobOpportunity(jobOpportunity.getTitle(), jobOpportunity.getDescription(),
+                    jobOpportunity.getLanguage(), jobOpportunity.getClosingDate(),
+                    jobOpportunity.getEducationLevel(), jobOpportunity.getSalary(),
+                    jobOpportunity.getCriterion(),
+                    jobOpportunity.getCustomer(),getAverage(jobOpportunity));
+        } else {
+            Logger.getLogger("JobOpportunityValidation").info("Job Opportunity not edited");
+            throw new IllegalArgumentException("Job Opportunity not edited");
         }
     }
 
@@ -90,7 +99,7 @@ public abstract class JobOpportunityValidation {
 
 
     public JobOpportunity deleteJobOpportunity(JobOpportunity jobOpportunity, Cpf cpf) {
-        if (jobOpportunity.getId() == 0 || exitCustomerJobOpportunity(jobOpportunity,cpf)) {
+        if (exitCustomerJobOpportunity(jobOpportunity,cpf)) {
             Logger.getLogger("JobOpportunityValidation").info("Job Opportunity deleted");
             return jobOpportunity.delete(jobOpportunity.getId());
         } else {

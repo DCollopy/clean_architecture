@@ -14,6 +14,8 @@ public class AdminForm  extends ProfileForm{
         this.functional = new FunctionalForm(admin.getFunctional());
     }
 
+    public AdminForm(){}
+
     public AdminForm(Admin admin) {
         this.functional = new FunctionalForm(admin.getFunctional());
     }

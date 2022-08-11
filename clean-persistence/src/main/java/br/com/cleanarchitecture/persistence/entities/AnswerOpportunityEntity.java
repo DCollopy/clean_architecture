@@ -4,11 +4,12 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "answer_opportunity")
+@Table(name = "answerOpportunity")
 public class AnswerOpportunityEntity implements Serializable {
 
     @Id
@@ -16,9 +17,9 @@ public class AnswerOpportunityEntity implements Serializable {
     private long id;
     private int pmdUser;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private Set<CriterionEntity> criterion;
+    @OneToMany(mappedBy = "answerOpportunity")
+    private Set<CriterionEntity> criterion = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<UserEntity> user;
+    @OneToMany(mappedBy = "answerOpportunity")
+    private Set<UserEntity> user = new HashSet<>();
 }

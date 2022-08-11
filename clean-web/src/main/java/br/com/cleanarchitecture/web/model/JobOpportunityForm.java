@@ -5,10 +5,13 @@ import br.com.cleanarchitecture.domain.entities.JobOpportunity;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 @Data
 public class JobOpportunityForm {
 
-    private long id;
     private String title;
     private String description;
     private String language;
@@ -17,14 +20,12 @@ public class JobOpportunityForm {
     private LocalDate closingDate;
     private String educationLevel;
     private String salary;
-    private CriterionForm criterion;
-    private UserForm user;
-    private CompanyForm company;
+    private Set<CriterionForm> criterion;
+    private Set<UserForm> user;
     private CustomerForm customer;
     private boolean status;
 
     public JobOpportunityForm(JobOpportunity jobOpportunity) {
-        this.id = jobOpportunity.getId();
         this.title = jobOpportunity.getTitle();
         this.description = jobOpportunity.getDescription();
         this.language = jobOpportunity.getLanguage();
@@ -33,9 +34,20 @@ public class JobOpportunityForm {
         this.closingDate = jobOpportunity.getClosingDate();
         this.educationLevel = jobOpportunity.getEducationLevel();
         this.salary = jobOpportunity.getSalary();
-        this.criterion = new CriterionForm((Criterion) jobOpportunity.getCriterion());
-        this.user = new UserForm(jobOpportunity.getUser());
-        this.company = new CompanyForm(jobOpportunity.getCompany());
+        this.criterion = jobOpportunity.getCriterion().stream().map(CriterionForm::new).collect(Collectors.toSet());
+        this.user = Stream.of(new UserForm(jobOpportunity.getUser())).collect(Collectors.toSet());
         this.customer = new CustomerForm(jobOpportunity.getCustomer());
+    }
+
+    public JobOpportunity convertToJobOpportunity() {
+        return new JobOpportunity(this.getTitle(),
+                this.getDescription(),
+                this.getLanguage(),
+                this.getClosingDate(),
+                this.getEducationLevel(),
+                this.getSalary(),
+                this.getCriterion().stream().map(CriterionForm::convertToCriterion).collect(Collectors.toSet()),
+                new CustomerForm().convertCustomer(),
+                this.getMinimumProfile());
     }
 }

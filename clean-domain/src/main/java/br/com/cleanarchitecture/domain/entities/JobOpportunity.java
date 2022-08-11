@@ -20,15 +20,14 @@ public class JobOpportunity {
     private String salary;
     private Set<Criterion> criterion;
     private User user;
-    private Company company;
     private Customer customer;
     private boolean status;
 
     public JobOpportunity() {
     }
     public JobOpportunity(String title, String description, String language,
-                          LocalDate closingDate, String educationLevel, String salary, Set<Criterion> criterion,
-                          Company company, Customer customer) {
+                          LocalDate closingDate, String educationLevel, String salary,
+                          Set<Criterion> criterion,Customer customer) {
         this.title = title;
         this.description = description;
         this.language = language;
@@ -36,13 +35,12 @@ public class JobOpportunity {
         this.educationLevel = educationLevel;
         this.salary = salary;
         this.criterion = criterion;
-        this.company = company;
         this.customer = customer;
     }
 
     public JobOpportunity(String title, String description, String language,
                           LocalDate closingDate, String educationLevel, String salary, Set<Criterion> criterion,
-                          Company company, Customer customer,double minimumProfile) {
+                          Customer customer,double minimumProfile) {
         this.title = title;
         this.description = description;
         this.language = language;
@@ -50,14 +48,13 @@ public class JobOpportunity {
         this.educationLevel = educationLevel;
         this.salary = salary;
         this.criterion = criterion;
-        this.company = company;
         this.customer = customer;
         this.minimumProfile = minimumProfile;
     }
 
     public JobOpportunity(Long id,String title, String description, String language,
-                          LocalDate closingDate, String educationLevel, String salary, Set<Criterion> criterion,
-                          Company company, Customer customer) {
+                          LocalDate closingDate, String educationLevel, String salary,
+                          Set<Criterion> criterion, Customer customer) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -66,7 +63,6 @@ public class JobOpportunity {
         this.educationLevel = educationLevel;
         this.salary = salary;
         this.criterion = criterion;
-        this.company = company;
         this.customer = customer;
     }
 
@@ -114,10 +110,6 @@ public class JobOpportunity {
         return user;
     }
 
-    public Company getCompany() {
-        return company;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
@@ -160,10 +152,6 @@ public class JobOpportunity {
     }
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
     }
 
     public void setCustomer(Customer customer) {

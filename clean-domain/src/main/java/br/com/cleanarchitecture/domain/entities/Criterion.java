@@ -14,7 +14,23 @@ public class Criterion  {
     private Set<AnswerOpportunity> answerOpportunity;
 
 
-    public Criterion(Long id, String title, String description, int pmd, int weight) {
+    public Criterion(String title, String description, int pmd, int weight) {
+        if (pmd < 1 || pmd >= 6) {
+            throw new IllegalArgumentException("Valor Incorreto, entre com um valor de 1 a 5 ");
+        }
+        if (weight < 1 || weight >= 6) {
+            throw new IllegalArgumentException("Valor Incorreto, entre com um valor de 1 a 5 ");
+        }
+        if (title.isEmpty()) {
+            throw new IllegalArgumentException("Entre com o titulo!");
+        }
+        this.pmd = pmd;
+        this.weight = weight;
+        this.title = title;
+        this.description = description;
+    }
+
+    public Criterion(long id,String title, String description, int pmd, int weight) {
         if (pmd < 1 || pmd >= 6) {
             throw new IllegalArgumentException("Valor Incorreto, entre com um valor de 1 a 5 ");
         }
