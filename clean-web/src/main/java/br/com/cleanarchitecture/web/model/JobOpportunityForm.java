@@ -1,13 +1,10 @@
 package br.com.cleanarchitecture.web.model;
 
-import br.com.cleanarchitecture.domain.entities.Criterion;
 import br.com.cleanarchitecture.domain.entities.JobOpportunity;
 import lombok.Data;
-
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Data
 public class JobOpportunityForm {
@@ -21,7 +18,6 @@ public class JobOpportunityForm {
     private String educationLevel;
     private String salary;
     private Set<CriterionForm> criterion;
-    private Set<UserForm> user;
     private CustomerForm customer;
     private boolean status;
 
@@ -35,7 +31,6 @@ public class JobOpportunityForm {
         this.educationLevel = jobOpportunity.getEducationLevel();
         this.salary = jobOpportunity.getSalary();
         this.criterion = jobOpportunity.getCriterion().stream().map(CriterionForm::new).collect(Collectors.toSet());
-        this.user = Stream.of(new UserForm(jobOpportunity.getUser())).collect(Collectors.toSet());
         this.customer = new CustomerForm(jobOpportunity.getCustomer());
     }
 
