@@ -58,11 +58,6 @@ public class JobOpportunityEntity implements Serializable {
     @OneToMany(mappedBy = "jobOpportunity")
     private Set<CriterionEntity> criterion = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="Job_Users",joinColumns= {@JoinColumn(name="job_id",referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="user_id",referencedColumnName="cpf")})
-    private Set<UserEntity> user = new HashSet<>();
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="customer_id", nullable=false)
     private CustomerEntity customer;

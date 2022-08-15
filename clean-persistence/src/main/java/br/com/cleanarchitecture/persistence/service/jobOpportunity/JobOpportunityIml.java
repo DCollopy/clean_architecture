@@ -6,10 +6,12 @@ import br.com.cleanarchitecture.domain.entities.repository.JobOpportunityService
 import br.com.cleanarchitecture.persistence.converter.JobOpportunityConverter;
 import br.com.cleanarchitecture.persistence.entities.JobOpportunityEntity;
 import br.com.cleanarchitecture.persistence.repository.jobOpportunity.JobOpportunityRepository;
+import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class JobOpportunityIml implements JobOpportunityService {
 
     private final JobOpportunityRepository jobOpportunityRepository;
@@ -30,7 +32,7 @@ public class JobOpportunityIml implements JobOpportunityService {
 
     public void save(JobOpportunity jobOpportunity, String whoYou) {
         JobOpportunity validation = jobOpportunityAbs.createJobOpportunity(jobOpportunity, whoYou);
-        if(validation != null){
+        if(validation != null && exists(jobOpportunity)){
             JobOpportunityEntity jobOpportunityEntity = jobOpportunityConverter.jobOpportunityToJobOpportunityEntity(jobOpportunity);
             jobOpportunityRepository.save(jobOpportunityEntity);
         }
@@ -39,7 +41,7 @@ public class JobOpportunityIml implements JobOpportunityService {
 
     public JobOpportunity edit(JobOpportunity jobOpportunity, long id) {
         JobOpportunity validation = jobOpportunityAbs.editJobOpportunity(jobOpportunity, id);
-        if(validation != null){
+        if(validation != null && exists(jobOpportunity)){
             JobOpportunityEntity jobOpportunityEntity = jobOpportunityConverter.jobOpportunityToJobOpportunityEntity(jobOpportunity);
             jobOpportunityRepository.save(jobOpportunityEntity);
         }
@@ -50,11 +52,28 @@ public class JobOpportunityIml implements JobOpportunityService {
         return false;
     }
 
-    public List<JobOpportunity> findAllCustomerOpportunity(Cpf cpf) {
-        return null;
+    public List<JobOpportunity> findAll() {
+        return jobOpportunityConverter.jobOpportunityEntityListToJobOpportunityList(jobOpportunityRepository.findAll());
+    }
+
+    public JobOpportunity findJob(long id) {
+        return jobOpportunityConverter.jobOpportunityEntityToJobOpportunity(jobOpportunityRepository.findById(id).get());
+    }
+
+    public boolean exists(JobOpportunity jobOpportunity) {
+        return jobOpportunityRepository.existsById(jobOpportunity.getId());
+    }
+
+    public JobOpportunity findCustomerOpportunity(JobOpportunity jobOpportunity) {
+        JobOpportunity findJob = findById(jobOpportunity.getId());
+        Cpf cpf = findJob.getCustomer().getCpf();
+        return jobOpportunityAbs.customerJobOpportunity(findJob,cpf);
     }
 
     public void delete(JobOpportunity jobOpportunity, Cpf cpf) {
-
+        JobOpportunity validation = jobOpportunityAbs.deleteJobOpportunity(jobOpportunity, cpf);
+        if(validation != null){
+            jobOpportunityRepository.deleteById(jobOpportunity.getId());
+        }
     }
 }

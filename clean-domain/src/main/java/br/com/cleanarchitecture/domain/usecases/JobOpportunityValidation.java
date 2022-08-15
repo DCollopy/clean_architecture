@@ -1,9 +1,6 @@
 package br.com.cleanarchitecture.domain.usecases;
 
-import br.com.cleanarchitecture.domain.entities.Cpf;
-import br.com.cleanarchitecture.domain.entities.Criterion;
-import br.com.cleanarchitecture.domain.entities.Customer;
-import br.com.cleanarchitecture.domain.entities.JobOpportunity;
+import br.com.cleanarchitecture.domain.entities.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -108,17 +105,20 @@ public abstract class JobOpportunityValidation {
         }
     }
 
-    public List<JobOpportunity> listCustomerJobOpportunity(Cpf cpf) {
-        JobOpportunity jobOpportunity = new JobOpportunity();
-        if (cpf != null) {
-            return jobOpportunity.listAllCustomer(cpf);
+    public JobOpportunity customerJobOpportunity(JobOpportunity jobOpportunity,Cpf cpf) {
+        if (exitCustomerJobOpportunity(jobOpportunity,cpf)) {
+            Logger.getLogger("JobOpportunityValidation").info("Job Opportunity found");
+            return jobOpportunity;
+        } else {
+            Logger.getLogger("JobOpportunityValidation").info("Job Opportunity not found");
+            throw new IllegalArgumentException("Job Opportunity not found");
         }
-        Logger.getLogger("JobOpportunityValidation").info("Customer not found job publication");
-        return null;
     }
+
 
     public boolean exitCustomerJobOpportunity(JobOpportunity jobOpportunity,Cpf cpf) {
         return jobOpportunity.getCustomer().getCpf().getNumber().equals(cpf.getNumber());
     }
+
 
 }

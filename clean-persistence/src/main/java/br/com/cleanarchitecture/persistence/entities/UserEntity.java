@@ -35,7 +35,4 @@ public class UserEntity extends ProfileEntity implements Serializable {
     @JoinColumn(name = "answerOopportunity_user")
     private AnswerOpportunityEntity answerOpportunity;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy="user")
-    private Set<JobOpportunityEntity> jobOpportunity = new HashSet<>();
-
 }

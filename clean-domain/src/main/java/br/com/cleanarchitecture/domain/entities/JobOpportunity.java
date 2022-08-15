@@ -19,7 +19,7 @@ public class JobOpportunity {
     private String educationLevel;
     private String salary;
     private Set<Criterion> criterion;
-    private User user;
+    private Set<User> user;
     private Customer customer;
     private boolean status;
 
@@ -66,6 +66,7 @@ public class JobOpportunity {
         this.customer = customer;
     }
 
+
     public long getId() {
         return id;
     }
@@ -106,9 +107,6 @@ public class JobOpportunity {
         return criterion;
     }
 
-    public User getUser() {
-        return user;
-    }
 
     public Customer getCustomer() {
         return customer;
@@ -150,9 +148,6 @@ public class JobOpportunity {
     public void setCriterion(Set<Criterion> criterion) {
         this.criterion = criterion;
     }
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
@@ -174,7 +169,7 @@ public class JobOpportunity {
         return this;
     }
 
-    public List<JobOpportunity> listAllCustomer(Cpf cpf){
+    public List<JobOpportunity> listAllUser(Cpf cpf){
         return List.of(this);
     }
 

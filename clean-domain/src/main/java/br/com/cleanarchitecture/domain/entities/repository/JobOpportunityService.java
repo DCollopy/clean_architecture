@@ -15,7 +15,13 @@ public interface JobOpportunityService {
 
     boolean isExpiredDay(JobOpportunity jobOpportunity);
 
-    List<JobOpportunity> findAllCustomerOpportunity(Cpf cpf);
+    List<JobOpportunity> findAll();
+
+    JobOpportunity findCustomerOpportunity(JobOpportunity jobOpportunity);
+
+    JobOpportunity findJob(long id);
+
+    boolean exists(JobOpportunity jobOpportunity);
 
     void delete(JobOpportunity jobOpportunity, Cpf cpf);
 

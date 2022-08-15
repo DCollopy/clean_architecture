@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -25,6 +26,7 @@ class JobOpportunityValidationTest {
                         new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO")));
         return jobOpportunity;
     }
+
     private Set<Criterion> getCriteria() {
         Set<Criterion> criterion = new HashSet<>();
         criterion.add(new Criterion(UUID.randomUUID().getMostSignificantBits(),"UML","O candidato deverá conhecer os principais diagramasda UML: casos de uso, classes e seqüência",4,5));
@@ -33,6 +35,7 @@ class JobOpportunityValidationTest {
         criterion.add(new Criterion(UUID.randomUUID().getMostSignificantBits(),"Experiência Profissional","2 anos de experiência em levantamento de requisitos análise.",4,2));
         return criterion;
     }
+
 
     @Test
     void validate() {
@@ -143,9 +146,10 @@ class JobOpportunityValidationTest {
     }
 
     @Test
-    void listCustomerJobOpportunity() {
-        Cpf cpf = new Cpf("33333333333");
-        assertTrue(jobOpportunityValidation.listCustomerJobOpportunity(cpf).size() > 0);
+    void customerJobOpportunity() {
+        Set<Criterion> criterion = getCriteria();
+        JobOpportunity jobOpportunity = getJobOpportunity(criterion, new Cpf("33333333333"));
+        assertEquals(jobOpportunity,jobOpportunityValidation.customerJobOpportunity(jobOpportunity,jobOpportunity.getCustomer().getCpf()));
     }
 
     @Test
