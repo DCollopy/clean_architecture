@@ -1,9 +1,12 @@
 package br.com.cleanarchitecture.domain.usecases;
 
-import br.com.cleanarchitecture.domain.entities.Cpf;
-import br.com.cleanarchitecture.domain.entities.Customer;
+import br.com.cleanarchitecture.domain.entities.*;
 
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public abstract class CustomerValidation {
 
@@ -58,10 +61,24 @@ public abstract class CustomerValidation {
         if (validate(customer).isEmpty() && cpf.getNumber().equals(customer.getCpf().getNumber())) {
             Logger.getLogger(CustomerValidation.class.getName()).info("Customer edited");
             return new Customer(customer.getName(), customer.getLastName(), customer.getEmail(),
-                    customer.getCpf(), customer.getPhone(), customer.getFunctional(), customer.getCompany());
+                    customer.getCpf(), customer.getPhone(), customer.getFunctional());
         } else {
             throw new IllegalArgumentException("Customer does not edit");
         }
+    }
+
+    public void addCustomerCompany(Customer customer) {
+        if(customer.getCompany() == null) {
+            Company company = new Company(
+                    new Cnpj(customer.getCompanyCnpj()), customer.getCompany().getFantasyName());
+            customer.setCompany(company);
+        } else {
+            throw new IllegalArgumentException("Company already added");
+        }
+    }
+
+    public Set<JobOpportunity> listAllJobOpportunities(Customer customers) {
+        return customers.getJobOpportunities();
     }
 
     public boolean custumerIsCustumer(Customer customer) {

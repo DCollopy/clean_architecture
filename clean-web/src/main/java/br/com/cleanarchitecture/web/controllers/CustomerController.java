@@ -3,6 +3,7 @@ package br.com.cleanarchitecture.web.controllers;
 
 import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.Customer;
+import br.com.cleanarchitecture.domain.entities.JobOpportunity;
 import br.com.cleanarchitecture.domain.entities.repository.CompanyService;
 import br.com.cleanarchitecture.domain.entities.repository.CustomerService;
 import br.com.cleanarchitecture.web.model.CustomerForm;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/venturarh/customer")
@@ -29,6 +31,12 @@ public class CustomerController {
     public String index(@PathVariable String cpf) {
         Cpf cpfView = new Cpf(cpf);
         return customerService.findOne(cpfView).toString();
+    }
+
+    @GetMapping({ "/{cpf}/job-opportunity" })
+    public Set<JobOpportunity> listAllJobOpportunity(@PathVariable String cpf) {
+        Cpf cpfView = new Cpf(cpf);
+        return customerService.listAllJobOpportunity(customerService.findOne(cpfView));
     }
 
     @PostMapping("/create")

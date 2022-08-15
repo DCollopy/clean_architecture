@@ -2,6 +2,7 @@ package br.com.cleanarchitecture.persistence.service.customer;
 
 import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.Customer;
+import br.com.cleanarchitecture.domain.entities.JobOpportunity;
 import br.com.cleanarchitecture.domain.entities.repository.CustomerService;
 import br.com.cleanarchitecture.persistence.converter.CpfConverter;
 import br.com.cleanarchitecture.persistence.converter.CustomerConverter;
@@ -11,6 +12,7 @@ import br.com.cleanarchitecture.persistence.repository.customer.CustomerReposito
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CustomerServiceIml implements CustomerService {
@@ -55,5 +57,9 @@ public class CustomerServiceIml implements CustomerService {
         Optional<CustomerEntity> customerEntity = customerRepository.
                 findById(cpfConverter.convertToCpfEntity(cpf.getNumber()));
         return customerConverter.convertToCustomer(customerEntity.get());
+    }
+
+    public Set<JobOpportunity> listAllJobOpportunity(Customer customer) {
+        return customerValidation.listAllJobOpportunities(customer);
     }
 }

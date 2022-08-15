@@ -1,8 +1,10 @@
 package br.com.cleanarchitecture.domain.entities.repository;
 
-import br.com.cleanarchitecture.domain.entities.Cnpj;
 import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.Customer;
+import br.com.cleanarchitecture.domain.entities.JobOpportunity;
+
+import java.util.Set;
 
 public interface CustomerService {
 
@@ -13,4 +15,6 @@ public interface CustomerService {
     public Boolean exist(Cpf cpf);
 
     public Customer findOne(Cpf cpf);
+
+    Set<JobOpportunity> listAllJobOpportunity(Customer customer);
 }

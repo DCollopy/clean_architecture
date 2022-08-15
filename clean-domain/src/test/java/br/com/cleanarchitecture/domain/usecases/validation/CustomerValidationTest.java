@@ -3,11 +3,32 @@ package br.com.cleanarchitecture.domain.usecases.validation;
 import br.com.cleanarchitecture.domain.entities.*;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerValidationTest {
     CustomerValidTest clientValidation = new CustomerValidTest();
 
+    public Set<JobOpportunity> jobOpportunities = Set.of(
+            new JobOpportunity(1L, "Programador Angular", "Programador Java", "Java",
+                    LocalDate.now(), "Graduação", "R$ 1.000,00",
+                    Set.of(new Criterion(UUID.randomUUID().getMostSignificantBits(), "Java", "Java", 2, 2)),new Customer("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
+                    new Phone("21","11111111"), new Functional("123456789"), new Company(new Cnpj("33.663.683/0001-16"),
+                    "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"))),
+            new JobOpportunity(2L, "Programador Java", "Programador Java", "Java",
+                    LocalDate.now(), "Graduação", "R$ 1.000,00",
+                    Set.of(new Criterion(UUID.randomUUID().getMostSignificantBits(),"Java", "Java", 2, 2)),new Customer("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
+                    new Phone("21","11111111"), new Functional("123456789"), new Company(new Cnpj("33.663.683/0001-16"),
+                    "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"))),
+            new JobOpportunity(3L, "Programador Python", "Programador Java", "Java",
+                    LocalDate.now(), "Graduação", "R$ 1.000,00",
+                    Set.of(new Criterion(UUID.randomUUID().getMostSignificantBits(),"Java", "Java", 2, 2)),new Customer("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
+                    new Phone("21","11111111"), new Functional("123456789"), new Company(new Cnpj("33.663.683/0001-16"),
+                    "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"))));
     @Test
     void customerTeamCompany() {
         Customer customer = new Customer("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
@@ -73,4 +94,25 @@ class CustomerValidationTest {
                 "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"));
         assertTrue(clientValidation.custumerIsCustumer(customer));
     }
+
+    @Test
+    void customerCompanyAlreadyAdd() {
+        Customer customer = new Customer("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
+                new Phone("21","11111111"), new Functional("123456789"));
+
+        customer.setCompany(new Company(new Cnpj("33.663.683/0001-16"),
+                "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"));
+        assertThrows(IllegalArgumentException.class,
+                () -> clientValidation.addCustomerCompany(customer));
+
+    }
+
+    @Test
+    void customerJobList() {
+        Customer customer = new Customer("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
+                new Phone("21","11111111"), new Functional("123456789"));
+        customer.setJobOpportunities(jobOpportunities);
+        assertEquals(jobOpportunities, clientValidation.listAllJobOpportunities(customer));
+    }
+
 }

@@ -12,6 +12,8 @@ public class Customer extends Profile{
     private final String type = "CUSTOMER";
     private Company company;
 
+    private Set<JobOpportunity> jobOpportunities;
+
     public Customer() {}
 
     public Customer(String name, String lastName, Email email, Cpf cpf,
@@ -29,6 +31,10 @@ public class Customer extends Profile{
 
     public Customer(Company company) {
         this.company = company;
+    }
+
+    public Customer(Set<JobOpportunity> jobOpportunities) {
+        this.jobOpportunities = jobOpportunities;
     }
 
     public String who() {
@@ -71,6 +77,10 @@ public class Customer extends Profile{
         return this.company.getCnpjObject();
     }
 
+    public Set<JobOpportunity> getJobOpportunities() {
+        return this.jobOpportunities;
+    }
+
     public void setName(String name) {
         super.setName(name);
     }
@@ -97,6 +107,10 @@ public class Customer extends Profile{
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public void setJobOpportunities(Set<JobOpportunity> jobOpportunities) {
+        this.jobOpportunities = jobOpportunities;
     }
 
     public Customer listAll(){
