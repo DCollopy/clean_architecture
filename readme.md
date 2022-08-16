@@ -86,3 +86,5 @@ e sim um banco de Vagas X Critérios X Candidatos.
   ![img_8.png](image/img_8.png)
 
       
+* Diagrama de classes
+![img.png](image/img.png)
