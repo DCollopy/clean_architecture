@@ -30,12 +30,10 @@ public class UserController {
     @PostMapping("/create")
     public String createUser(@Valid @RequestBody UserForm userForm) {
         User user = userForm.convertUserformToUser();
-        Cpf cpf = user.getCpf();
-        if (!userService.exist(cpf)) {
-            userService.save(user);
-            return "redirect:/user";
-        }
-        return "Already exists cpf";
+        userService.save(user);
+        return "redirect:/user";
+
+
     }
 
     @PostMapping("/create/curriculum")

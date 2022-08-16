@@ -29,7 +29,7 @@ public  class UserServiceIml implements UserService {
 
     public void save(User user) {
         User validation = userValidation.createUser(user);
-        if(validation != null){
+        if(validation != null && exist(validation.getCpf())){
             UserEntity userEntity = userConverter.convertToUserEntity(validation);
             userRepository.save(userEntity);
         }
