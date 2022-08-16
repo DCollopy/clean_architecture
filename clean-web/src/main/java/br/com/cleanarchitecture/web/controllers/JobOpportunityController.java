@@ -1,6 +1,7 @@
 package br.com.cleanarchitecture.web.controllers;
 
 import br.com.cleanarchitecture.domain.entities.JobOpportunity;
+import br.com.cleanarchitecture.domain.entities.repository.CustomerService;
 import br.com.cleanarchitecture.domain.entities.repository.JobOpportunityService;
 import br.com.cleanarchitecture.web.model.JobOpportunityForm;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +14,11 @@ import java.util.List;
 public class JobOpportunityController {
 
     private final JobOpportunityService jobOpportunityService;
+    private final CustomerService customerService;
 
-    public JobOpportunityController(JobOpportunityService jobOpportunityService) {
+    public JobOpportunityController(JobOpportunityService jobOpportunityService, CustomerService customerService) {
         this.jobOpportunityService = jobOpportunityService;
+        this.customerService = customerService;
     }
 
     @GetMapping
@@ -28,6 +31,7 @@ public class JobOpportunityController {
                                                @PathVariable(name= "who") String  who) {
         JobOpportunity jobOpportunity = jobOpportunityForm.convertToJobOpportunity();
         jobOpportunityService.save(jobOpportunity,who);
+        customerService.saveJobOpportunity(jobOpportunity.getCustomer(),jobOpportunity);
         return "redirect:/job-opportunity";
     }
 

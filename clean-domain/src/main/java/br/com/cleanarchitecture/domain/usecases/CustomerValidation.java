@@ -2,7 +2,6 @@ package br.com.cleanarchitecture.domain.usecases;
 
 import br.com.cleanarchitecture.domain.entities.*;
 
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -67,16 +66,21 @@ public abstract class CustomerValidation {
         }
     }
 
-    public void addCustomerCompany(Customer customer) {
+    public Customer addCustomerCompany(Customer customer) {
         if(customer.getCompany() == null) {
             Company company = new Company(
                     new Cnpj(customer.getCompanyCnpj()), customer.getCompany().getFantasyName());
             customer.setCompany(company);
+            return customer;
         } else {
             throw new IllegalArgumentException("Company already added");
         }
     }
 
+    public Customer addCustomerJobOpportunity(Customer customer, JobOpportunity jobOpportunity) {
+        customer.setJobOpportunities(Stream.of(jobOpportunity).collect(Collectors.toSet()));
+        return customer;
+    }
     public Set<JobOpportunity> listAllJobOpportunities(Customer customers) {
         return customers.getJobOpportunities();
     }
@@ -88,6 +92,5 @@ public abstract class CustomerValidation {
     public String whoYou(){
         return "Customer";
     }
-
 
 }

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CompanyServiceIml implements CompanyService {
@@ -27,14 +28,9 @@ public class CompanyServiceIml implements CompanyService {
 
     private final CnpjConverter cnpjConverter = new CnpjConverter();
 
-    private final CpfConverter cpfConverter = new CpfConverter();
-
-    private final CustomerRepository customerRepository;
-
     private final CompanyRepository companyRepository;
 
-    public CompanyServiceIml(CustomerRepository customerRepository, CompanyRepository companyRepository) {
-        this.customerRepository = customerRepository;
+    public CompanyServiceIml(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
 
@@ -47,6 +43,11 @@ public class CompanyServiceIml implements CompanyService {
         }
     }
 
+    public void saveCustomer(Company company) {
+        Company companyCustomer = companyValidation.saveCustomer(company);
+        companyRepository.save(companyConverter.convertToCompanyEntity(companyCustomer));
+    }
+
     public Company edit(Company company, Cnpj cnpj, String whoYou) {
         Company validation = companyValidation.editCompany(company, cnpj, whoYou);
         if(validation != null){
@@ -56,24 +57,6 @@ public class CompanyServiceIml implements CompanyService {
         return validation;
     }
 
-    public void saveCustomer(Customer customer, Cnpj cnpj) {
-
-        Company companyActualization = findOne(cnpj);
-        CustomerEntity customerAdd = customerRepository.findById(cpfConverter.convertToCpfEntity(customer.getCpf().getNumber())).get();
-        CompanyEntity companyEntity = companyConverter.convertToCompanyEntity(companyActualization);
-
-
-        customerAdd.getCompany().add(companyEntity);
-        companyEntity.getCustomer().add(customerAdd);
-
-        customerRepository.save(customerAdd);
-        Company company = companyConverter.convertToCompany(companyEntity);
-        //CustomerEntity customerEntity = customerConverter.convertToCustomerEntity(customer);
-
-
-        //companyActualization.setCustomers(companyConverter.convertToCustomerSet(customer));
-        edit(company, cnpj, "ADMIN");
-    }
 
     public Company findOne(Cnpj cnpj) {
         Optional<CompanyEntity> companyEntity = companyRepository.findById(cnpjConverter.convertToCnpjEntity(cnpj.getNumber()));

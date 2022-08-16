@@ -8,13 +8,15 @@ import java.util.Set;
 
 public interface CustomerService {
 
-    public void save(Customer customer);
+    void save(Customer customer);
 
-    public Customer edit(Customer customer, Cpf cpf);
+    Customer edit(Customer customer, Cpf cpf);
 
-    public Boolean exist(Cpf cpf);
+    Boolean exist(Cpf cpf);
 
-    public Customer findOne(Cpf cpf);
+    Customer findOne(Cpf cpf);
+
+    void saveJobOpportunity(Customer customer,JobOpportunity jobOpportunity);
 
     Set<JobOpportunity> listAllJobOpportunity(Customer customer);
 }

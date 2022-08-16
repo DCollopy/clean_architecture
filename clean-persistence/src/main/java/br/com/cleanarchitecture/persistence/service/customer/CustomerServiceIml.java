@@ -37,6 +37,11 @@ public class CustomerServiceIml implements CustomerService {
         }
     }
 
+    public void saveJobOpportunity(Customer customer, JobOpportunity jobOpportunity) {
+        Customer addJobOpportunity = customerValidation.addCustomerJobOpportunity(customer, jobOpportunity);
+        customerRepository.save(customerConverter.convertToCustomerEntity(addJobOpportunity));
+    }
+
     public Customer edit(Customer customer, Cpf cpf) {
         Customer validation = customerValidation.editCustomer(customer,cpf);
         if(validation != null){

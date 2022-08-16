@@ -45,7 +45,7 @@ public class CustomerController {
         Customer customer = customerForm.convertCustomer();
         if(companyService.exist(customer.getCompanyCnpjObj())){
             customerService.save(customer);
-            companyService.saveCustomer(customerService.findOne(customer.getCpf()),customer.getCompanyCnpjObj());
+            companyService.saveCustomer(customer.getCompany());
             return "Customer created successfully";
         }
         return "Ops! Something went wrong";
