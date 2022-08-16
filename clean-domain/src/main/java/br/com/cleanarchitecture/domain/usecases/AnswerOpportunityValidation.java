@@ -8,15 +8,14 @@ public abstract class AnswerOpportunityValidation  {
 
 
     public String validate(AnswerOpportunity answerOpportunity) {
-        String message = "";
         if(answerOpportunity.getPmdUser() < 1 || answerOpportunity.getPmdUser() > 5) {
-            message = "PMD is required";
+            return  "PMD is required";
         }
         if(answerOpportunity.getCriterion() == null) {
-            message = "Criterion is required";
+            return "Criterion is required";
         }
         if(answerOpportunity.getUser() == null) {
-            message = "User is required";
+            return "User is required";
         }
         return "";
     }

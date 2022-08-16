@@ -14,9 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/venturarh/company")
 public class CompanyController {
-
     private final CompanyService companyService;
-
 
     public CompanyController(CompanyService companyService) {
         this.companyService = companyService;
