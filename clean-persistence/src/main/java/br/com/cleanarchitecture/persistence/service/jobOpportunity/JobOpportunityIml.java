@@ -42,15 +42,6 @@ public class JobOpportunityIml implements JobOpportunityService {
 
     }
 
-    public void saveUser(JobOpportunity jobOpportunity, User user) {
-        Set<User> validation = jobOpportunityAbs.userSave(jobOpportunity, user);
-        if(validation != null && exists(jobOpportunity)){
-            JobOpportunityEntity jobOpportunityEntity = jobOpportunityConverter.jobOpportunityToJobOpportunityEntity(jobOpportunity);
-            jobOpportunityRepository.save(jobOpportunityEntity);
-        }
-
-    }
-
     public JobOpportunity edit(JobOpportunity jobOpportunity, long id) {
         JobOpportunity validation = jobOpportunityAbs.editJobOpportunity(jobOpportunity, id);
         if(validation != null && exists(jobOpportunity)){
