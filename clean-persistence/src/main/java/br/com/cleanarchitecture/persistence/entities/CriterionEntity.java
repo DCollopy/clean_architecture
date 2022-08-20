@@ -29,10 +29,6 @@ public class CriterionEntity implements Serializable {
         this.weight = weight;
     }
 
-    public CriterionEntity(AnswerOpportunityEntity answerOpportunity) {
-        this.answerOpportunity = answerOpportunity;
-    }
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="job_id", nullable=false)
     private JobOpportunityEntity jobOpportunity;

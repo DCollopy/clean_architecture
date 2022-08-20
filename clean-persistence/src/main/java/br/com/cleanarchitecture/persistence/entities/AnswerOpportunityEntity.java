@@ -17,8 +17,6 @@ public class AnswerOpportunityEntity implements Serializable {
     private long id;
     private int pmdUser;
 
-    @OneToMany(mappedBy = "answerOpportunity")
-    private Set<CriterionEntity> criterion = new HashSet<>();
 
     @OneToMany(mappedBy = "answerOpportunity")
     private Set<UserEntity> user = new HashSet<>();

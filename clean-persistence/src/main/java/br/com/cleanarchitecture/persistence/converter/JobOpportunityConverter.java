@@ -35,4 +35,5 @@ public class JobOpportunityConverter {
     public List<JobOpportunity> jobOpportunityEntityListToJobOpportunityList(List<JobOpportunityEntity> jobOpportunityEntityList) {
         return jobOpportunityEntityList.stream().map(this::jobOpportunityEntityToJobOpportunity).collect(Collectors.toList());
     }
+
 }

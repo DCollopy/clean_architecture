@@ -3,9 +3,7 @@ package br.com.cleanarchitecture.domain.usecases;
 import br.com.cleanarchitecture.domain.entities.*;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Logger;
 
 public abstract class JobOpportunityValidation {
@@ -119,6 +117,5 @@ public abstract class JobOpportunityValidation {
     public boolean exitCustomerJobOpportunity(JobOpportunity jobOpportunity,Cpf cpf) {
         return jobOpportunity.getCustomer().getCpf().getNumber().equals(cpf.getNumber());
     }
-
 
 }

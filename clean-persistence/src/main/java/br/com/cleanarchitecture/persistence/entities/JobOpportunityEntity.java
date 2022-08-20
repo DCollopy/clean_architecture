@@ -61,5 +61,4 @@ public class JobOpportunityEntity implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="customer_id", nullable=false)
     private CustomerEntity customer;
-
 }

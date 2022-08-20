@@ -1,42 +1,49 @@
 package br.com.cleanarchitecture.domain.entities;
 
+import lombok.Data;
+
+import java.util.Set;
+
+@Data
 public class AnswerOpportunity {
 
     private long id;
-    private int pmdUser;
-    private Criterion criterion;
+    private Set<Integer> pmdUser;
     private User user;
+    private Set<JobOpportunity> jobOpportunity;
+    private double minimumProfile;
 
-    public AnswerOpportunity(long id, int pmdUser, Criterion criterion, User user) {
-        if (pmdUser < 1 || pmdUser >= 6) {
-            throw new IllegalArgumentException("Valor Incorreto, entre com um valor de 1 a 5 ");
-        }
-        if (criterion == null) {
-            throw new IllegalArgumentException("Criterio não pode ser nulo");
+    public AnswerOpportunity(Set<Integer> pmdUser, Set<JobOpportunity> jobOpportunity,User user) {
+        if (pmdUser.stream().iterator().next() < 1 || pmdUser.stream().iterator().next() >= 6) {
+            throw new IllegalArgumentException("Invalid valor, must be between 1 and 5");
         }
         if (user == null) {
-            throw new IllegalArgumentException("Usuario não pode ser nulo");
+            throw new IllegalArgumentException("Ops,User is required");
         }
-        this.id = id;
-        this.criterion = criterion;
-        this.user = user;
         this.pmdUser = pmdUser;
+        this.jobOpportunity = jobOpportunity;
+        this.user = user;
     }
+    public AnswerOpportunity(Set<Integer> pmdUser, Set<JobOpportunity> jobOpportunity, User user, double average) {
+        if (pmdUser.stream().iterator().next() < 1 || pmdUser.stream().iterator().next() >= 6) {
+            throw new IllegalArgumentException("Invalid valor, must be between 1 and 5");
+        }
+        if (user == null) {
+            throw new IllegalArgumentException("Ops,User is required");
+        }
+        this.pmdUser = pmdUser;
+        this.jobOpportunity = jobOpportunity;
+        this.user = user;
+        this.minimumProfile = average;
+    }
+    public AnswerOpportunity(){}
+
 
 
     public long getId() {
         return id;
     }
 
-
-    public int getPmdUser() {
-        return pmdUser;
-    }
-
-
-    public Criterion getCriterion() {
-        return criterion;
-    }
 
     public User getUser() {
         return user;
@@ -48,16 +55,12 @@ public class AnswerOpportunity {
     }
 
 
-    public void setPmdUser(int pmdUser) {
-        this.pmdUser = pmdUser;
-    }
-
-
-    public void setCriterion(Criterion criterion) {
-        this.criterion = criterion;
-    }
-
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public double setMinimumProfile(double minimumProfile) {
+        this.minimumProfile = minimumProfile;
+        return minimumProfile;
     }
 }

@@ -1,18 +1,17 @@
 package br.com.cleanarchitecture.domain.usecases;
 
 import br.com.cleanarchitecture.domain.entities.AnswerOpportunity;
+import br.com.cleanarchitecture.domain.entities.Criterion;
+import br.com.cleanarchitecture.domain.entities.JobOpportunity;
 
+import java.util.*;
 import java.util.logging.Logger;
 
 public abstract class AnswerOpportunityValidation  {
 
-
     public String validate(AnswerOpportunity answerOpportunity) {
-        if(answerOpportunity.getPmdUser() < 1 || answerOpportunity.getPmdUser() > 5) {
+        if(answerOpportunity.getPmdUser().stream().iterator().next() < 1 || answerOpportunity.getPmdUser().stream().iterator().next() > 5) {
             return  "PMD is required";
-        }
-        if(answerOpportunity.getCriterion() == null) {
-            return "Criterion is required";
         }
         if(answerOpportunity.getUser() == null) {
             return "User is required";
@@ -20,14 +19,45 @@ public abstract class AnswerOpportunityValidation  {
         return "";
     }
 
-
-    public void createAnswerOpportunity(AnswerOpportunity answerOpportunity) {
-        if(!validate(answerOpportunity).isEmpty()) {
-            new AnswerOpportunity(answerOpportunity.getId(), answerOpportunity.getPmdUser(), answerOpportunity.getCriterion(), answerOpportunity.getUser());
+    public AnswerOpportunity createAnswerOpportunity(AnswerOpportunity answerOpportunity) {
+        if(validate(answerOpportunity).isEmpty()) {
             Logger.getLogger(AnswerOpportunityValidation.class.getName()).info("AnswerOpportunity created");
+
+            return new AnswerOpportunity(answerOpportunity.getPmdUser(),answerOpportunity.getJobOpportunity(),
+                    answerOpportunity.getUser(),getAverage(answerOpportunity));
         }else {
-            Logger.getLogger(AnswerOpportunityValidation.class.getName()).severe("Erro ao criar resposta");
+            throw new IllegalArgumentException("Ops!!!, something went wrong");
         }
     }
 
+    public double getAverage(AnswerOpportunity answerOpportunity) {
+        double multiple = 0;
+        int soma = 0;
+        Set<Criterion> criterion = answerOpportunity.getJobOpportunity().stream().iterator().next().getCriterion();
+        for (int i = 0; i < criterion.size(); i++) {
+            for (Criterion calculate : criterion) {
+                for(Integer pmdUser : answerOpportunity.getPmdUser()) {
+                    multiple += (pmdUser * calculate.getWeight());
+                    soma += calculate.getWeight();
+                }
+            }
+        }
+        return answerOpportunity.setMinimumProfile(multiple / soma);
+    }
+
+    public Set<JobOpportunity> listAllJobOpportunity(JobOpportunity jobOpportunity, AnswerOpportunity answerOpportunity) {
+        for (JobOpportunity job : answerOpportunity.getJobOpportunity()) {
+            if (job.getId() == jobOpportunity.getId()) {
+                return answerOpportunity.getJobOpportunity();
+            }
+        }
+        return Collections.emptySet();
+    }
+
+    public AnswerOpportunity minimunProfileIsClosedJobMinimumProfile(AnswerOpportunity answerOpportunity, JobOpportunity jobOpportunity) {
+        if(answerOpportunity.getMinimumProfile() >= jobOpportunity.getMinimumProfile()) {
+            return answerOpportunity;
+        }
+        return null;
+    }
 }

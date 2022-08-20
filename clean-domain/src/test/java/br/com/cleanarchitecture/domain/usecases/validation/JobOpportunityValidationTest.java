@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -36,6 +35,10 @@ class JobOpportunityValidationTest {
         return criterion;
     }
 
+    private User getUser() {
+        return new User("Luis", "Oliveira", new Email("teste@email.com"),
+                new Cpf("33333333333"), new Phone("21", "11111111"));
+    }
 
     @Test
     void validate() {

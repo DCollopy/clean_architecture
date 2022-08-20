@@ -19,7 +19,6 @@ public class JobOpportunity {
     private String educationLevel;
     private String salary;
     private Set<Criterion> criterion;
-    private Set<User> user;
     private Customer customer;
     private boolean status;
 
@@ -153,6 +152,7 @@ public class JobOpportunity {
         this.customer = customer;
     }
 
+
     public void setStatus(boolean status) {
         this.status = status;
     }
@@ -167,10 +167,6 @@ public class JobOpportunity {
 
     public JobOpportunity delete(long id){
         return this;
-    }
-
-    public List<JobOpportunity> listAllUser(Cpf cpf){
-        return List.of(this);
     }
 
 }

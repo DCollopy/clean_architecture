@@ -2,7 +2,6 @@ package br.com.cleanarchitecture.domain.entities;
 
 import lombok.Data;
 
-import java.util.Set;
 
 @Data
 public class Criterion  {
@@ -11,8 +10,6 @@ public class Criterion  {
     private String description;
     private int pmd;
     private int weight;
-    private Set<AnswerOpportunity> answerOpportunity;
-
 
     public Criterion(String title, String description, int pmd, int weight) {
         if (pmd < 1 || pmd >= 6) {
@@ -45,10 +42,6 @@ public class Criterion  {
         this.weight = weight;
         this.title = title;
         this.description = description;
-    }
-
-    public Criterion(Set<AnswerOpportunity> answerOpportunity) {
-        this.answerOpportunity = answerOpportunity;
     }
 
     public Criterion() {
@@ -94,13 +87,6 @@ public class Criterion  {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Set<AnswerOpportunity> getAnswerOpportunity() {
-        return answerOpportunity;
-    }
-    public void setAnswerOpportunity(Set<AnswerOpportunity> answerOpportunity) {
-        this.answerOpportunity = answerOpportunity;
     }
 
 }

@@ -2,6 +2,7 @@ package br.com.cleanarchitecture.persistence.service.jobOpportunity;
 
 import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.JobOpportunity;
+import br.com.cleanarchitecture.domain.entities.User;
 import br.com.cleanarchitecture.domain.entities.repository.JobOpportunityService;
 import br.com.cleanarchitecture.persistence.converter.JobOpportunityConverter;
 import br.com.cleanarchitecture.persistence.entities.JobOpportunityEntity;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 @Service
 public class JobOpportunityIml implements JobOpportunityService {
 
@@ -32,6 +35,15 @@ public class JobOpportunityIml implements JobOpportunityService {
 
     public void save(JobOpportunity jobOpportunity, String whoYou) {
         JobOpportunity validation = jobOpportunityAbs.createJobOpportunity(jobOpportunity, whoYou);
+        if(validation != null && exists(jobOpportunity)){
+            JobOpportunityEntity jobOpportunityEntity = jobOpportunityConverter.jobOpportunityToJobOpportunityEntity(jobOpportunity);
+            jobOpportunityRepository.save(jobOpportunityEntity);
+        }
+
+    }
+
+    public void saveUser(JobOpportunity jobOpportunity, User user) {
+        Set<User> validation = jobOpportunityAbs.userSave(jobOpportunity, user);
         if(validation != null && exists(jobOpportunity)){
             JobOpportunityEntity jobOpportunityEntity = jobOpportunityConverter.jobOpportunityToJobOpportunityEntity(jobOpportunity);
             jobOpportunityRepository.save(jobOpportunityEntity);
