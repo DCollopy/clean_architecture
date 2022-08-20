@@ -9,12 +9,10 @@ public class AnswerOpportunityForm {
     private long id;
     private int pmdUser;
     private int weightUser;
-    private CriterionForm criterion;
 
     public AnswerOpportunityForm(AnswerOpportunity answerOpportunity) {
         this.id = answerOpportunity.getId();
-        this.pmdUser = answerOpportunity.getPmdUser();
-        this.criterion = new CriterionForm(answerOpportunity.getCriterion());
+        //this.pmdUser = answerOpportunity.getPmdUser();
     }
 
 }
