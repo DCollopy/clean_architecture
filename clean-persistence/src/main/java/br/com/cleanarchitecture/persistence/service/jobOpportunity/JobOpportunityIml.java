@@ -45,8 +45,10 @@ public class JobOpportunityIml implements JobOpportunityService {
 
     public void saveAnswer(JobOpportunity jobOpportunity, AnswerOpportunity answerOpportunity) {
         JobOpportunity job = findById(jobOpportunity.getId());
-        job.setAnswerOpportunity(answerOpportunity);
-        jobOpportunityRepository.save(jobOpportunityConverter.jobOpportunityToJobOpportunityEntity(job));
+        if(job != null){
+            job.setAnswerOpportunity(answerOpportunity);
+            jobOpportunityRepository.save(jobOpportunityConverter.jobOpportunityToJobOpportunityEntity(job));
+        }
     }
 
     public JobOpportunity edit(JobOpportunity jobOpportunity, long id) {

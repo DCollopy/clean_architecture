@@ -1,6 +1,5 @@
 package br.com.cleanarchitecture.persistence.converter;
 
-import br.com.cleanarchitecture.domain.entities.AnswerOpportunity;
 import br.com.cleanarchitecture.domain.entities.JobOpportunity;
 import br.com.cleanarchitecture.persistence.entities.JobOpportunityEntity;
 
@@ -45,4 +44,5 @@ public class JobOpportunityConverter {
     public Set<JobOpportunityEntity> jobOpportunitySetToJobOpportunityEntitySet(Set<JobOpportunity> jobOpportunity) {
         return jobOpportunity.stream().map(this::jobOpportunityToJobOpportunityEntity).collect(Collectors.toSet());
     }
+
 }

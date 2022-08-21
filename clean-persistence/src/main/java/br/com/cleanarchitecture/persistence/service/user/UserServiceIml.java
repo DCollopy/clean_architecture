@@ -1,5 +1,6 @@
 package br.com.cleanarchitecture.persistence.service.user;
 
+import br.com.cleanarchitecture.domain.entities.AnswerOpportunity;
 import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.User;
 import br.com.cleanarchitecture.domain.entities.repository.UserService;
@@ -32,6 +33,14 @@ public  class UserServiceIml implements UserService {
         if(validation != null && exist(validation.getCpf())){
             UserEntity userEntity = userConverter.convertToUserEntity(validation);
             userRepository.save(userEntity);
+        }
+    }
+
+    public void saveAnswer(User user, AnswerOpportunity answerOpportunity) {
+        User userFind = findOne(user.getCpf());
+        if(userFind != null){
+            userFind.setAnswerOpportunity(answerOpportunity);
+            save(userFind);
         }
     }
 
