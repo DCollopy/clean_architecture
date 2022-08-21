@@ -20,6 +20,7 @@ public class JobOpportunity {
     private String salary;
     private Set<Criterion> criterion;
     private Customer customer;
+    private AnswerOpportunity answerOpportunity;
     private boolean status;
 
     public JobOpportunity() {
@@ -65,6 +66,9 @@ public class JobOpportunity {
         this.customer = customer;
     }
 
+    public JobOpportunity(AnswerOpportunity answerOpportunity){
+        this.answerOpportunity = answerOpportunity;
+    }
 
     public long getId() {
         return id;
@@ -105,7 +109,6 @@ public class JobOpportunity {
     public Set<Criterion> getCriterion() {
         return criterion;
     }
-
 
     public Customer getCustomer() {
         return customer;

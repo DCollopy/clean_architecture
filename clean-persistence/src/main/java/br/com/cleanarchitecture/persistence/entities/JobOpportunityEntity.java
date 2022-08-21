@@ -51,8 +51,10 @@ public class JobOpportunityEntity implements Serializable {
         this.criterion = criterion;
         this.customer = customer;
         this.minimumProfile = minimumProfile;
+    }
 
-
+    public JobOpportunityEntity(AnswerOpportunityEntity answerOpportunity) {
+        this.answerOpportunity = answerOpportunity;
     }
 
     @OneToMany(mappedBy = "jobOpportunity")
@@ -61,4 +63,8 @@ public class JobOpportunityEntity implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="customer_id", nullable=false)
     private CustomerEntity customer;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "answerOopportunity_user")
+    private AnswerOpportunityEntity answerOpportunity;
 }

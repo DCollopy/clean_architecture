@@ -20,6 +20,10 @@ public class UserEntity extends ProfileEntity implements Serializable {
         super(name, lastName,email,cpf,phone);
     }
 
+    public UserEntity(AnswerOpportunityEntity answerOpportunity) {
+        this.answerOpportunity = answerOpportunity;
+    }
+
     @ManyToOne(cascade = CascadeType.ALL)
     private SchoolingLevelEntity schoolingLevel;
 
@@ -31,8 +35,10 @@ public class UserEntity extends ProfileEntity implements Serializable {
     @JoinColumn(name = "professionalExperience")
     private ProfessionalExperienceEntity professionalExperience;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "answerOopportunity_user")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(name = "user_answer_opportunity_entity",
+            joinColumns = @JoinColumn(name = "user_entity_cpf"),
+            inverseJoinColumns = @JoinColumn(name = "answer_opportunity_entity_id"))
     private AnswerOpportunityEntity answerOpportunity;
 
 }

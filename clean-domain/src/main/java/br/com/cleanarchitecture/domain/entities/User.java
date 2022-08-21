@@ -12,7 +12,7 @@ public class User extends Profile{
     private Skill skill;
     private ProfessionalExperience professionalExperience;
 
-    private Set<AnswerOpportunity> answerOpportunity;
+    private AnswerOpportunity answerOpportunity;
 
     public User() {
     }
@@ -29,7 +29,7 @@ public class User extends Profile{
         super(name, lastName, email, cpf, phone);
     }
 
-    public User(Set<AnswerOpportunity> answerOpportunity) {
+    public User(AnswerOpportunity answerOpportunity) {
         this.answerOpportunity = answerOpportunity;
     }
 
@@ -66,9 +66,6 @@ public class User extends Profile{
         return professionalExperience;
     }
 
-    public Set<AnswerOpportunity> getAnswerOpportunity() {
-        return answerOpportunity;
-    }
 
     public void setName(String name) {
         super.setName(name);

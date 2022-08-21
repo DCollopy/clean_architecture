@@ -61,12 +61,12 @@ class AnswerOpportunityValidationTest {
                new Cpf("33333333333"), new Phone("21", "11111111"));
     }
 
-    private Set<Integer> getPmdUser() {
-        Set<Integer> pmdUser = new HashSet<>();
-        pmdUser.add(5);
-        pmdUser.add(3);
-        pmdUser.add(1);
-        pmdUser.add(5);
+    private Set<Points> getPmdUser() {
+        Set<Points> pmdUser = new HashSet<>();
+        pmdUser.add(new Points(5));
+        pmdUser.add(new Points(3));
+        pmdUser.add(new Points(1));
+        pmdUser.add(new Points(5));
         return pmdUser;
     }
 
@@ -82,7 +82,7 @@ class AnswerOpportunityValidationTest {
     @Test
     void createAnswerOpportunity() {
         AnswerOpportunity answerOpportunity = new AnswerOpportunity(getPmdUser(),getJobOpportunity(), getUser());
-        assertEquals(answerOpportunity, answerOpportunityValidation.createAnswerOpportunity(answerOpportunity));
+        assertEquals(answerOpportunity, answerOpportunityValidation.createAnswerOpportunity(answerOpportunity,"USER"));
     }
 
     @Test

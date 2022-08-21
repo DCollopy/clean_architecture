@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -29,10 +30,10 @@ public class CompanyEntity implements Serializable {
         this.customer = customer;
     }
 
-    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinTable(name="Company_Custommer",joinColumns=
-            {@JoinColumn(name="company_id",referencedColumnName="cnpj")},
-            inverseJoinColumns={@JoinColumn(name="customer_id",referencedColumnName="cpf")})
-    private Set<CustomerEntity> customer = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "Company_Custommer",
+            joinColumns = @JoinColumn(name = "company_cnpj"),
+            inverseJoinColumns = @JoinColumn(name = "CustomerEntity_cpf"))
+    private Set<CustomerEntity> customer = new LinkedHashSet<>();
 
 }

@@ -8,28 +8,28 @@ import java.util.Set;
 public class AnswerOpportunity {
 
     private long id;
-    private Set<Integer> pmdUser;
+    private Set<Points> pmdUser;
     private User user;
     private Set<JobOpportunity> jobOpportunity;
     private double minimumProfile;
 
-    public AnswerOpportunity(Set<Integer> pmdUser, Set<JobOpportunity> jobOpportunity,User user) {
-        if (pmdUser.stream().iterator().next() < 1 || pmdUser.stream().iterator().next() >= 6) {
-            throw new IllegalArgumentException("Invalid valor, must be between 1 and 5");
-        }
+    public AnswerOpportunity(Set<Points> pmdUser, Set<JobOpportunity> jobOpportunity, User user) {
         if (user == null) {
             throw new IllegalArgumentException("Ops,User is required");
+        }
+        if(jobOpportunity == null) {
+            throw new IllegalArgumentException("Ops,JobOpportunity is required");
         }
         this.pmdUser = pmdUser;
         this.jobOpportunity = jobOpportunity;
         this.user = user;
     }
-    public AnswerOpportunity(Set<Integer> pmdUser, Set<JobOpportunity> jobOpportunity, User user, double average) {
-        if (pmdUser.stream().iterator().next() < 1 || pmdUser.stream().iterator().next() >= 6) {
-            throw new IllegalArgumentException("Invalid valor, must be between 1 and 5");
-        }
+    public AnswerOpportunity(Set<Points> pmdUser, Set<JobOpportunity> jobOpportunity, User user, double average) {
         if (user == null) {
             throw new IllegalArgumentException("Ops,User is required");
+        }
+        if(jobOpportunity == null) {
+            throw new IllegalArgumentException("Ops,JobOpportunity is required");
         }
         this.pmdUser = pmdUser;
         this.jobOpportunity = jobOpportunity;
@@ -37,8 +37,6 @@ public class AnswerOpportunity {
         this.minimumProfile = average;
     }
     public AnswerOpportunity(){}
-
-
 
     public long getId() {
         return id;

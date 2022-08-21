@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -13,6 +14,7 @@ import java.util.Set;
 public class CustomerEntity extends ProfileEntity implements Serializable {
 
     private final String type = "CUSTOMER";
+
     protected CustomerEntity() {}
 
     public CustomerEntity(String name, String lastName, EmailEntity email, CpfEntity cpf,
@@ -37,7 +39,19 @@ public class CustomerEntity extends ProfileEntity implements Serializable {
     @OneToMany(mappedBy = "customer")
     private Set<JobOpportunityEntity> jobOpportunity = new HashSet<>();
 
-    @ManyToMany(mappedBy = "customer", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    private Set<CompanyEntity> company = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "Company_Custommer",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "company_id"))
+    private Set<CompanyEntity> company = new LinkedHashSet<>();
+
+    public Set<CompanyEntity> getCompany() {
+        return company;
+    }
+
+    public void setCompany(Set<CompanyEntity> company) {
+        this.company = company;
+    }
+
 
 }

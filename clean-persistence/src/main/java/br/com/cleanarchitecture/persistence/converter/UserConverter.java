@@ -4,9 +4,7 @@ import br.com.cleanarchitecture.domain.entities.User;
 import br.com.cleanarchitecture.persistence.entities.UserEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserConverter {
