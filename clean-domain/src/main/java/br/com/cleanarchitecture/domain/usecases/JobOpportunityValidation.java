@@ -113,7 +113,6 @@ public abstract class JobOpportunityValidation {
         }
     }
 
-
     public boolean exitCustomerJobOpportunity(JobOpportunity jobOpportunity,Cpf cpf) {
         return jobOpportunity.getCustomer().getCpf().getNumber().equals(cpf.getNumber());
     }

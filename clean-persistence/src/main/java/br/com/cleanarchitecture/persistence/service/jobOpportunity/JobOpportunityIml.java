@@ -1,5 +1,6 @@
 package br.com.cleanarchitecture.persistence.service.jobOpportunity;
 
+import br.com.cleanarchitecture.domain.entities.AnswerOpportunity;
 import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.JobOpportunity;
 import br.com.cleanarchitecture.domain.entities.User;
@@ -40,6 +41,12 @@ public class JobOpportunityIml implements JobOpportunityService {
             jobOpportunityRepository.save(jobOpportunityEntity);
         }
 
+    }
+
+    public void saveAnswer(JobOpportunity jobOpportunity, AnswerOpportunity answerOpportunity) {
+        JobOpportunity job = findById(jobOpportunity.getId());
+        job.setAnswerOpportunity(answerOpportunity);
+        jobOpportunityRepository.save(jobOpportunityConverter.jobOpportunityToJobOpportunityEntity(job));
     }
 
     public JobOpportunity edit(JobOpportunity jobOpportunity, long id) {

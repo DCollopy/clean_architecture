@@ -1,5 +1,6 @@
 package br.com.cleanarchitecture.domain.entities.repository;
 
+import br.com.cleanarchitecture.domain.entities.AnswerOpportunity;
 import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.JobOpportunity;
 
@@ -10,6 +11,7 @@ public interface JobOpportunityService {
     JobOpportunity findById(Long id);
 
     void save(JobOpportunity jobOpportunity, String whoYou);
+    void saveAnswer(JobOpportunity jobOpportunity, AnswerOpportunity answerOpportunity);
 
     JobOpportunity edit(JobOpportunity jobOpportunity, long id);
 
