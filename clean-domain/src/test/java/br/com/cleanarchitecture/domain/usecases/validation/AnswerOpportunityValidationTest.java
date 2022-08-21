@@ -91,17 +91,4 @@ class AnswerOpportunityValidationTest {
         assertEquals(3.0, answerOpportunityValidation.getAverage(answerOpportunity));
     }
 
-    @Test
-    void listAllJobOpportunity() {
-        AnswerOpportunity answerOpportunity = new AnswerOpportunity(getPmdUser(),getJobOpportunity(), getUser());
-        assertEquals(answerOpportunity.getJobOpportunity(), answerOpportunityValidation.listAllJobOpportunity(new JobOpportunity(1L,"Engenheiro de Software Java Pleno",
-                "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
-                "English intemediario", LocalDate.now().plusDays(30),
-                IEducationLevel.COMPLETE_GRAD, "1200", getCriteria(),
-                new Customer("Joao","Oliveira",new Email("teste@email.com"),
-                        new Cpf("12345678901"),
-                        new Phone("21", "11111111"),new Functional("123456789"),
-                        new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"))),
-                answerOpportunity));
-    }
 }

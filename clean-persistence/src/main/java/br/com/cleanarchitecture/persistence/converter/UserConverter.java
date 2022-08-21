@@ -1,5 +1,6 @@
 package br.com.cleanarchitecture.persistence.converter;
 
+import br.com.cleanarchitecture.domain.entities.AnswerOpportunity;
 import br.com.cleanarchitecture.domain.entities.User;
 import br.com.cleanarchitecture.persistence.entities.UserEntity;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,6 @@ public class UserConverter {
                 new EmailConverter().convertToEmailEntity(user.getEmail().getAddress()),
                 new CpfConverter().convertToCpfEntity(user.getCpf().getNumber()),
                 new PhoneConverter().convertToPhoneEntity(user.getPhone().getDdd(), user.getPhone().getNumber()));
-
     }
 
     public List<User> convertToUserList(List<UserEntity> userEntity) {

@@ -37,8 +37,12 @@ public class JobOpportunityConverter {
     public List<JobOpportunity> jobOpportunityEntityListToJobOpportunityList(List<JobOpportunityEntity> jobOpportunityEntityList) {
         return jobOpportunityEntityList.stream().map(this::jobOpportunityEntityToJobOpportunity).collect(Collectors.toList());
     }
-    public Set<JobOpportunity> jobOpportunityEntityListToJobOpportunitySet(Set<JobOpportunityEntity> jobOpportunityEntityList) {
-        return jobOpportunityEntityList.stream().map(this::jobOpportunityEntityToJobOpportunity).collect(Collectors.toSet());
+
+    public Set<JobOpportunity> jobOpportunityEntitySetToJobOpportunitySet(Set<JobOpportunityEntity> jobOpportunityEntity) {
+        return jobOpportunityEntity.stream().map(this::jobOpportunityEntityToJobOpportunity).collect(Collectors.toSet());
     }
 
+    public Set<JobOpportunityEntity> jobOpportunitySetToJobOpportunityEntitySet(Set<JobOpportunity> jobOpportunity) {
+        return jobOpportunity.stream().map(this::jobOpportunityToJobOpportunityEntity).collect(Collectors.toSet());
+    }
 }

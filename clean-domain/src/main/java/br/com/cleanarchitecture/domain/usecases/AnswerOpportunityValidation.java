@@ -45,15 +45,6 @@ public abstract class AnswerOpportunityValidation  {
         return answerOpportunity.setMinimumProfile(multiple / soma);
     }
 
-    public Set<JobOpportunity> listAllJobOpportunity(JobOpportunity jobOpportunity, AnswerOpportunity answerOpportunity) {
-        for (JobOpportunity job : answerOpportunity.getJobOpportunity()) {
-            if (job.getId() == jobOpportunity.getId()) {
-                return answerOpportunity.getJobOpportunity();
-            }
-        }
-        return Collections.emptySet();
-    }
-
     public AnswerOpportunity minimunProfileIsClosedJobMinimumProfile(AnswerOpportunity answerOpportunity, JobOpportunity jobOpportunity) {
         if(answerOpportunity.getMinimumProfile() >= jobOpportunity.getMinimumProfile()) {
             return answerOpportunity;
