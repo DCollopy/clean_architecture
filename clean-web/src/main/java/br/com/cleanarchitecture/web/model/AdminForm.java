@@ -6,11 +6,14 @@ import lombok.Data;
 
 @Data
 public class AdminForm  extends ProfileForm{
+
+    private String uuid;
     private FunctionalForm functional;
     private final String type = "ADMIN";
 
     public AdminForm(Admin admin, Profile profile) {
         super(profile);
+        this.uuid = admin.getUuid();
         this.functional = new FunctionalForm(admin.getFunctional());
     }
 
@@ -26,6 +29,7 @@ public class AdminForm  extends ProfileForm{
 
     public Admin convertAdminformToAdmin() {
         Admin admin = new Admin(
+                this.getUuid(),
                 this.getName(), this.getLastName(),
                 new EmailForm().convertEmailFormToEmail(this.getEmail().getAddress()),
                 new CpfForm().convertCpfFormToCpf(this.getCpf().getNumber()),

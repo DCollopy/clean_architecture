@@ -26,14 +26,19 @@ public class CompanyEntity implements Serializable {
         this.customer = customers;
     }
 
+    public CompanyEntity(CnpjEntity cnpj, String fantasyName) {
+        this.cnpj = cnpj;
+        this.fantasyName = fantasyName;
+    }
+
     public CompanyEntity(Set<CustomerEntity> customer) {
         this.customer = customer;
     }
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "Company_Custommer",
             joinColumns = @JoinColumn(name = "company_cnpj"),
-            inverseJoinColumns = @JoinColumn(name = "CustomerEntity_cpf"))
-    private Set<CustomerEntity> customer = new LinkedHashSet<>();
+            inverseJoinColumns = @JoinColumn(name = "customer_cpf"))
+    private Set<CustomerEntity> customer = new HashSet<>();
 
 }

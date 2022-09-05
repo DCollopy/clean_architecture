@@ -17,7 +17,7 @@ public interface UserService {
     Boolean exist(Cpf cpf);
 
     User edit(User user, Cpf cpf);
-
+    User findOneUid(String uid);
     List<User> listAll();
 
 }

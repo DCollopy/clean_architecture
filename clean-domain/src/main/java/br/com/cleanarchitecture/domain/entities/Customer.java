@@ -7,6 +7,8 @@ import java.util.Set;
 
 @Data
 public class Customer extends Profile{
+
+    private String uuid;
     private Functional functional;
 
     private final String type = "CUSTOMER";
@@ -23,10 +25,34 @@ public class Customer extends Profile{
         this.company = company;
     }
 
+    public Customer(String uuid, String name, String lastName, Email email, Cpf cpf,
+                    Phone phone, Functional functional) {
+        super(name, lastName, email, cpf, phone);
+        this.uuid = uuid;
+        this.functional = functional;
+    }
+
     public Customer(String name, String lastName, Email email, Cpf cpf,
                     Phone phone, Functional functional) {
         super(name, lastName, email, cpf, phone);
         this.functional = functional;
+    }
+
+    public Customer(String uuid,String name, String lastName, Email email, Cpf cpf,
+                    Phone phone, Functional functional,Company company) {
+        super(name, lastName, email, cpf, phone);
+        this.uuid = uuid;
+        this.functional = functional;
+        this.company = company;
+    }
+
+    public Customer(String uuid,String name, String lastName, Email email, Cpf cpf,
+                    Phone phone, Functional functional,Company company, Set<JobOpportunity> jobOpportunities) {
+        super(name, lastName, email, cpf, phone);
+        this.uuid = uuid;
+        this.functional = functional;
+        this.company = company;
+        this.jobOpportunities = jobOpportunities;
     }
 
     public Customer(Company company) {

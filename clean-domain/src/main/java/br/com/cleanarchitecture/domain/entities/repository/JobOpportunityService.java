@@ -10,7 +10,7 @@ public interface JobOpportunityService {
 
     JobOpportunity findById(Long id);
 
-    void save(JobOpportunity jobOpportunity, String whoYou);
+    JobOpportunity save(JobOpportunity jobOpportunity, String whoYou);
     void saveAnswer(JobOpportunity jobOpportunity, AnswerOpportunity answerOpportunity);
 
     JobOpportunity edit(JobOpportunity jobOpportunity, long id);

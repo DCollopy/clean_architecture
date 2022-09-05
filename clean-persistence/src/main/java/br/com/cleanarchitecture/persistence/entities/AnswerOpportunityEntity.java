@@ -36,8 +36,8 @@ public class AnswerOpportunityEntity implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinTable(name = "answer_opportunity_user_entity",
-            joinColumns = @JoinColumn(name = "answer_opportunity_entity_null"),
-            inverseJoinColumns = @JoinColumn(name = "user_entity_cpf"))
+            joinColumns = @JoinColumn(name = "answer_opportunity_entity_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_cpf"))
     @JoinColumns({
             @JoinColumn(name = "USER_ENTITY_CPF", referencedColumnName = "CPF")
     })

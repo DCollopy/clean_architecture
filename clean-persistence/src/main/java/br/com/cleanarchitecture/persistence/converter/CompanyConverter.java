@@ -16,8 +16,7 @@ public class CompanyConverter {
     public CompanyConverter(){}
 
     public CompanyEntity convertToCompanyEntity(Company company) {
-        Set<CustomerEntity> customerEntities = customerConverter.convertToCustomerSet(company.getCustomers());
-        return new CompanyEntity(new CnpjEntity(company.getCnpj()), company.getFantasyName(), customerEntities);
+        return new CompanyEntity(new CnpjEntity(company.getCnpj()), company.getFantasyName());
     }
 
     public Company convertToCompany(CompanyEntity companyEntity) {
@@ -38,6 +37,11 @@ public class CompanyConverter {
 
     public Company convertCompanyEntitySetToCompany(Set<CompanyEntity> companyEntity){
         return convertToCompany(companyEntity.iterator().next());
+    }
+
+    public CompanyEntity convertToCompanyEntityCustomer(Company company) {
+        Set<CustomerEntity> customerEntities = customerConverter.convertToCustomerSetEntity(company.getCustomers());
+        return new CompanyEntity(new CnpjEntity(company.getCnpj()), company.getFantasyName(), customerEntities);
     }
 
 }

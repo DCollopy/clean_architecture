@@ -39,7 +39,7 @@ public abstract class CompanyValidation {
     }
 
     public Company saveCustomer(Company company) {
-        company.setCustomers(new HashSet<>(company.getCustomers()));
+        company.setCustomers(company.getCustomers());
         return company;
     }
 

@@ -13,13 +13,17 @@ import java.util.Set;
 @Table(name = "customer")
 public class CustomerEntity extends ProfileEntity implements Serializable {
 
+    @Column(length = 500)
+    private String uuid;
+
     private final String type = "CUSTOMER";
 
     protected CustomerEntity() {}
 
-    public CustomerEntity(String name, String lastName, EmailEntity email, CpfEntity cpf,
-                          PhoneEntity phone, FunctionalEntity functional,Set<CompanyEntity> company) {
+    public CustomerEntity(String uuid,String name, String lastName, EmailEntity email, CpfEntity cpf,
+                          PhoneEntity phone, FunctionalEntity functional,CompanyEntity company) {
         super(name, lastName, email, cpf, phone);
+        this.uuid = uuid;
         this.functional = functional;
         this.company = company;
     }
@@ -29,8 +33,8 @@ public class CustomerEntity extends ProfileEntity implements Serializable {
         this.functional = functional;
     }
 
-    public CustomerEntity(Set<CompanyEntity> company) {
-        this.company = company;
+    public CustomerEntity(Set<JobOpportunityEntity> jobOpportunity) {
+        this.jobOpportunity = jobOpportunity;
     }
 
     @Embedded
@@ -39,17 +43,17 @@ public class CustomerEntity extends ProfileEntity implements Serializable {
     @OneToMany(mappedBy = "customer")
     private Set<JobOpportunityEntity> jobOpportunity = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "Company_Custommer",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "company_id"))
-    private Set<CompanyEntity> company = new LinkedHashSet<>();
+            joinColumns = @JoinColumn(name = "customer_cpf"),
+            inverseJoinColumns = @JoinColumn(name = "company_cnpj"))
+    private CompanyEntity company;
 
-    public Set<CompanyEntity> getCompany() {
+    public CompanyEntity getCompany() {
         return company;
     }
 
-    public void setCompany(Set<CompanyEntity> company) {
+    public void setCompany(CompanyEntity company) {
         this.company = company;
     }
 

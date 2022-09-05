@@ -5,8 +5,6 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Data
@@ -27,7 +25,7 @@ public class JobOpportunityEntity implements Serializable {
     private String language;
 
     private Double minimumProfile = 0.0;
-    private LocalDate startDate;
+    private final LocalDate startDate = LocalDate.now();
 
     private LocalDate closingDate;
 
@@ -41,14 +39,13 @@ public class JobOpportunityEntity implements Serializable {
 
     public JobOpportunityEntity(String title, String description, String language,
                                 LocalDate closingDate, String educationLevel,
-                                String salary, Set<CriterionEntity> criterion,
-                                CustomerEntity customer,Double minimumProfile) {
+                                String salary,CustomerEntity customer,Double minimumProfile) {
         this.title = title;
         this.description = description;
+        this.language = language;
         this.closingDate = closingDate;
         this.educationLevel = educationLevel;
         this.salary = salary;
-        this.criterion = criterion;
         this.customer = customer;
         this.minimumProfile = minimumProfile;
     }
@@ -57,8 +54,9 @@ public class JobOpportunityEntity implements Serializable {
         this.answerOpportunity = answerOpportunity;
     }
 
-    @OneToMany(mappedBy = "jobOpportunity")
-    private Set<CriterionEntity> criterion = new HashSet<>();
+    public JobOpportunityEntity(long id) {
+        this.id = id;
+    }
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="customer_id", nullable=false)
@@ -67,4 +65,5 @@ public class JobOpportunityEntity implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "answerOopportunity_user")
     private AnswerOpportunityEntity answerOpportunity;
+
 }

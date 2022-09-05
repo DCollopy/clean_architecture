@@ -49,7 +49,7 @@ public abstract class CustomerValidation {
     public Customer createCustomer(Customer customer) {
         if(validate(customer).isEmpty()) {
             Logger.getLogger(CustomerValidation.class.getName()).info("Customer created");
-            return new Customer(customer.getName(), customer.getLastName(), customer.getEmail(),
+            return new Customer(customer.getUuid(),customer.getName(), customer.getLastName(), customer.getEmail(),
                     customer.getCpf(), customer.getPhone(), customer.getFunctional(), customer.getCompany());
         }
         Logger.getLogger(CustomerValidation.class.getName()).info("Customer does not create");
@@ -59,7 +59,7 @@ public abstract class CustomerValidation {
     public Customer editCustomer(Customer customer, Cpf cpf) {
         if (validate(customer).isEmpty() && cpf.getNumber().equals(customer.getCpf().getNumber())) {
             Logger.getLogger(CustomerValidation.class.getName()).info("Customer edited");
-            return new Customer(customer.getName(), customer.getLastName(), customer.getEmail(),
+            return new Customer(customer.getUuid(),customer.getName(), customer.getLastName(), customer.getEmail(),
                     customer.getCpf(), customer.getPhone(), customer.getFunctional());
         } else {
             throw new IllegalArgumentException("Customer does not edit");

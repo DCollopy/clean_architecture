@@ -1,6 +1,7 @@
 package br.com.cleanarchitecture.web.controllers;
 
 
+import br.com.cleanarchitecture.domain.entities.Cnpj;
 import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.Customer;
 import br.com.cleanarchitecture.domain.entities.JobOpportunity;
@@ -8,6 +9,7 @@ import br.com.cleanarchitecture.domain.entities.repository.CompanyService;
 import br.com.cleanarchitecture.domain.entities.repository.CustomerService;
 import br.com.cleanarchitecture.web.model.CustomerForm;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,10 +29,14 @@ public class CustomerController {
         this.companyService = companyService;
     }
 
-    @GetMapping({ "/{cpf}" })
-    public String index(@PathVariable String cpf) {
-        Cpf cpfView = new Cpf(cpf);
-        return customerService.findOne(cpfView).toString();
+    @GetMapping({ "/{uid}" })
+    public Customer index(@PathVariable String uid) {
+        Customer customer = customerService.findByUid(uid);
+        if(customer != null){
+            return customer;
+        } else {
+            throw new IllegalArgumentException("UUID is null");
+        }
     }
 
     @GetMapping({ "/{cpf}/job-opportunity" })
@@ -39,22 +45,24 @@ public class CustomerController {
         return customerService.listAllJobOpportunity(customerService.findOne(cpfView));
     }
 
-    @PostMapping("/create")
+    @PostMapping(value = "/create",  consumes= MediaType.APPLICATION_JSON_VALUE)
     public String createCustomer(@Valid
                                      @RequestBody CustomerForm customerForm) {
+        System.out.println(customerForm);
+        System.out.println(customerForm.getCnpj());
         Customer customer = customerForm.convertCustomer();
-        if(companyService.exist(customer.getCompanyCnpjObj())){
+        if(companyService.exist(new Cnpj(customerForm.getCnpj()))) {
+            customer.setCompany(companyService.findOne(new Cnpj(customerForm.getCnpj())));
             customerService.save(customer);
-            companyService.saveCustomer(customer.getCompany());
             return "Customer created successfully";
         }
         return "Ops! Something went wrong";
     }
 
-    @GetMapping("/edit{cpf}")
-    public ResponseEntity<CustomerForm> editCustomer(@PathVariable String cpf) {
-        return ResponseEntity.ok(new CustomerForm(customerService.findOne(new Cpf(cpf))));
-    }
+    //@GetMapping("/edit{cpf}")
+    //public ResponseEntity<CustomerForm> editCustomer(@PathVariable String cpf) {
+        //return ResponseEntity.ok(new CustomerForm(customerService.findOne(new Cpf(cpf))));
+    //}
 
     @PutMapping("/edit{cpf}")
     public ResponseEntity<Customer> editCustomer(@Valid

@@ -1,13 +1,21 @@
 package br.com.cleanarchitecture.web.controllers;
 
+import br.com.cleanarchitecture.domain.entities.Cpf;
+import br.com.cleanarchitecture.domain.entities.Criterion;
+import br.com.cleanarchitecture.domain.entities.Customer;
 import br.com.cleanarchitecture.domain.entities.JobOpportunity;
+import br.com.cleanarchitecture.domain.entities.repository.CriterionService;
 import br.com.cleanarchitecture.domain.entities.repository.CustomerService;
 import br.com.cleanarchitecture.domain.entities.repository.JobOpportunityService;
+import br.com.cleanarchitecture.web.model.CriterionForm;
+import br.com.cleanarchitecture.web.model.CustomerForm;
 import br.com.cleanarchitecture.web.model.JobOpportunityForm;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/venturarh/job-opportunity")
@@ -16,9 +24,12 @@ public class JobOpportunityController {
     private final JobOpportunityService jobOpportunityService;
     private final CustomerService customerService;
 
-    public JobOpportunityController(JobOpportunityService jobOpportunityService, CustomerService customerService) {
+    private final CriterionService criterionService;
+
+    public JobOpportunityController(JobOpportunityService jobOpportunityService, CustomerService customerService, CriterionService criterionService) {
         this.jobOpportunityService = jobOpportunityService;
         this.customerService = customerService;
+        this.criterionService = criterionService;
     }
 
     @GetMapping
@@ -26,12 +37,19 @@ public class JobOpportunityController {
         return jobOpportunityService.findAll();
     }
 
-    @PostMapping("/create/{who}")
+    @PostMapping(value="/create/{who}", consumes= MediaType.APPLICATION_JSON_VALUE)
     public String createJobOpportunity(@Valid @RequestBody JobOpportunityForm jobOpportunityForm,
                                                @PathVariable(name= "who") String  who) {
         JobOpportunity jobOpportunity = jobOpportunityForm.convertToJobOpportunity();
-        jobOpportunityService.save(jobOpportunity,who);
-        customerService.saveJobOpportunity(jobOpportunity.getCustomer(),jobOpportunity);
+        Set<Criterion> criterion = jobOpportunity.getCriterion();
+        Customer customer = customerService.findOne(new Cpf(jobOpportunityForm.getCpf()));
+
+        jobOpportunity.setCustomer(customer);
+
+        JobOpportunity job = jobOpportunityService.save(jobOpportunity,who);
+        JobOpportunity jobFindbyId = jobOpportunityService.findById(job.getId());
+
+        criterionService.save(criterion,jobFindbyId);
         return "redirect:/job-opportunity";
     }
 
@@ -44,6 +62,7 @@ public class JobOpportunityController {
     public JobOpportunity findCustomerOpportunity(@PathVariable Long id) {
         return jobOpportunityService.findCustomerOpportunity(jobOpportunityService.findJob(id));
     }
+
 
     @PutMapping("/{id}")
     public JobOpportunity edit(@Valid @RequestBody JobOpportunityForm jobOpportunityForm,

@@ -6,18 +6,14 @@ import br.com.cleanarchitecture.domain.entities.Customer;
 import br.com.cleanarchitecture.domain.entities.repository.CompanyService;
 import br.com.cleanarchitecture.persistence.converter.CnpjConverter;
 import br.com.cleanarchitecture.persistence.converter.CompanyConverter;
-import br.com.cleanarchitecture.persistence.converter.CpfConverter;
 import br.com.cleanarchitecture.persistence.converter.CustomerConverter;
 import br.com.cleanarchitecture.persistence.entities.CnpjEntity;
 import br.com.cleanarchitecture.persistence.entities.CompanyEntity;
-import br.com.cleanarchitecture.persistence.entities.CustomerEntity;
 import br.com.cleanarchitecture.persistence.repository.company.CompanyRepository;
-import br.com.cleanarchitecture.persistence.repository.customer.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class CompanyServiceIml implements CompanyService {
@@ -27,6 +23,8 @@ public class CompanyServiceIml implements CompanyService {
     private final CompanyConverter companyConverter = new CompanyConverter();
 
     private final CnpjConverter cnpjConverter = new CnpjConverter();
+
+    private final CustomerConverter customerConverter = new CustomerConverter();
 
     private final CompanyRepository companyRepository;
 
@@ -43,9 +41,12 @@ public class CompanyServiceIml implements CompanyService {
         }
     }
 
-    public void saveCustomer(Company company) {
-        Company companyCustomer = companyValidation.saveCustomer(company);
-        companyRepository.save(companyConverter.convertToCompanyEntity(companyCustomer));
+    public void saveCustomer(String cnpj, Customer customer) {
+        Cnpj cnpjEntity = cnpjConverter.convertToCnpj(cnpj);
+        Company findOne = findOne(cnpjEntity);
+        findOne.setCustomers(customerConverter.convertToCustomerSet(customer));
+        Company companyCustomer = companyValidation.saveCustomer(findOne);
+        companyRepository.save(companyConverter.convertToCompanyEntityCustomer(companyCustomer));
     }
 
     public Company edit(Company company, Cnpj cnpj, String whoYou) {

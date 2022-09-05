@@ -57,7 +57,10 @@ public class CustomerServiceIml implements CustomerService {
         return customerRepository.existsById(cpfEntity);
     }
 
-
+    public Customer findByUid(String uid) {
+        Optional<CustomerEntity> customerEntity = customerRepository.findByUuid(uid);
+        return customerEntity.map(customerConverter::convertToCustomer).orElse(null);
+    }
     public Customer findOne(Cpf cpf) {
         Optional<CustomerEntity> customerEntity = customerRepository.
                 findById(cpfConverter.convertToCpfEntity(cpf.getNumber()));

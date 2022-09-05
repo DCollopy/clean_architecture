@@ -4,12 +4,20 @@ import lombok.Data;
 
 @Data
 public class Admin extends Profile {
+
+    private String uuid;
     private Functional functional;
     private final String type = "ADMIN";
     public Admin() {}
 
     public Admin(String name, String lastName, Email email, Cpf cpf, Phone phone, Functional functional) {
         super(name, lastName, email, cpf, phone);
+        this.functional = functional;
+    }
+
+    public Admin(String uuid,String name, String lastName, Email email, Cpf cpf, Phone phone, Functional functional) {
+        super(name, lastName, email, cpf, phone);
+        this.uuid = uuid;
         this.functional = functional;
     }
 

@@ -2,6 +2,7 @@ package br.com.cleanarchitecture.domain.entities;
 
 import lombok.Data;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -59,6 +60,4 @@ public class Company {
         return this;
     }
 
-    public void setCustomer(Set<Customer> customer) {
-    }
 }

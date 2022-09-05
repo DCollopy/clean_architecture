@@ -7,6 +7,7 @@ import java.util.Set;
 @Data
 public class User extends Profile{
 
+    private String uuid;
     private final String type = "USER";
     private SchoolingLevel schoolingLevel;
     private Skill skill;
@@ -27,6 +28,11 @@ public class User extends Profile{
 
     public User(String name, String lastName, Email email, Cpf cpf, Phone phone) {
         super(name, lastName, email, cpf, phone);
+    }
+
+    public User(String uuid,String name, String lastName, Email email, Cpf cpf, Phone phone) {
+        super(name, lastName, email, cpf, phone);
+        this.uuid = uuid;
     }
 
     public User(AnswerOpportunity answerOpportunity) {

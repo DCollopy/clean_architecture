@@ -15,18 +15,14 @@ public class CriterionForm {
     private int pmd;
     private int weight;
 
-    public CriterionForm(Criterion criterion) {
-        this.title = criterion.getTitle();
-        this.description = criterion.getDescription();
-        this.pmd = criterion.getPmd();
-        this.weight = criterion.getWeight();
+    public CriterionForm(){}
+
+    public Criterion convertToCriterion(CriterionForm criterionForm) {
+        return new Criterion(criterionForm.getTitle(), criterionForm.getDescription(), criterionForm.getPmd(), criterionForm.getWeight());
     }
 
-    public Criterion convertToCriterion() {
-        return new Criterion(this.getTitle(), this.getDescription(), this.getPmd(), this.getWeight());
+    public Set<Criterion> convertToCriterionSet(Set<CriterionForm> criterion) {
+        return criterion.stream().map(this::convertToCriterion).collect(Collectors.toSet());
     }
 
-    public Set<Criterion> convertToCriterionSet() {
-        return Stream.of(this).map(CriterionForm::convertToCriterion).collect(Collectors.toSet());
-    }
 }

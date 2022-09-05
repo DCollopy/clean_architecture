@@ -16,7 +16,6 @@ public class JobOpportunityConverter {
                 jobOpportunityEntity.getClosingDate(),
                 jobOpportunityEntity.getEducationLevel(),
                 jobOpportunityEntity.getSalary(),
-                new CriterionConverter().convertToCriterionSet(jobOpportunityEntity.getCriterion()),
                 new CustomerConverter().convertToCustomer(jobOpportunityEntity.getCustomer()),
                 jobOpportunityEntity.getMinimumProfile());
     }
@@ -28,9 +27,27 @@ public class JobOpportunityConverter {
                 jobOpportunity.getClosingDate(),
                 jobOpportunity.getEducationLevel(),
                 jobOpportunity.getSalary(),
-                new CriterionConverter().convertToCriterionEntitySet(jobOpportunity.getCriterion()),
                 new CustomerConverter().convertToCustomerEntity(jobOpportunity.getCustomer()),
                 jobOpportunity.getMinimumProfile());
+    }
+
+    public JobOpportunity jobOpportunityEntityId(JobOpportunityEntity jobOpportunityEntity) {
+        return new JobOpportunity(jobOpportunityEntity.getId(),jobOpportunityEntity.getTitle(),
+                jobOpportunityEntity.getDescription(),
+                jobOpportunityEntity.getLanguage(),
+                jobOpportunityEntity.getClosingDate(),
+                jobOpportunityEntity.getEducationLevel(),
+                jobOpportunityEntity.getSalary(),
+                new CustomerConverter().convertToCustomer(jobOpportunityEntity.getCustomer()),
+                jobOpportunityEntity.getMinimumProfile());
+    }
+
+    public JobOpportunity convertJobOpportunityCriterion(JobOpportunityEntity jobOpportunityEntity) {
+        return new JobOpportunity(jobOpportunityEntity.getId());
+    }
+
+    public JobOpportunityEntity convertJobOpportunityEntityCriterion(JobOpportunity jobOpportunity) {
+        return new JobOpportunityEntity(jobOpportunity.getId());
     }
 
     public List<JobOpportunity> jobOpportunityEntityListToJobOpportunityList(List<JobOpportunityEntity> jobOpportunityEntityList) {
@@ -44,5 +61,6 @@ public class JobOpportunityConverter {
     public Set<JobOpportunityEntity> jobOpportunitySetToJobOpportunityEntitySet(Set<JobOpportunity> jobOpportunity) {
         return jobOpportunity.stream().map(this::jobOpportunityToJobOpportunityEntity).collect(Collectors.toSet());
     }
+
 
 }

@@ -3,32 +3,33 @@ package br.com.cleanarchitecture.web.controllers;
 import br.com.cleanarchitecture.domain.entities.Cpf;
 import br.com.cleanarchitecture.domain.entities.User;
 import br.com.cleanarchitecture.domain.entities.repository.UserService;
-import br.com.cleanarchitecture.web.model.CpfForm;
 import br.com.cleanarchitecture.web.model.UserForm;
-import io.swagger.v3.oas.annotations.OpenAPI30;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 @RestController
 @RequestMapping("/api/venturarh/user")
 public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping({ "/{cpf}" })
-    public User index(@PathVariable String cpf) {
-        Cpf cpfView = new Cpf(cpf);
-        return userService.findOne(cpfView);
+    @GetMapping({ "/{uid}"})
+    public User index(@PathVariable String uid) {
+        User user = userService.findOneUid(uid);
+        if(user != null){
+            return user;
+        } else {
+            throw new IllegalArgumentException("UUID is null");
+        }
     }
 
-    @PostMapping("/create")
+    @PostMapping(value = "/create", consumes= MediaType.APPLICATION_JSON_VALUE)
     public String createUser(@Valid @RequestBody UserForm userForm) {
+        System.out.println(userForm);
         User user = userForm.convertUserformToUser();
         userService.save(user);
         return "redirect:/user";
@@ -38,6 +39,7 @@ public class UserController {
 
     @PostMapping("/create/curriculum")
     public String createUserCurriculum(@Valid @RequestBody UserForm userForm) {
+        System.out.println(userForm);
         User user = userForm.convertUserformToUserCurriculum();
         userService.saveCurriculum(user);
         return "redirect:/user";

@@ -98,7 +98,8 @@ class CustomerValidationTest {
     @Test
     void customerCompanyAlreadyAdd() {
         Customer customer = new Customer("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
-                new Phone("21","11111111"), new Functional("123456789"));
+                new Phone("21","11111111"), new Functional("123456789"), new Company(new Cnpj("33.663.683/0001-16"),
+                "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"));
 
         customer.setCompany(new Company(new Cnpj("33.663.683/0001-16"),
                 "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"));
@@ -110,7 +111,8 @@ class CustomerValidationTest {
     @Test
     void customerJobList() {
         Customer customer = new Customer("Luis", "Oliveira", new Email("teste@email.com"), new Cpf("33333333333"),
-                new Phone("21","11111111"), new Functional("123456789"));
+                new Phone("21","11111111"), new Functional("123456789"), new Company(new Cnpj("33.663.683/0001-16"),
+                "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"));
         customer.setJobOpportunities(jobOpportunities);
         assertEquals(jobOpportunities, clientValidation.listAllJobOpportunities(customer));
     }

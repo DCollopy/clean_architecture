@@ -13,7 +13,7 @@ public class UserConverter {
     public UserConverter(){}
 
     public User convertToUser(UserEntity userEntity) {
-        return new User(userEntity.getName(), userEntity.getLastName(),
+        return new User(userEntity.getUuid(),userEntity.getName(), userEntity.getLastName(),
                 new EmailConverter().convertToEmail(userEntity.getEmail().getAddress()),
                 new CpfConverter().convertToCpf(userEntity.getCpf().getCpf()),
                 new PhoneConverter().convertToPhone(userEntity.getPhone().getDdd(), userEntity.getPhone().getPhone()));
@@ -21,7 +21,7 @@ public class UserConverter {
     }
 
     public UserEntity convertToUserEntity(User user) {
-        return new UserEntity(user.getName(), user.getLastName(),
+        return new UserEntity(user.getUuid(),user.getName(), user.getLastName(),
                 new EmailConverter().convertToEmailEntity(user.getEmail().getAddress()),
                 new CpfConverter().convertToCpfEntity(user.getCpf().getNumber()),
                 new PhoneConverter().convertToPhoneEntity(user.getPhone().getDdd(), user.getPhone().getNumber()));

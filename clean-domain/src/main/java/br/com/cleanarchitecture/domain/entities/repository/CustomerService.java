@@ -18,5 +18,6 @@ public interface CustomerService {
 
     void saveJobOpportunity(Customer customer,JobOpportunity jobOpportunity);
 
+    Customer findByUid(String uid);
     Set<JobOpportunity> listAllJobOpportunity(Customer customer);
 }

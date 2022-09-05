@@ -41,7 +41,7 @@ public abstract class UserValidation {
     public User createUser(User user) {
         if(validate(user).isEmpty()){
             Logger.getLogger(UserValidation.class.getName()).info("User created");
-            return new User(user.getName(), user.getLastName(), user.getEmail(),
+            return new User(user.getUuid(),user.getName(), user.getLastName(), user.getEmail(),
                     user.getCpf(), user.getPhone());
         } else{
             Logger.getLogger(UserValidation.class.getName()).info("User not created");

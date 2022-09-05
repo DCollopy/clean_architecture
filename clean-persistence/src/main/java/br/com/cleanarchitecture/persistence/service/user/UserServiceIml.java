@@ -30,10 +30,11 @@ public  class UserServiceIml implements UserService {
 
     public void save(User user) {
         User validation = userValidation.createUser(user);
-        if(validation != null && exist(validation.getCpf())){
+        if(validation != null && !exist(validation.getCpf())){
             UserEntity userEntity = userConverter.convertToUserEntity(validation);
             userRepository.save(userEntity);
         }
+
     }
 
     public void saveAnswer(User user, AnswerOpportunity answerOpportunity) {
@@ -62,6 +63,11 @@ public  class UserServiceIml implements UserService {
     }
     public User findOne(Cpf cpf) {
         Optional<UserEntity> userEntity = userRepository.findById(cpfConverter.convertToCpfEntity(cpf.getNumber()));
+        return userConverter.convertToUser(userEntity.get());
+    }
+
+    public User findOneUid(String uid) {
+        Optional<UserEntity> userEntity = userRepository.findByUuid(uid);
         return userConverter.convertToUser(userEntity.get());
     }
 

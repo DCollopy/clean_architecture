@@ -5,23 +5,32 @@ import br.com.cleanarchitecture.domain.entities.User;
 import lombok.Data;
 
 @Data
-public class UserForm extends ProfileForm{
+public class UserForm {
+
+    private String uuid;
+
+    private String name;
+
+    private String lastName;
+
+    private String email;
+
+    private String cpf;
+
+    private String ddd;
+
+    private String phone;
     private SchoolingLevelForm schoolingLevel;
-
     private SkillForm skill;
-
     private ProfessionalExperienceForm professionalExperience;
+
 
     private final String type = "USER";
 
     public UserForm() {}
 
-    public UserForm(Profile profile) {
-        super(profile);
-    }
-
-    public UserForm(User user, Profile profile) {
-        super(profile);
+    public UserForm(User user) {
+        this.uuid = user.getUuid();
         this.schoolingLevel = new SchoolingLevelForm(user.getSchoolingLevel());
         this.skill = new SkillForm(user.getSkill());
         this.professionalExperience = new ProfessionalExperienceForm(user.getProfessionalExperience());
@@ -31,35 +40,11 @@ public class UserForm extends ProfileForm{
         return this.getType();
     }
 
-    public SchoolingLevelForm getSchoolingLevel() {
-        return schoolingLevel;
-    }
-
-    public void setSchoolingLevel(SchoolingLevelForm schoolingLevel) {
-        this.schoolingLevel = schoolingLevel;
-    }
-
-    public SkillForm getSkill() {
-        return skill;
-    }
-
-    public void setSkill(SkillForm skill) {
-        this.skill = skill;
-    }
-
-    public ProfessionalExperienceForm getProfessionalExperience() {
-        return professionalExperience;
-    }
-
-    public void setProfessionalExperience(ProfessionalExperienceForm professionalExperience) {
-        this.professionalExperience = professionalExperience;
-    }
-
     public User convertUserformToUserCurriculum(){
         User user = new User(this.getName(), this.getLastName(),
-                new EmailForm().convertEmailFormToEmail(this.getEmail().getAddress()),
-                new CpfForm().convertCpfFormToCpf(this.getCpf().getNumber()),
-                new PhoneForm().convertPhoneFormToPhone(this.getPhone().getDdd(), this.getPhone().getNumber()),
+                new EmailForm().convertEmailFormToEmail(this.getEmail()),
+                new CpfForm().convertCpfFormToCpf(this.getCpf()),
+                new PhoneForm().convertPhoneFormToPhone(this.getDdd(), this.getPhone()),
                 new SchoolingLevelForm().convertSchoolingLevelFormToSchoolingLevel(),
                 new SkillForm().convertSkillFormToSkill(this.getSkill().getLanguage()),
                 new ProfessionalExperienceForm().convertProfessionalExperienceFormToProfessionalExperience());
@@ -67,10 +52,10 @@ public class UserForm extends ProfileForm{
     }
 
     public User convertUserformToUser(){
-        User user = new User(this.getName(), this.getLastName(),
-                new EmailForm().convertEmailFormToEmail(this.getEmail().getAddress()),
-                new CpfForm().convertCpfFormToCpf(this.getCpf().getNumber()),
-                new PhoneForm().convertPhoneFormToPhone(this.getPhone().getDdd(), this.getPhone().getNumber()));
+        User user = new User(this.getUuid(),this.getName(), this.getLastName(),
+                new EmailForm().convertEmailFormToEmail(this.getEmail()),
+                new CpfForm().convertCpfFormToCpf(this.getCpf()),
+                new PhoneForm().convertPhoneFormToPhone(this.getDdd(), this.getPhone()));
         return user;
     }
 }

@@ -31,16 +31,17 @@ public class JobOpportunityIml implements JobOpportunityService {
 
     public JobOpportunity findById(Long id) {
         Optional<JobOpportunityEntity> jobOpportunityEntity = jobOpportunityRepository.findById(id);
-        return jobOpportunityConverter.jobOpportunityEntityToJobOpportunity(jobOpportunityEntity.get());
+        return jobOpportunityConverter.jobOpportunityEntityId(jobOpportunityEntity.get());
     }
 
-    public void save(JobOpportunity jobOpportunity, String whoYou) {
+    public JobOpportunity save(JobOpportunity jobOpportunity, String whoYou) {
         JobOpportunity validation = jobOpportunityAbs.createJobOpportunity(jobOpportunity, whoYou);
-        if(validation != null && exists(jobOpportunity)){
+        if(validation != null && !exists(jobOpportunity)){
             JobOpportunityEntity jobOpportunityEntity = jobOpportunityConverter.jobOpportunityToJobOpportunityEntity(jobOpportunity);
-            jobOpportunityRepository.save(jobOpportunityEntity);
+            JobOpportunityEntity jobEntity = jobOpportunityRepository.save(jobOpportunityEntity);
+            return jobOpportunityConverter.jobOpportunityEntityId(jobEntity);
         }
-
+        return jobOpportunity;
     }
 
     public void saveAnswer(JobOpportunity jobOpportunity, AnswerOpportunity answerOpportunity) {
