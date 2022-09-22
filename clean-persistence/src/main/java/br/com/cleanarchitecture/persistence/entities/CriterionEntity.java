@@ -41,7 +41,7 @@ public class CriterionEntity implements Serializable {
         this.answerOpportunity = answerOpportunity;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="job_id")
     private JobOpportunityEntity jobOpportunity;
 

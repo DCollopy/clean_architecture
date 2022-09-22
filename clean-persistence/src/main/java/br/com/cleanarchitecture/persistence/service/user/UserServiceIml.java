@@ -68,7 +68,7 @@ public  class UserServiceIml implements UserService {
 
     public User findOneUid(String uid) {
         Optional<UserEntity> userEntity = userRepository.findByUuid(uid);
-        return userConverter.convertToUser(userEntity.get());
+        return userEntity.map(userConverter :: convertToUser).orElse(null);
     }
 
     public Boolean exist(Cpf cpf) {

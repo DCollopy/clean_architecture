@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Data
@@ -37,9 +38,10 @@ public class JobOpportunityEntity implements Serializable {
 
     protected JobOpportunityEntity() {}
 
-    public JobOpportunityEntity(String title, String description, String language,
+    public JobOpportunityEntity(long id,String title, String description, String language,
                                 LocalDate closingDate, String educationLevel,
                                 String salary,CustomerEntity customer,Double minimumProfile) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.language = language;

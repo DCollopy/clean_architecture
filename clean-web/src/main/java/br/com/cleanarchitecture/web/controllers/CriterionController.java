@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.Convert;
 import java.util.List;
 
 @RestController
@@ -24,9 +25,10 @@ public class CriterionController {
         return criterionService.findAll();
     }
 
-    @GetMapping("{id}/details")
-    public List<Criterion> detailsJob(@PathVariable Long id){
-        return criterionService.findJob(id);
+    @GetMapping("details/{id}")
+    public List<Criterion> detailsJob(@PathVariable String id){
+        long convertId = Long.parseLong(id);
+        return criterionService.findJob(convertId);
     }
 
 }

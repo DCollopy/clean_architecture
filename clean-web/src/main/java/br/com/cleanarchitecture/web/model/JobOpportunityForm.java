@@ -5,10 +5,13 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Data
 public class JobOpportunityForm {
 
+    private long id;
     private String title;
     private String description;
     private String language;
@@ -17,19 +20,33 @@ public class JobOpportunityForm {
     private LocalDate closingDate;
     private String educationLevel;
     private String salary;
-    private Set<CriterionForm> criterion;
     private String cpf;
     private boolean status;
+    private Set<CriterionForm> criterion;
 
     public JobOpportunityForm(){}
 
     public JobOpportunity convertToJobOpportunity() {
-        return new JobOpportunity(this.getTitle(),
+        return new JobOpportunity(
+                this.getTitle(),
                 this.getDescription(),
                 this.getLanguage(),
                 this.getClosingDate(),
                 this.getEducationLevel(),
                 this.getSalary(),
-                new CriterionForm().convertToCriterionSet(this.getCriterion()));
+                this.getCriterion().stream().map(CriterionForm::convertToCriterion).collect(Collectors.toSet()),
+                this.getMinimumProfile());
+    }
+
+    public Set<JobOpportunity> convertToJob(JobOpportunity jobOpportunity) {
+        return Stream.of(new JobOpportunity(
+                jobOpportunity.getTitle(),
+                jobOpportunity.getDescription(),
+                jobOpportunity.getLanguage(),
+                jobOpportunity.getClosingDate(),
+                jobOpportunity.getEducationLevel(),
+                jobOpportunity.getSalary(),
+                jobOpportunity.getCriterion(),
+                jobOpportunity.getMinimumProfile())).collect(Collectors.toSet());
     }
 }

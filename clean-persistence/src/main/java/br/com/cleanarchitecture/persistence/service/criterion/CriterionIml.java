@@ -32,7 +32,7 @@ public class CriterionIml implements CriterionService {
             if(validation != null){
                 validation.setJobOpportunity(jobOpportunity);
                 CriterionEntity criterionEntity = criterionConverter.convertToCriterionEntityJob(validation);
-                criterionRepository.saveAndFlush(criterionEntity);
+                criterionRepository.save(criterionEntity);
             }
         }
     }

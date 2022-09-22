@@ -24,37 +24,6 @@ class AnswerOpportunityValidationTest {
         return criterion;
     }
 
-    private Set<JobOpportunity> getJobOpportunity() {
-        Set<JobOpportunity> jobOpportunity = new HashSet<>();
-
-        jobOpportunity.add(new JobOpportunity( 1L,"Engenheiro de Software C#",
-                "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
-                "English intemediario", LocalDate.now().plusDays(30),
-                IEducationLevel.COMPLETE_GRAD, "1200", getCriteria(),
-                new Customer("Joao","Oliveira",new Email("teste@email.com"),
-                        new Cpf("12345678901"),
-                        new Phone("21", "11111111"),new Functional("123456789"),
-                        new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"))));
-
-        jobOpportunity.add(new JobOpportunity( UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software Python",
-                "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
-                "English intemediario", LocalDate.now().plusDays(30),
-                IEducationLevel.COMPLETE_GRAD, "1200", getCriteria(),
-                new Customer("Joao","Oliveira",new Email("teste@email.com"),
-                        new Cpf("12345678901"),
-                        new Phone("21", "11111111"),new Functional("123456789"),
-                        new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"))));
-
-        jobOpportunity.add(new JobOpportunity( UUID.randomUUID().getMostSignificantBits(),"Engenheiro de Software FullStack",
-                "Entre para a melhor empresa de tecnologia do mercado, aplique seus conhecmentos em ferramentas de ponta",
-                "English intemediario", LocalDate.now().plusDays(30),
-                IEducationLevel.COMPLETE_GRAD, "1200", getCriteria(),
-                new Customer("Joao","Oliveira",new Email("teste@email.com"),
-                        new Cpf("12345678901"),
-                        new Phone("21", "11111111"),new Functional("123456789"),
-                        new Company(new Cnpj("33.663.683/0001-16"),"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO"))));
-        return jobOpportunity;
-    }
 
     private User getUser() {
        return new User("Luis", "Oliveira", new Email("teste@email.com"),
@@ -74,20 +43,20 @@ class AnswerOpportunityValidationTest {
     @Test
     void validate() {
         assertThrows(IllegalArgumentException.class,
-                () -> answerOpportunityValidation.validate(new AnswerOpportunity(new HashSet<>(0,0),getJobOpportunity() ,getUser())));
+                () -> answerOpportunityValidation.validate(new AnswerOpportunity(new HashSet<>(0,0),getCriteria() ,getUser())));
         assertThrows(IllegalArgumentException.class,
-                () -> answerOpportunityValidation.validate(new AnswerOpportunity(getPmdUser(),getJobOpportunity(),null)));
+                () -> answerOpportunityValidation.validate(new AnswerOpportunity(getPmdUser(),getCriteria(),null)));
     }
 
     @Test
     void createAnswerOpportunity() {
-        AnswerOpportunity answerOpportunity = new AnswerOpportunity(getPmdUser(),getJobOpportunity(), getUser());
+        AnswerOpportunity answerOpportunity = new AnswerOpportunity(getPmdUser(),getCriteria(), getUser());
         assertEquals(answerOpportunity, answerOpportunityValidation.createAnswerOpportunity(answerOpportunity,"USER"));
     }
 
     @Test
     void getAverage() {
-        AnswerOpportunity answerOpportunity = new AnswerOpportunity(getPmdUser(),getJobOpportunity(), getUser());
+        AnswerOpportunity answerOpportunity = new AnswerOpportunity(getPmdUser(),getCriteria(), getUser());
         assertEquals(3.0, answerOpportunityValidation.getAverage(answerOpportunity));
     }
 

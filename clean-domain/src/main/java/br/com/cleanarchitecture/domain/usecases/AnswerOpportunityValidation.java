@@ -14,7 +14,7 @@ public abstract class AnswerOpportunityValidation  {
         if(answerOpportunity.getUser() == null) {
             return "User is required";
         }
-        if(answerOpportunity.getJobOpportunity() == null) {
+        if(answerOpportunity.getCriterion().isEmpty()) {
             return "Job Opportunity is required";
         }
         return "";
@@ -23,7 +23,7 @@ public abstract class AnswerOpportunityValidation  {
     public AnswerOpportunity createAnswerOpportunity(AnswerOpportunity answerOpportunity, String whoYou) {
         if(validate(answerOpportunity).isEmpty() && answerOpportunity.getUser().who().equals(whoYou)) {
             Logger.getLogger(AnswerOpportunityValidation.class.getName()).info("AnswerOpportunity created");
-            return new AnswerOpportunity(answerOpportunity.getPmdUser(),answerOpportunity.getJobOpportunity(),
+            return new AnswerOpportunity(answerOpportunity.getPmdUser(),answerOpportunity.getCriterion(),
                     answerOpportunity.getUser(),getAverage(answerOpportunity));
         }else {
             throw new IllegalArgumentException("Ops!!!, something went wrong");
@@ -33,7 +33,7 @@ public abstract class AnswerOpportunityValidation  {
     public double getAverage(AnswerOpportunity answerOpportunity) {
         double multiple = 0;
         int soma = 0;
-        Set<Criterion> criterion = answerOpportunity.getJobOpportunity().stream().iterator().next().getCriterion();
+        Set<Criterion> criterion = answerOpportunity.getCriterion();
         for (int i = 0; i < criterion.size(); i++) {
             for (Criterion calculate : criterion) {
                 for(Points pmdUser : answerOpportunity.getPmdUser()) {

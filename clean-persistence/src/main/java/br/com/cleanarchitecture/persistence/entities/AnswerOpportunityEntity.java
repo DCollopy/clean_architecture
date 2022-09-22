@@ -34,7 +34,7 @@ public class AnswerOpportunityEntity implements Serializable {
     @OneToMany(mappedBy = "answerOpportunity")
     private Set<JobOpportunityEntity> jobOpportunityEntities= new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne()
     @JoinTable(name = "answer_opportunity_user_entity",
             joinColumns = @JoinColumn(name = "answer_opportunity_entity_id"),
             inverseJoinColumns = @JoinColumn(name = "user_cpf"))

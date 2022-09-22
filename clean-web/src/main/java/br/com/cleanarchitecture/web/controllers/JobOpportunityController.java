@@ -37,19 +37,19 @@ public class JobOpportunityController {
         return jobOpportunityService.findAll();
     }
 
-    @PostMapping(value="/create/{who}", consumes= MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/create/{uuid}", consumes= MediaType.APPLICATION_JSON_VALUE)
     public String createJobOpportunity(@Valid @RequestBody JobOpportunityForm jobOpportunityForm,
-                                               @PathVariable(name= "who") String  who) {
+                                               @PathVariable(name= "uuid") String  uuid) {
         JobOpportunity jobOpportunity = jobOpportunityForm.convertToJobOpportunity();
-        Set<Criterion> criterion = jobOpportunity.getCriterion();
-        Customer customer = customerService.findOne(new Cpf(jobOpportunityForm.getCpf()));
+        Set<Criterion> criterion = new CriterionForm().convertToCriterionSet(jobOpportunityForm.getCriterion());
+        Customer customer = customerService.findByUid(uuid);
 
         jobOpportunity.setCustomer(customer);
+        jobOpportunity.setCriterion(criterion);
 
-        JobOpportunity job = jobOpportunityService.save(jobOpportunity,who);
-        JobOpportunity jobFindbyId = jobOpportunityService.findById(job.getId());
+        JobOpportunity job = jobOpportunityService.save(jobOpportunity,customer.who());
 
-        criterionService.save(criterion,jobFindbyId);
+        criterionService.save(criterion,job);
         return "redirect:/job-opportunity";
     }
 

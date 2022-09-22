@@ -58,4 +58,11 @@ public class UserForm {
                 new PhoneForm().convertPhoneFormToPhone(this.getDdd(), this.getPhone()));
         return user;
     }
+
+    public User convertToUser(User user){
+         return new User(user.getUuid(),user.getName(), user.getLastName(),
+                new EmailForm().convertEmailFormToEmail(user.getEmail().getAddress()),
+                new CpfForm().convertCpfFormToCpf(user.getCpf().getNumber()),
+                new PhoneForm().convertPhoneFormToPhone(user.getPhone().getDdd(), user.getPhone().getNumber()));
+    }
 }

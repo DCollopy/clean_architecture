@@ -15,6 +15,8 @@ public class PointsForm {
         this.pmdUser = points.getPmdUser();
     }
 
+    public PointsForm(){}
+
     public Points pointsFormToPoints() {
         return new Points(getPmdUser());
     }

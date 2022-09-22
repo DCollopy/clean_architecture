@@ -10,29 +10,29 @@ public class AnswerOpportunity {
     private long id;
     private Set<Points> pmdUser;
     private User user;
-    private Set<JobOpportunity> jobOpportunity;
+    private Set<Criterion> criterion;
     private double minimumProfile;
 
-    public AnswerOpportunity(Set<Points> pmdUser, Set<JobOpportunity> jobOpportunity, User user) {
+    public AnswerOpportunity(Set<Points> pmdUser,Set<Criterion> criterion , User user) {
         if (user == null) {
             throw new IllegalArgumentException("Ops,User is required");
         }
-        if(jobOpportunity == null) {
-            throw new IllegalArgumentException("Ops,JobOpportunity is required");
+        if(criterion == null) {
+            throw new IllegalArgumentException("Ops,Criterion is required");
         }
         this.pmdUser = pmdUser;
-        this.jobOpportunity = jobOpportunity;
+        this.criterion = criterion;
         this.user = user;
     }
-    public AnswerOpportunity(Set<Points> pmdUser, Set<JobOpportunity> jobOpportunity, User user, double average) {
+    public AnswerOpportunity(Set<Points> pmdUser,Set<Criterion> criterion, User user, double average) {
         if (user == null) {
             throw new IllegalArgumentException("Ops,User is required");
         }
-        if(jobOpportunity == null) {
-            throw new IllegalArgumentException("Ops,JobOpportunity is required");
+        if(criterion.isEmpty()) {
+            throw new IllegalArgumentException("Ops,Criterion is required");
         }
         this.pmdUser = pmdUser;
-        this.jobOpportunity = jobOpportunity;
+        this.criterion = criterion;
         this.user = user;
         this.minimumProfile = average;
     }

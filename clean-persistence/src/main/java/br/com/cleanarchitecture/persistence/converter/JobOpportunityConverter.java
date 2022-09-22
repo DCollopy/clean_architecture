@@ -6,11 +6,12 @@ import br.com.cleanarchitecture.persistence.entities.JobOpportunityEntity;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class JobOpportunityConverter {
 
     public JobOpportunity jobOpportunityEntityToJobOpportunity(JobOpportunityEntity jobOpportunityEntity) {
-        return new JobOpportunity(jobOpportunityEntity.getTitle(),
+        return new JobOpportunity(jobOpportunityEntity.getId(),jobOpportunityEntity.getTitle(),
                 jobOpportunityEntity.getDescription(),
                 jobOpportunityEntity.getLanguage(),
                 jobOpportunityEntity.getClosingDate(),
@@ -21,7 +22,7 @@ public class JobOpportunityConverter {
     }
 
     public JobOpportunityEntity jobOpportunityToJobOpportunityEntity(JobOpportunity jobOpportunity) {
-        return new JobOpportunityEntity(jobOpportunity.getTitle(),
+        return new JobOpportunityEntity(jobOpportunity.getId(),jobOpportunity.getTitle(),
                 jobOpportunity.getDescription(),
                 jobOpportunity.getLanguage(),
                 jobOpportunity.getClosingDate(),
@@ -60,6 +61,10 @@ public class JobOpportunityConverter {
 
     public Set<JobOpportunityEntity> jobOpportunitySetToJobOpportunityEntitySet(Set<JobOpportunity> jobOpportunity) {
         return jobOpportunity.stream().map(this::jobOpportunityToJobOpportunityEntity).collect(Collectors.toSet());
+    }
+
+    public Set<JobOpportunityEntity> convertJobOpportunityEntity(JobOpportunity jobOpportunity) {
+        return Stream.of(convertJobOpportunityEntityCriterion(jobOpportunity)).collect(Collectors.toSet());
     }
 
 

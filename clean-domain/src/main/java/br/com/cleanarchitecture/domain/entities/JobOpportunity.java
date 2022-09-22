@@ -93,7 +93,7 @@ public class JobOpportunity {
 
     public JobOpportunity(long id,String title, String description, String language,
                           LocalDate closingDate, String educationLevel, String salary,
-                          Set<Criterion> criterion, Customer customer, double minimumProfile) {
+                          Customer customer, Set<Criterion> criterion,  double minimumProfile) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -101,8 +101,8 @@ public class JobOpportunity {
         this.closingDate = closingDate;
         this.educationLevel = educationLevel;
         this.salary = salary;
-        this.criterion = criterion;
         this.customer = customer;
+        this.criterion = criterion;
         this.minimumProfile = minimumProfile;
     }
 
@@ -122,7 +122,7 @@ public class JobOpportunity {
 
     public JobOpportunity(String title, String description, String language,
                           LocalDate closingDate, String educationLevel, String salary,
-                          Set<Criterion> criterion) {
+                          Set<Criterion> criterion,double minimumProfile) {
         this.title = title;
         this.description = description;
         this.language = language;
@@ -130,7 +130,19 @@ public class JobOpportunity {
         this.educationLevel = educationLevel;
         this.salary = salary;
         this.criterion = criterion;
+        this.minimumProfile = minimumProfile;
     }
+
+    public JobOpportunity(String title, String description, String language,
+                          LocalDate closingDate, String educationLevel, String salary){
+        this.title = title;
+        this.description = description;
+        this.language = language;
+        this.closingDate = closingDate;
+        this.educationLevel = educationLevel;
+        this.salary = salary;
+    }
+
 
     public JobOpportunity(AnswerOpportunity answerOpportunity){
         this.answerOpportunity = answerOpportunity;

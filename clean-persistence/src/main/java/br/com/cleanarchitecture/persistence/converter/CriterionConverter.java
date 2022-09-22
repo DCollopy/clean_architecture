@@ -50,4 +50,5 @@ public class CriterionConverter {
     public Set<CriterionEntity> convertToCriterionEntitySet(Set<Criterion> criteria) {
         return criteria.stream().map(this::convertToCriterionEntity).collect(Collectors.toSet());
     }
+
 }
